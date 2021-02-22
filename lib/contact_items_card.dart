@@ -45,7 +45,7 @@ class ContactItemsCard extends StatelessWidget {
   }
 
   dynamic _buildContactItem(dynamic data) {
-    if (data == 'UNKNOWN') {
+    if (data == 'UNKNOWN' || data == null) {
       /// there is no data, so show a message
       return _buildMsgWidget(true);
     }
@@ -97,6 +97,8 @@ class ContactItemsCard extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    /// takes data which can be [string] or [list] and return contact item(s)
+    dynamic contactItem = _buildContactItem(data);
     return Column(
       children: <Widget>[
         // title
@@ -116,8 +118,7 @@ class ContactItemsCard extends StatelessWidget {
           ),
         ),
 
-        /// take data which can be [string] or [list] and return contact item(s)
-        _buildContactItem(data)
+        if (contactItem != null) contactItem
       ],
     );
   }
