@@ -40,7 +40,7 @@ class ContactItem extends StatelessWidget {
               children: <Widget>[
                 GestureDetector(
                   onTap: () async {
-                    /// show the upgrade to primary bottomsheet
+                    /// show the upgrade to primary bottom sheet
                     dynamic result = await upgradeToPrimaryBottomSheet(
                         context: context, type: type, value: value);
                     provider.contactUtils.showMessageFromModal(context, result);
@@ -54,7 +54,7 @@ class ContactItem extends StatelessWidget {
                 smallHorizontalSizedBox,
                 GestureDetector(
                   onTap: () async {
-                    /// show the retire contact bottomsheet
+                    /// show the retire contact bottom sheet
                     dynamic result = await deleteContactDialogue(
                       context: context,
                       value: value,

@@ -91,7 +91,7 @@ class AddContactInfo extends StatefulWidget {
 
 class _AddContactInfoState extends State<AddContactInfo> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  Queue<int> phoneNumberInputCountroller = Queue<int>();
+  Queue<int> phoneNumberInputController = Queue<int>();
   TextEditingController textEditingController = TextEditingController();
 
   String value;
@@ -123,14 +123,14 @@ class _AddContactInfoState extends State<AddContactInfo> {
             if (widget.type == ContactInfoType.phone)
               SILPhoneInput(
                 autovalidate: true,
-                inputController: phoneNumberInputCountroller,
+                inputController: phoneNumberInputController,
                 enabled: true,
                 labelText: ContactDetailsStrings.labelText,
                 labelStyle: TextThemes.boldSize16Text(),
                 hintText: ContactDetailsStrings.enterNo,
                 context: context,
                 onChanged: (dynamic val) {
-                  this.phoneNumberInputCountroller.add(1);
+                  this.phoneNumberInputController.add(1);
                   value = val;
                 },
               ),

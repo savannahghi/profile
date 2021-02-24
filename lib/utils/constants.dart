@@ -1,6 +1,6 @@
 class ContactDetailsStrings {
-  static String accountSection = 'Account settins';
-  static String legalSection = 'legal infromation';
+  static String accountSection = 'Account settings';
+  static String legalSection = 'legal information';
   static String notificationSettings = 'Notification settings';
   static String changePINSettings = 'Change PIN';
   static String languageSettings = 'Language settings';
@@ -8,7 +8,7 @@ class ContactDetailsStrings {
   static String termsOfServiceSettings = 'Terms of service';
   static const String contactInfo = 'Contact info';
   static const String enterPhone = 'Enter your phone number';
-  static const String verify = 'Send verifiction code';
+  static const String verify = 'Send verification code';
   static const String codeSent = 'A 6 digit verification code was sent to ';
   static const String editProf = 'Basic details';
   static const String editProfDesc = 'Tap to enable editing';
@@ -74,7 +74,7 @@ class ContactDetailsStrings {
     if (hasError) {
       return 'Failed to delete $value';
     }
-    return 'Successfully removed $value from your accout';
+    return 'Successfully removed $value from your account';
   }
 
   static String setPrimaryFeedback(String value, [bool hasError = false]) {
@@ -105,7 +105,7 @@ class ContactDetailsStrings {
   //----
   static final String enterNo = 'Enter your phone number';
 
-  static final String signupPhoneNo = 'Please enter a phone number';
+  static final String signUpPhoneNo = 'Please enter a phone number';
 }
 
 /// adds a secondary email address
@@ -157,9 +157,9 @@ query GenerateOTP($msisdn: String!) {
 }
  ''';
 
-/// sends an OTP to an email only
+/// sends an OTP to the provided email only
 final String generateEmailOTPQuery = r'''
-query GenerateemailVerificationOTP($email: String!){
+query GenerateEmailVerificationOTP($email: String!){
   emailVerificationOTP(email: $email)
 }
  ''';
