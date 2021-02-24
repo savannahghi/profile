@@ -122,7 +122,7 @@ class _AddContactInfoState extends State<AddContactInfo> {
             // phone number
             if (widget.type == ContactInfoType.phone)
               SILPhoneInput(
-                autovalidate: true,
+                autoValidate: true,
                 inputController: phoneNumberInputController,
                 enabled: true,
                 labelText: ContactDetailsStrings.labelText,
@@ -186,9 +186,9 @@ class _AddContactInfoState extends State<AddContactInfo> {
           ],
           if (otp != null) ...<Widget>[
             // verify otp input here
-            SILPincodeTextField(
+            SILPinCodeTextField(
               controller: textEditingController,
-              autofocus: true,
+              autoFocus: true,
               maxLength: 6,
               pinBoxWidth: 34,
               pinBoxHeight: 38,

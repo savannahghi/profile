@@ -5,8 +5,8 @@ author:
 homepage:
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: '>=2.7.0 <3.0.0'
+  flutter: '>=1.17.0'
 
 dependencies:
   flutter:
@@ -18,12 +18,12 @@ dependencies:
   sil_themes:
     git:
       url: https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_themes.git
-      ref: 0.0.1
+      ref: 0.0.2
   sil_dumb_widgets:
     git:
       url: https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_dumb_widgets.git
-      ref: 0.0.6
-      
+      ref: 0.0.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -33,4 +33,3 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
