@@ -12,29 +12,29 @@ import 'package:sil_themes/text_themes.dart';
 /// [onAddContactInfo] opens an add contact bottom sheet
 class ContactItemsCard extends StatelessWidget {
   final String title;
-  final String addMessage;
+  final String? addMessage;
   final dynamic data;
-  final Function onAddContactInfo;
+  final Function? onAddContactInfo;
   final ContactInfoType type;
 
   Widget _buildMsgWidget([bool primary = false]) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 18, horizontal: 20),
-      decoration: BoxDecoration(color: Colors.white),
+      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
+      decoration: const BoxDecoration(color: Colors.white),
       child: Row(
         children: <Widget>[
           Expanded(
             child: Text(
-              addMessage,
+              addMessage!,
               style: TextThemes.normalSize14Text(),
             ),
           ),
           GestureDetector(
-            key: Key('add_contact_key'),
+            key: const Key('add_contact_key'),
             onTap: () {
-              onAddContactInfo(primary);
+              onAddContactInfo!(primary);
             },
-            child: Icon(
+            child: const Icon(
               MdiIcons.plusCircle,
               color: Colors.green,
             ),
@@ -53,14 +53,14 @@ class ContactItemsCard extends StatelessWidget {
     if (data.runtimeType == String) {
       /// data is a string and contains a [primary] contact
       return ContactItem(
-        value: data,
+        value: data.toString(),
         type: type,
       );
     }
 
     if (data is BuiltList) {
       /// data is a list and contains [secondary] contacts
-      BuiltList<String> items = data as BuiltList<String>;
+      final BuiltList<String> items = data as BuiltList<String>;
       return Column(
         children: <Widget>[
           for (String item in items)
@@ -88,22 +88,22 @@ class ContactItemsCard extends StatelessWidget {
   }
 
   const ContactItemsCard({
-    Key key,
-    @required this.title,
-    @required this.data,
-    @required this.type,
+    Key? key,
+    required this.title,
+    required this.data,
+    required this.type,
     this.addMessage,
     this.onAddContactInfo,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     /// takes data which can be [string] or [list] and return contact item(s)
-    dynamic contactItem = _buildContactItem(data);
+    final dynamic contactItem = _buildContactItem(data);
     return Column(
       children: <Widget>[
         // title
         Container(
-          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
           width: double.infinity,
           decoration: BoxDecoration(
             color: Theme.of(context).accentColor.withOpacity(0.06),
@@ -118,7 +118,7 @@ class ContactItemsCard extends StatelessWidget {
           ),
         ),
 
-        if (contactItem != null) contactItem
+        if (contactItem != null) contactItem as Widget
       ],
     );
   }

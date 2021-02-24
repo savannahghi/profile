@@ -16,8 +16,8 @@ void main() {
             body: ContactProvider(
               primaryEmail: 'someone@example.com',
               primaryPhone: '+254728101710',
-              secondaryEmails: BuiltList([]),
-              secondaryPhones: BuiltList([]),
+              secondaryEmails: BuiltList<String>(<String>[]),
+              secondaryPhones: BuiltList<String>(<String>[]),
               contactUtils: ContactUtils(
                 toggleLoadingIndicator: null,
                 client: null,
@@ -43,8 +43,8 @@ void main() {
             body: ContactProvider(
               primaryEmail: 'UNKNOWN',
               primaryPhone: '+254728101710',
-              secondaryEmails: BuiltList([]),
-              secondaryPhones: BuiltList([]),
+              secondaryEmails: BuiltList<String>(<String>[]),
+              secondaryPhones: BuiltList<String>(<String>[]),
               contactUtils: ContactUtils(
                 toggleLoadingIndicator: null,
                 client: null,

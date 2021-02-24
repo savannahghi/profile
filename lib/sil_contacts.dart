@@ -10,7 +10,7 @@ import 'package:sil_contacts/utils/constants.dart';
 class ContactDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    ContactProvider provider = ContactProvider.of(context);
+    final ContactProvider provider = ContactProvider.of(context)!;
     return Column(
       children: <Widget>[
         ContactItemsCard(
@@ -25,7 +25,7 @@ class ContactDetails extends StatelessWidget {
           type: ContactInfoType.email,
           addMessage: ContactDetailsStrings.primaryEmailMessage,
           onAddContactInfo: ([bool primary = false]) async {
-            dynamic result = await addContactInfoBottomSheet(
+            final dynamic result = await addContactInfoBottomSheet(
                 context: context,
                 type: ContactInfoType.email,
                 onSave: provider.contactUtils.addPrimaryEmail,
@@ -39,7 +39,7 @@ class ContactDetails extends StatelessWidget {
           type: ContactInfoType.phone,
           data: provider.secondaryPhones,
           onAddContactInfo: ([bool primary = false]) async {
-            dynamic result = await addContactInfoBottomSheet(
+            final dynamic result = await addContactInfoBottomSheet(
                 context: context,
                 type: ContactInfoType.phone,
                 onSave: provider.contactUtils.addSecondaryPhone);
@@ -53,7 +53,7 @@ class ContactDetails extends StatelessWidget {
             type: ContactInfoType.email,
             addMessage: ContactDetailsStrings.secondaryEmailsMessage,
             onAddContactInfo: ([bool primary = false]) async {
-              dynamic result = await addContactInfoBottomSheet(
+              final dynamic result = await addContactInfoBottomSheet(
                   context: context,
                   type: ContactInfoType.email,
                   onSave: provider.contactUtils.addSecondaryEmail);
@@ -67,15 +67,15 @@ class ContactDetails extends StatelessWidget {
 
 class ContactProvider extends InheritedWidget {
   const ContactProvider({
-    Key key,
-    @required this.contactUtils,
-    @required this.primaryEmail,
-    @required this.primaryPhone,
-    @required this.secondaryEmails,
-    @required this.secondaryPhones,
-    @required this.wait,
-    @required this.checkWaitingFor,
-    @required Widget child,
+    Key? key,
+    required this.contactUtils,
+    required this.primaryEmail,
+    required this.primaryPhone,
+    required this.secondaryEmails,
+    required this.secondaryPhones,
+    required this.wait,
+    required this.checkWaitingFor,
+    required Widget child,
   }) : super(key: key, child: child);
 
   final ContactUtils contactUtils;
@@ -87,7 +87,7 @@ class ContactProvider extends InheritedWidget {
   final Wait wait;
   final Function checkWaitingFor;
 
-  static ContactProvider of(BuildContext context) {
+  static ContactProvider? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<ContactProvider>();
   }
 

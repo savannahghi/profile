@@ -7,22 +7,22 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:sil_contacts/contact_utils.dart';
 import 'package:sil_contacts/sil_contacts.dart';
 import 'package:sil_contacts/utils/constants.dart';
-import 'package:sil_dumb_widgets/sil_buttons.dart';
-import 'package:sil_dumb_widgets/sil_inputs.dart';
-import 'package:sil_dumb_widgets/sil_loader.dart';
+import 'package:sil_ui_components/sil_buttons.dart';
+import 'package:sil_ui_components/sil_inputs.dart';
+import 'package:sil_ui_components/sil_loader.dart';
 import 'package:sil_themes/spaces.dart';
 import 'package:sil_themes/text_themes.dart';
 
 /// shows a bottom sheet that renders [AddContactInfo]
 /// takes contact type and a save function
 Future<dynamic> addContactInfoBottomSheet(
-    {@required BuildContext context,
-    @required ContactInfoType type,
-    @required Function onSave,
+    {required BuildContext context,
+    required ContactInfoType type,
+    required Function onSave,
     bool primary = false}) async {
   final bool isPhone = type == ContactInfoType.phone;
-  ContactProvider provider = ContactProvider.of(context);
-  return await showModalBottomSheet(
+  final ContactProvider? provider = ContactProvider.of(context);
+  return showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
@@ -30,13 +30,13 @@ Future<dynamic> addContactInfoBottomSheet(
         return Padding(
           padding: MediaQuery.of(context).viewInsets,
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
             ),
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
               maxWidth: 420,
             ),
-            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -77,13 +77,13 @@ class AddContactInfo extends StatefulWidget {
   final ContactInfoType type;
   final Function onSave;
   final bool primary;
-  final ContactProvider provider;
+  final ContactProvider? provider;
 
   const AddContactInfo({
-    @required this.type,
-    @required this.onSave,
-    @required this.primary,
-    @required this.provider,
+    required this.type,
+    required this.onSave,
+    required this.primary,
+    required this.provider,
   });
   @override
   _AddContactInfoState createState() => _AddContactInfoState();
@@ -94,8 +94,8 @@ class _AddContactInfoState extends State<AddContactInfo> {
   Queue<int> phoneNumberInputController = Queue<int>();
   TextEditingController textEditingController = TextEditingController();
 
-  String value;
-  String otp;
+  String? value;
+  String? otp;
   bool invalidCode = false;
 
   final String flag = 'add_contact_info';
@@ -106,9 +106,9 @@ class _AddContactInfoState extends State<AddContactInfo> {
     });
   }
 
-  void toggleInvalidCodeMsg(bool val) {
+  void toggleInvalidCodeMsg({bool? val}) {
     setState(() {
-      invalidCode = val;
+      invalidCode = val!;
     });
   }
 
@@ -122,47 +122,44 @@ class _AddContactInfoState extends State<AddContactInfo> {
             // phone number
             if (widget.type == ContactInfoType.phone)
               SILPhoneInput(
-                autoValidate: true,
                 inputController: phoneNumberInputController,
                 enabled: true,
                 labelText: ContactDetailsStrings.labelText,
                 labelStyle: TextThemes.boldSize16Text(),
-                hintText: ContactDetailsStrings.enterNo,
-                context: context,
                 onChanged: (dynamic val) {
                   this.phoneNumberInputController.add(1);
-                  value = val;
+                  value = val.toString();
                 },
               ),
             // email
             if (widget.type == ContactInfoType.email)
               SILFormTextField(
-                key: Key('add_email_field'),
+                key: const Key('add_email_field'),
                 context: context,
                 labelText: ContactDetailsStrings.email,
                 hintText: ContactDetailsStrings.emailHint,
                 keyboardType: TextInputType.emailAddress,
                 borderColor: Colors.grey.withOpacity(0.5),
-                prefixIcon: Icon(MdiIcons.email),
+                prefixIcon: const Icon(MdiIcons.email),
                 validator: (dynamic value) {
-                  if (value.isEmpty) {
+                  if (value.isEmpty as bool) {
                     return ContactDetailsStrings.emailValidationMessage;
                   }
 
-                  if (!ContactUtils.validateEmail(value)) {
+                  if (!ContactUtils.validateEmail(value.toString())) {
                     return ContactDetailsStrings.emailValidationMessage;
                   }
 
                   return null;
                 },
                 onChanged: (dynamic val) {
-                  value = val;
+                  value = val.toString();
                 },
               ),
             size40VerticalSizedBox,
             // save button
-            if (!widget.provider.checkWaitingFor(flag: flag))
-              Container(
+            if (!(widget.provider!.checkWaitingFor(flag: flag) as bool))
+              SizedBox(
                 width: double.infinity,
                 height: 48,
                 child: SILPrimaryButton(
@@ -170,8 +167,8 @@ class _AddContactInfoState extends State<AddContactInfo> {
                     if (value == null) {
                       return;
                     }
-                    if (_formKey.currentState.validate()) {
-                      await widget.provider.contactUtils.genericAddContact(
+                    if (_formKey.currentState!.validate()) {
+                      await widget.provider!.contactUtils.genericAddContact(
                           context: context,
                           value: value,
                           type: widget.type,
@@ -195,11 +192,11 @@ class _AddContactInfoState extends State<AddContactInfo> {
               wrapAlignment: WrapAlignment.spaceAround,
               onTextChanged: (dynamic val) {
                 if (invalidCode) {
-                  toggleInvalidCodeMsg(false);
+                  toggleInvalidCodeMsg(val: false);
                 }
               },
               onDone: (String v) async {
-                await widget.provider.contactUtils.verifyAddPrimaryEmailOtp(
+                await widget.provider!.contactUtils.verifyAddPrimaryEmailOtp(
                   context: context,
                   otp: otp,
                   userInput: v,
@@ -222,8 +219,8 @@ class _AddContactInfoState extends State<AddContactInfo> {
             ],
             size40VerticalSizedBox,
           ],
-          if (widget.provider.checkWaitingFor(flag: flag))
-            Center(
+          if (widget.provider!.checkWaitingFor(flag: flag) as bool)
+            const Center(
               child: SILLoader(),
             )
         ],

@@ -5,7 +5,7 @@ import 'package:sil_contacts/contact_utils.dart';
 import 'package:sil_contacts/set_to_primary.dart';
 import 'package:sil_contacts/sil_contacts.dart';
 import 'package:sil_contacts/utils/constants.dart';
-import 'package:sil_dumb_widgets/sil_loader.dart';
+import 'package:sil_ui_components/sil_loader.dart';
 import 'package:sil_themes/spaces.dart';
 import 'package:sil_themes/text_themes.dart';
 
@@ -18,21 +18,20 @@ class ContactItem extends StatelessWidget {
   final ContactInfoType type;
 
   const ContactItem({
-    Key key,
-    @required this.value,
-    @required this.type,
+    Key? key,
+    required this.value,
+    required this.type,
     this.editable = false,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    ContactProvider provider = ContactProvider.of(context);
+    final ContactProvider? provider = ContactProvider.of(context);
     return Container(
       padding:
           EdgeInsets.symmetric(vertical: editable ? 10 : 20, horizontal: 20),
-      decoration: BoxDecoration(color: Colors.white),
+      decoration: const BoxDecoration(color: Colors.white),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Text(value),
           if (editable)
@@ -41,9 +40,10 @@ class ContactItem extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     /// show the upgrade to primary bottom sheet
-                    dynamic result = await upgradeToPrimaryBottomSheet(
+                    final dynamic result = await upgradeToPrimaryBottomSheet(
                         context: context, type: type, value: value);
-                    provider.contactUtils.showMessageFromModal(context, result);
+                    provider!.contactUtils
+                        .showMessageFromModal(context, result);
                   },
                   child: Icon(
                     MdiIcons.keyboardCaps,
@@ -55,13 +55,14 @@ class ContactItem extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     /// show the retire contact bottom sheet
-                    dynamic result = await deleteContactDialogue(
+                    final dynamic result = await deleteContactDialogue(
                       context: context,
                       value: value,
                       type: type,
                       provider: provider,
                     );
-                    provider.contactUtils.showMessageFromModal(context, result);
+                    provider!.contactUtils
+                        .showMessageFromModal(context, result);
                   },
                   child: Icon(
                     MdiIcons.trashCanOutline,
@@ -93,16 +94,16 @@ class ContactItem extends StatelessWidget {
 
 /// deletes a secondary contact from an account
 Future<dynamic> deleteContactDialogue({
-  @required BuildContext context,
-  @required String value,
-  @required ContactInfoType type,
-  @required ContactProvider provider,
+  required BuildContext context,
+  required String value,
+  required ContactInfoType type,
+  required ContactProvider? provider,
 }) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false,
     builder: (BuildContext context) {
-      String flag = 'retire_contact';
+      const String flag = 'retire_contact';
       return AlertDialog(
         backgroundColor: Theme.of(context).backgroundColor,
         content: SingleChildScrollView(
@@ -115,32 +116,28 @@ Future<dynamic> deleteContactDialogue({
             ],
           ),
         ),
-        actions: provider.checkWaitingFor(flag: flag)
+        actions: provider!.checkWaitingFor(flag: flag) as bool
             ? <Widget>[
-                SILLoader(),
+                const SILLoader(),
               ]
             : <Widget>[
                 TextButton(
-                  child: Text(
-                    'Confirm',
-                    style: TextThemes.boldSize16Text(Colors.red),
-                  ),
                   onPressed: () async {
-                    provider.contactUtils
-                        .toggleLoadingIndicator(context: context, flag: flag);
-                    Map<String, dynamic> result = await provider.contactUtils
-                        .retireSecondaryContact(
+                    provider.contactUtils.toggleLoadingIndicator!(
+                        context: context, flag: flag);
+                    final Map<String, dynamic> result =
+                        await provider.contactUtils.retireSecondaryContact(
                             value: value,
                             isPhone: type == ContactInfoType.phone,
                             context: context,
                             flag: flag);
                     if (result['status'] == 'error') {
-                      provider.contactUtils.toggleLoadingIndicator(
+                      provider.contactUtils.toggleLoadingIndicator!(
                           context: context, flag: flag, show: false);
                       Navigator.pop(context, <String, String>{
                         'status': 'error',
-                        'message':
-                            ContactDetailsStrings.retireFeedback(value, true),
+                        'message': ContactDetailsStrings.retireFeedback(value,
+                            hasError: true),
                       });
                       return;
                     }
@@ -149,12 +146,16 @@ Future<dynamic> deleteContactDialogue({
                       'message': ContactDetailsStrings.retireFeedback(value),
                     });
                   },
+                  child: Text(
+                    'Confirm',
+                    style: TextThemes.boldSize16Text(Colors.red),
+                  ),
                 ),
                 TextButton(
-                  child: Text('Cancel'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
+                  child: const Text('Cancel'),
                 ),
               ],
       );
@@ -164,39 +165,40 @@ Future<dynamic> deleteContactDialogue({
 
 /// opens a bottom sheet to show instructions on how to change a primary contact
 void primaryContactInfo(
-    {@required BuildContext context,
-    @required bool isPhone,
-    @required String value}) {
+    {required BuildContext context,
+    required bool isPhone,
+    required String value}) {
   showModalBottomSheet(
       context: context,
       barrierColor: Colors.black.withOpacity(0.2),
       elevation: 1,
       builder: (BuildContext context) {
-        List<String> instructions = isPhone
+        final List<String> instructions = isPhone
             ? ContactDetailsStrings.phoneChangeInstructions
             : ContactDetailsStrings.emailChangeInstructions;
         return Container(
           height: 320,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           color: Colors.white,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF1ba376).withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(25),
+                    ),
                     child: Text(
                         isPhone
                             ? ContactDetailsStrings.phoneTitle
                             : ContactDetailsStrings.emailTitle,
-                        style: TextThemes.heavySize10Text(Color(0xFF1ba376))),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF1ba376).withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(25),
-                    ),
+                        style: TextThemes.heavySize10Text(
+                            const Color(0xFF1ba376))),
                   ),
                   Text(
                     value,

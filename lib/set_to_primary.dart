@@ -4,18 +4,20 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:sil_contacts/contact_utils.dart';
 import 'package:sil_contacts/sil_contacts.dart';
 import 'package:sil_contacts/utils/constants.dart';
-import 'package:sil_dumb_widgets/sil_buttons.dart';
-import 'package:sil_dumb_widgets/sil_inputs.dart';
-import 'package:sil_dumb_widgets/sil_loader.dart';
+import 'package:sil_ui_components/sil_buttons.dart';
+import 'package:sil_ui_components/sil_inputs.dart';
+import 'package:sil_ui_components/sil_loader.dart';
 import 'package:sil_themes/spaces.dart';
 import 'package:sil_themes/text_themes.dart';
 
 /// shows bottom sheet to render [SetContactToPrimary]
 /// takes contact type and a value which can be [phone] or [email]
 Future<dynamic> upgradeToPrimaryBottomSheet(
-    {BuildContext context, ContactInfoType type, String value}) async {
-  ContactProvider provider = ContactProvider.of(context);
-  return await showModalBottomSheet(
+    {required BuildContext context,
+    ContactInfoType? type,
+    String? value}) async {
+  final ContactProvider? provider = ContactProvider.of(context);
+  return showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
@@ -25,14 +27,14 @@ Future<dynamic> upgradeToPrimaryBottomSheet(
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 // borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 maxWidth: 420,
               ),
-              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
               // margin: EdgeInsets.all(5),
               child: SingleChildScrollView(
                 child: SetContactToPrimary(
@@ -52,14 +54,14 @@ Future<dynamic> upgradeToPrimaryBottomSheet(
 /// verifies the otp
 /// then uses the otp to set the [phone] or [email] as primary
 class SetContactToPrimary extends StatefulWidget {
-  final String value;
-  final ContactInfoType type;
-  final ContactProvider provider;
+  final String? value;
+  final ContactInfoType? type;
+  final ContactProvider? provider;
 
   const SetContactToPrimary({
-    @required this.value,
-    @required this.type,
-    @required this.provider,
+    required this.value,
+    required this.type,
+    required this.provider,
   });
 
   @override
@@ -68,9 +70,9 @@ class SetContactToPrimary extends StatefulWidget {
 
 class _SetContactToPrimaryState extends State<SetContactToPrimary> {
   TextEditingController textEditingController = TextEditingController();
-  String otp;
+  String? otp;
   bool invalidCode = false;
-  bool isPhone;
+  late bool isPhone;
   final String flag = 'set_to_primary';
 
   @override
@@ -84,19 +86,19 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
     return Column(
       children: <Widget>[
         if (otp == null) ...<Widget>[
-          if (isPhone) _buildPhoneAlert(context, widget.provider),
-          if (!isPhone) _buildEmailAlert(context, widget.provider),
+          if (isPhone) _buildPhoneAlert(context, widget.provider!),
+          if (!isPhone) _buildEmailAlert(context, widget.provider!),
         ],
         if (otp != null) _buildVerifyWidget(context, widget.provider),
-        if (widget.provider.checkWaitingFor(flag: flag)) ...<Widget>[
+        if (widget.provider!.checkWaitingFor(flag: flag) as bool) ...<Widget>[
           size15VerticalSizedBox,
-          SILLoader()
+          const SILLoader()
         ]
       ],
     );
   }
 
-  Widget _buildVerifyWidget(BuildContext context, ContactProvider provider) {
+  Widget _buildVerifyWidget(BuildContext context, ContactProvider? provider) {
     return Column(
       children: <Widget>[
         Text(
@@ -126,7 +128,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
           },
           onDone: (dynamic val) async {
             if (val == otp) {
-              await provider.contactUtils.verifyContact(
+              await provider!.contactUtils.verifyContact(
                 context: context,
                 isPhone: isPhone,
                 flag: flag,
@@ -156,7 +158,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
   Widget _buildPhoneAlert(BuildContext context, ContactProvider provider) {
     return Column(
       children: <Widget>[
-        Icon(
+        const Icon(
           MdiIcons.phoneAlertOutline,
           size: 70,
         ),
@@ -172,15 +174,15 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
           textAlign: TextAlign.center,
         ),
         mediumVerticalSizedBox,
-        if (!provider.checkWaitingFor(flag: flag)) ...<Widget>[
-          Container(
+        if (!(provider.checkWaitingFor(flag: flag) as bool)) ...<Widget>[
+          SizedBox(
             width: double.infinity,
             height: 44,
             child: SILPrimaryButton(
               onPressed: () async {
-                provider.contactUtils
-                    .toggleLoadingIndicator(context: context, flag: flag);
-                Map<String, dynamic> result = await provider.contactUtils
+                provider.contactUtils.toggleLoadingIndicator!(
+                    context: context, flag: flag);
+                final Map<String, dynamic> result = await provider.contactUtils
                     .sendPhoneOtp(
                         phone: widget.value, context: context, flag: flag);
                 if (result['status'] == 'error') {
@@ -191,7 +193,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
                   return;
                 }
                 setState(() {
-                  otp = result['otp'];
+                  otp = result['otp'].toString();
                 });
                 return;
               },
@@ -200,7 +202,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
             ),
           ),
           mediumVerticalSizedBox,
-          Container(
+          SizedBox(
             width: double.infinity,
             height: 44,
             child: SILSecondaryButton(
@@ -220,7 +222,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
   Widget _buildEmailAlert(BuildContext context, ContactProvider provider) {
     return Column(
       children: <Widget>[
-        Icon(
+        const Icon(
           MdiIcons.emailAlertOutline,
           size: 70,
         ),
@@ -231,20 +233,20 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
         ),
         mediumVerticalSizedBox,
         Text(
-          ContactDetailsStrings.alertMessage(widget.value, false),
+          ContactDetailsStrings.alertMessage(widget.value, isPhone: false),
           style: TextThemes.normalSize12Text().copyWith(height: 1.6),
           textAlign: TextAlign.center,
         ),
         mediumVerticalSizedBox,
-        if (!provider.checkWaitingFor(flag: flag)) ...<Widget>[
-          Container(
+        if (!(provider.checkWaitingFor(flag: flag) as bool)) ...<Widget>[
+          SizedBox(
             width: double.infinity,
             height: 44,
             child: SILPrimaryButton(
               onPressed: () async {
-                provider.contactUtils
-                    .toggleLoadingIndicator(context: context, flag: flag);
-                Map<String, dynamic> result = await provider.contactUtils
+                provider.contactUtils.toggleLoadingIndicator!(
+                    context: context, flag: flag);
+                final Map<String, dynamic> result = await provider.contactUtils
                     .sendEmailOtp(
                         email: widget.value, context: context, flag: flag);
                 if (result['status'] == 'error') {
@@ -255,7 +257,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
                   return;
                 }
                 setState(() {
-                  otp = result['otp'];
+                  otp = result['otp'].toString();
                 });
                 return;
               },
@@ -264,7 +266,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
             ),
           ),
           mediumVerticalSizedBox,
-          Container(
+          SizedBox(
             width: double.infinity,
             height: 44,
             child: SILSecondaryButton(
