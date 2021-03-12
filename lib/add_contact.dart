@@ -106,9 +106,9 @@ class _AddContactInfoState extends State<AddContactInfo> {
     });
   }
 
-  void toggleInvalidCodeMsg({bool? val}) {
+  void toggleInvalidCodeMsg({required bool val}) {
     setState(() {
-      invalidCode = val!;
+      invalidCode = val;
     });
   }
 
@@ -159,7 +159,8 @@ class _AddContactInfoState extends State<AddContactInfo> {
             size40VerticalSizedBox,
             // save button
             if (!(widget.provider!.checkWaitingFor(flag: flag) as bool))
-              SizedBox(
+              // ignore: sized_box_for_whitespace
+              Container(
                 width: double.infinity,
                 height: 48,
                 child: SILPrimaryButton(

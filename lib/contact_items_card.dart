@@ -53,7 +53,7 @@ class ContactItemsCard extends StatelessWidget {
     if (data.runtimeType == String) {
       /// data is a string and contains a [primary] contact
       return ContactItem(
-        value: data.toString(),
+        value: data as String,
         type: type,
       );
     }
