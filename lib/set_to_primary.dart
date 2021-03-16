@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:sil_ui_components/sil_platform_loader.dart';
 import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
 import 'package:sil_user_profile/utils/constants.dart';
 import 'package:sil_ui_components/sil_buttons.dart';
 import 'package:sil_ui_components/sil_inputs.dart';
-import 'package:sil_ui_components/sil_loader.dart';
+
 import 'package:sil_themes/spaces.dart';
 import 'package:sil_themes/text_themes.dart';
 
@@ -92,7 +93,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
         if (otp != null) _buildVerifyWidget(context, widget.provider),
         if (widget.provider!.checkWaitingFor(flag: flag) as bool) ...<Widget>[
           size15VerticalSizedBox,
-          const SILLoader()
+          const SILPlatformLoader()
         ]
       ],
     );

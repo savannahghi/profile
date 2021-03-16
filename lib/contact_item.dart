@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:sil_ui_components/sil_platform_loader.dart';
 import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/set_to_primary.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
 import 'package:sil_user_profile/utils/constants.dart';
-import 'package:sil_ui_components/sil_loader.dart';
 import 'package:sil_themes/spaces.dart';
 import 'package:sil_themes/text_themes.dart';
 
@@ -118,7 +118,7 @@ Future<dynamic> deleteContactDialogue({
         ),
         actions: provider!.checkWaitingFor(flag: flag) as bool
             ? <Widget>[
-                const SILLoader(),
+                const SILPlatformLoader(),
               ]
             : <Widget>[
                 TextButton(
