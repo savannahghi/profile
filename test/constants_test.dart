@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sil_contacts/utils/constants.dart';
+import 'package:sil_user_profile/utils/constants.dart';
 
 void main() {
   test('should test ContactDetailsStrings', () {

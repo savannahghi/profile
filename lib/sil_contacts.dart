@@ -1,10 +1,10 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
-import 'package:sil_contacts/add_contact.dart';
-import 'package:sil_contacts/contact_items_card.dart';
-import 'package:sil_contacts/contact_utils.dart';
-import 'package:sil_contacts/utils/constants.dart';
+import 'package:sil_user_profile/add_contact.dart';
+import 'package:sil_user_profile/contact_items_card.dart';
+import 'package:sil_user_profile/contact_utils.dart';
+import 'package:sil_user_profile/utils/constants.dart';
 
 /// renders [ContactItemsCard] card and supplies the relevant [data] and [type]
 class ContactDetails extends StatelessWidget {

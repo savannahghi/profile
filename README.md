@@ -1,3 +1,3 @@
-# sil_contacts
+# sil_user_profile
 
 // TODO: add documentation

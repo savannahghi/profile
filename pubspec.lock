@@ -11,9 +11,11 @@ packages:
   async_redux:
     dependency: "direct main"
     description:
-      name: async_redux
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: "0.0.2"
+      resolved-ref: "1d4d7ee97b764046ad4eeaaa1fa976cf217476dd"
+      url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/async_redux_flutter.git"
+    source: git
     version: "9.0.0"
   boolean_selector:
     dependency: transitive
@@ -281,8 +283,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.3"
-      resolved-ref: ba5666131e13b8483a5c7fe2febc2405509198b0
+      ref: "0.0.3-nullsafety"
+      resolved-ref: db5c8f9aeda1fe6bb3833af6a64cf385fc29f846
       url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_themes.git"
     source: git
     version: "0.0.1"
@@ -290,8 +292,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.9"
-      resolved-ref: "395b073f789306fb3d2827a4b08686f7adbebf54"
+      ref: "0.0.10-nullsafety"
+      resolved-ref: a59506e474b7210029f6d0cb42f67f4a7e787c3e
       url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_ui_components.git"
     source: git
     version: "0.0.1"

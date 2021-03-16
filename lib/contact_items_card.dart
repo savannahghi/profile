@@ -3,8 +3,8 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:sil_contacts/contact_item.dart';
-import 'package:sil_contacts/contact_utils.dart';
+import 'package:sil_user_profile/contact_item.dart';
+import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_themes/text_themes.dart';
 
 /// renders [ContactItem]s based on data supplied [primary] or [secondary] contacts
