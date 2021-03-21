@@ -3,7 +3,7 @@ description: A new Flutter package project.
 version: 0.0.1
 publish_to: none
 author:
-homepage:
+
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -23,7 +23,7 @@ dependencies:
   sil_ui_components:
     git:
       url: https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_ui_components.git
-      ref: 0.0.19-nullsafety
+      ref: 0.0.20-nullsafety
 
 dev_dependencies:
   flutter_test:
