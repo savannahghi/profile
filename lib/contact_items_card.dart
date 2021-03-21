@@ -1,4 +1,3 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -58,9 +57,9 @@ class ContactItemsCard extends StatelessWidget {
       );
     }
 
-    if (data is BuiltList) {
+    if (data is List) {
       /// data is a list and contains [secondary] contacts
-      final BuiltList<String> items = data as BuiltList<String>;
+      final List<String> items = data as List<String>;
       return Column(
         children: <Widget>[
           for (String item in items)

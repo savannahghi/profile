@@ -1,5 +1,4 @@
 import 'package:async_redux/async_redux.dart';
-import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:sil_user_profile/add_contact.dart';
 import 'package:sil_user_profile/contact_items_card.dart';
@@ -81,8 +80,8 @@ class ContactProvider extends InheritedWidget {
   final ContactUtils contactUtils;
   final String primaryEmail;
   final String primaryPhone;
-  final BuiltList<String> secondaryEmails;
-  final BuiltList<String> secondaryPhones;
+  final List<String> secondaryEmails;
+  final List<String> secondaryPhones;
 
   final Wait wait;
   final Function checkWaitingFor;
