@@ -38,6 +38,7 @@ class ContactItem extends StatelessWidget {
             Row(
               children: <Widget>[
                 GestureDetector(
+                  key: const Key('editable_contact_key'),
                   onTap: () async {
                     /// show the upgrade to primary bottom sheet
                     final dynamic result = await upgradeToPrimaryBottomSheet(
@@ -53,6 +54,7 @@ class ContactItem extends StatelessWidget {
                 ),
                 smallHorizontalSizedBox,
                 GestureDetector(
+                  key: const Key('delete_contact_key'),
                   onTap: () async {
                     /// show the retire contact bottom sheet
                     final dynamic result = await deleteContactDialogue(
@@ -74,6 +76,7 @@ class ContactItem extends StatelessWidget {
             ),
           if (!editable)
             GestureDetector(
+              key: const Key('not_editable_contact_key'),
               onTap: () {
                 primaryContactInfo(
                     context: context,
@@ -224,11 +227,12 @@ void primaryContactInfo(
               ),
               mediumVerticalSizedBox,
               GestureDetector(
+                key: const Key('close_key'),
                 onTap: () {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  'Close',
+                  ContactDetailsStrings.closeText,
                   style: TextThemes.heavySize14Text(Colors.red),
                 ),
               ),

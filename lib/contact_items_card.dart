@@ -29,7 +29,7 @@ class ContactItemsCard extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            key: const Key('add_contact_key'),
+            key: Key(title),
             onTap: () {
               onAddContactInfo!(primary);
             },

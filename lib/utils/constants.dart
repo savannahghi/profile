@@ -24,7 +24,9 @@ class ContactDetailsStrings {
   static const String sendingPhoneOtp = 'Sending phone otp';
   static const String sendingCode = 'Sending Code...';
   static const String verifyPhone = 'Verify Phone';
-
+  static const String closeText = 'Close';
+  static const String cancelText = 'Nope, Cancel';
+  static const String okayText = 'Ok, Continue';
   static const String verificationTitle = 'Verification';
   static const String verificationMessage =
       'Please enter your current PIN to \ncontinue and set a new one';

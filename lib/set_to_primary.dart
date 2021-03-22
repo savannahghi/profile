@@ -199,7 +199,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
                 return;
               },
               customRadius: 4,
-              text: 'Ok, Continue',
+              text: ContactDetailsStrings.okayText,
             ),
           ),
           mediumVerticalSizedBox,
@@ -210,7 +210,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              text: 'Nop, Cancel',
+              text: ContactDetailsStrings.cancelText,
               customRadius: 4,
               buttonColor: Colors.grey.withOpacity(0.1),
             ),
@@ -263,7 +263,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
                 return;
               },
               customRadius: 4,
-              text: 'Ok, Continue',
+              text: ContactDetailsStrings.okayText,
             ),
           ),
           mediumVerticalSizedBox,
@@ -274,7 +274,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              text: 'Nop, Cancel',
+              text: ContactDetailsStrings.cancelText,
               customRadius: 4,
               buttonColor: Colors.grey.withOpacity(0.1),
             ),
