@@ -112,6 +112,20 @@ class _AddContactInfoState extends State<AddContactInfo> {
     });
   }
 
+  String formatPhoneNumber(
+      {required String countryCode, required String phoneNumber}) {
+    if (!countryCode.startsWith('+')) {
+      return '+$countryCode';
+    }
+    if (countryCode == '+1') {
+      return '$countryCode$phoneNumber';
+    }
+    if (phoneNumber.startsWith('0')) {
+      return phoneNumber.substring(1);
+    }
+    return '$countryCode$phoneNumber';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -130,6 +144,7 @@ class _AddContactInfoState extends State<AddContactInfo> {
                   this.phoneNumberInputController.add(1);
                   value = val.toString();
                 },
+                phoneNumberFormatter: formatPhoneNumber,
               ),
             // email
             if (widget.type == ContactInfoType.email)
