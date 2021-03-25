@@ -12,6 +12,15 @@ import 'package:sil_themes/text_themes.dart';
 /// the data supplied is either a [string] or an [list] of contacts
 /// [onAddContactInfo] opens an add contact bottom sheet
 class ContactItemsCard extends StatelessWidget {
+  const ContactItemsCard({
+    Key? key,
+    required this.title,
+    required this.data,
+    required this.type,
+    this.addMessage,
+    this.onAddContactInfo,
+  }) : super(key: key);
+
   final String title;
   final String? addMessage;
   final List<ContactType<ValueObject<String>>> data;
@@ -92,14 +101,6 @@ class ContactItemsCard extends StatelessWidget {
     }
   }
 
-  const ContactItemsCard({
-    Key? key,
-    required this.title,
-    required this.data,
-    required this.type,
-    this.addMessage,
-    this.onAddContactInfo,
-  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     /// takes data which can be [string] or [list] and return contact item(s)

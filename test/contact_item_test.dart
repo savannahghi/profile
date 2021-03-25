@@ -5,7 +5,7 @@ import 'package:sil_core_domain_objects/value_objects.dart';
 import 'package:sil_user_profile/contact_item.dart';
 import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
-import 'package:sil_user_profile/utils/constants.dart';
+import 'package:sil_user_profile/constants.dart';
 
 void main() {
   group('ContactItem', () {
@@ -47,9 +47,9 @@ void main() {
       await tester.pumpAndSettle();
 
       // expect to find widget in the bottom sheet
-      expect(find.text(ContactDetailsStrings.phoneTitle), findsOneWidget);
+      expect(find.text(phoneTitle), findsOneWidget);
       expect(find.text('0712345678'), findsWidgets);
-      expect(find.text(ContactDetailsStrings.closeText), findsOneWidget);
+      expect(find.text(closeText), findsOneWidget);
 
       //expect to find the close button
       expect(find.byKey(const Key('close_key')), findsOneWidget);
@@ -58,9 +58,9 @@ void main() {
       await tester.tap(find.byKey(const Key('close_key')));
       await tester.pumpAndSettle();
 
-      expect(find.text(ContactDetailsStrings.phoneTitle), findsNothing);
+      expect(find.text(phoneTitle), findsNothing);
       expect(find.text('0712345678'), findsOneWidget);
-      expect(find.text(ContactDetailsStrings.closeText), findsNothing);
+      expect(find.text(closeText), findsNothing);
     });
 
     testWidgets(
@@ -101,9 +101,9 @@ void main() {
       await tester.pumpAndSettle();
 
       // expect to find widget in the bottom sheet
-      expect(find.text(ContactDetailsStrings.emailTitle), findsOneWidget);
+      expect(find.text(emailTitle), findsOneWidget);
       expect(find.text('someone@example.com'), findsWidgets);
-      expect(find.text(ContactDetailsStrings.closeText), findsOneWidget);
+      expect(find.text(closeText), findsOneWidget);
 
       //expect to find the close button
       expect(find.byKey(const Key('close_key')), findsOneWidget);
@@ -112,9 +112,9 @@ void main() {
       await tester.tap(find.byKey(const Key('close_key')));
       await tester.pumpAndSettle();
 
-      expect(find.text(ContactDetailsStrings.emailTitle), findsNothing);
+      expect(find.text(emailTitle), findsNothing);
       expect(find.text('someone@example.com'), findsOneWidget);
-      expect(find.text(ContactDetailsStrings.closeText), findsNothing);
+      expect(find.text(closeText), findsNothing);
     });
 
     testWidgets('renders correctly when the item is editable',

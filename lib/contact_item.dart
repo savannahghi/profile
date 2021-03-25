@@ -5,7 +5,7 @@ import 'package:sil_ui_components/sil_platform_loader.dart';
 import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/set_to_primary.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
-import 'package:sil_user_profile/utils/constants.dart';
+import 'package:sil_user_profile/constants.dart';
 import 'package:sil_themes/spaces.dart';
 import 'package:sil_themes/text_themes.dart';
 
@@ -13,16 +13,16 @@ import 'package:sil_themes/text_themes.dart';
 /// [editable] flag determines whether a contact can be [deleted] or [upgraded]
 ///  which is not the case for a primary contact
 class ContactItem extends StatelessWidget {
-  final String value;
-  final bool editable;
-  final ContactInfoType type;
-
   const ContactItem({
     Key? key,
     required this.value,
     required this.type,
     this.editable = false,
   }) : super(key: key);
+
+  final String value;
+  final bool editable;
+  final ContactInfoType type;
   @override
   Widget build(BuildContext context) {
     final ContactProvider? provider = ContactProvider.of(context);
@@ -113,7 +113,7 @@ Future<dynamic> deleteContactDialogue({
           child: ListBody(
             children: <Widget>[
               Text(
-                ContactDetailsStrings.retireMsg(value),
+                retireMsg(value),
                 style: TextThemes.normalSize14Text(),
               ),
             ],
@@ -139,14 +139,13 @@ Future<dynamic> deleteContactDialogue({
                           context: context, flag: flag, show: false);
                       Navigator.pop(context, <String, String>{
                         'status': 'error',
-                        'message': ContactDetailsStrings.retireFeedback(value,
-                            hasError: true),
+                        'message': retireFeedback(value, hasError: true),
                       });
                       return;
                     }
                     Navigator.pop(context, <String, String>{
                       'status': 'ok',
-                      'message': ContactDetailsStrings.retireFeedback(value),
+                      'message': retireFeedback(value),
                     });
                   },
                   child: Text(
@@ -176,9 +175,8 @@ void primaryContactInfo(
       barrierColor: Colors.black.withOpacity(0.2),
       elevation: 1,
       builder: (BuildContext context) {
-        final List<String> instructions = isPhone
-            ? ContactDetailsStrings.phoneChangeInstructions
-            : ContactDetailsStrings.emailChangeInstructions;
+        final List<String> instructions =
+            isPhone ? phoneChangeInstructions : emailChangeInstructions;
         return Container(
           height: 320,
           padding: const EdgeInsets.all(20),
@@ -196,10 +194,7 @@ void primaryContactInfo(
                       color: const Color(0xFF1ba376).withOpacity(0.2),
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    child: Text(
-                        isPhone
-                            ? ContactDetailsStrings.phoneTitle
-                            : ContactDetailsStrings.emailTitle,
+                    child: Text(isPhone ? phoneTitle : emailTitle,
                         style: TextThemes.heavySize10Text(
                             const Color(0xFF1ba376))),
                   ),
@@ -232,7 +227,7 @@ void primaryContactInfo(
                   Navigator.pop(context);
                 },
                 child: Text(
-                  ContactDetailsStrings.closeText,
+                  closeText,
                   style: TextThemes.heavySize14Text(Colors.red),
                 ),
               ),

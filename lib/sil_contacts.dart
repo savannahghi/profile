@@ -5,7 +5,7 @@ import 'package:sil_user_profile/add_contact.dart';
 import 'package:sil_user_profile/contact_items_card.dart';
 import 'package:sil_user_profile/contact_type.dart';
 import 'package:sil_user_profile/contact_utils.dart';
-import 'package:sil_user_profile/utils/constants.dart';
+import 'package:sil_user_profile/constants.dart';
 
 /// renders [ContactItemsCard] card and supplies the relevant [data] and [type]
 class ContactDetails extends StatelessWidget {
@@ -15,7 +15,7 @@ class ContactDetails extends StatelessWidget {
     return Column(
       children: <Widget>[
         ContactItemsCard(
-          title: ContactDetailsStrings.primaryPhone,
+          title: primaryPhone,
           type: ContactInfoType.phone,
           addMessage: '',
           data: <ContactType<ValueObject<String>>>[
@@ -24,12 +24,12 @@ class ContactDetails extends StatelessWidget {
         ),
         if (provider.primaryEmail != null)
           ContactItemsCard(
-            title: ContactDetailsStrings.primaryEmail,
+            title: primaryEmail,
             data: <ContactType<ValueObject<String>>>[
               ContactType<ValueObject<String>>(provider.primaryEmail!)
             ],
             type: ContactInfoType.email,
-            addMessage: ContactDetailsStrings.primaryEmailMessage,
+            addMessage: primaryEmailMessage,
             onAddContactInfo: ([bool primary = false]) async {
               final dynamic result = await addContactInfoBottomSheet(
                   context: context,
@@ -40,8 +40,8 @@ class ContactDetails extends StatelessWidget {
             },
           ),
         ContactItemsCard(
-          title: ContactDetailsStrings.secondaryPhones,
-          addMessage: ContactDetailsStrings.phonesMessage,
+          title: secondaryPhones,
+          addMessage: phonesMessage,
           type: ContactInfoType.phone,
           data: <ContactType<ValueObject<String>>>[
             for (PhoneNumber phoneNumber in provider.secondaryPhones)
@@ -60,7 +60,7 @@ class ContactDetails extends StatelessWidget {
         ),
         if (provider.primaryEmail != null)
           ContactItemsCard(
-            title: ContactDetailsStrings.secondaryEmails,
+            title: secondaryEmails,
             data: <ContactType<ValueObject<String>>>[
               for (EmailAddress emailAddress in provider.secondaryEmails)
                 ContactType<ValueObject<String>>(
@@ -69,7 +69,7 @@ class ContactDetails extends StatelessWidget {
                 )
             ],
             type: ContactInfoType.email,
-            addMessage: ContactDetailsStrings.secondaryEmailsMessage,
+            addMessage: secondaryEmailsMessage,
             onAddContactInfo: ([bool primary = false]) async {
               final dynamic result = await addContactInfoBottomSheet(
                   context: context,

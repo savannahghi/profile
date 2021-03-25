@@ -7,7 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:sil_ui_components/sil_platform_loader.dart';
 import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
-import 'package:sil_user_profile/utils/constants.dart';
+import 'package:sil_user_profile/constants.dart';
 import 'package:sil_ui_components/sil_buttons.dart';
 import 'package:sil_ui_components/sil_inputs.dart';
 import 'package:sil_themes/spaces.dart';
@@ -42,17 +42,13 @@ Future<dynamic> addContactInfoBottomSheet(
                 children: <Widget>[
                   mediumVerticalSizedBox,
                   Text(
-                    isPhone
-                        ? ContactDetailsStrings.phone
-                        : ContactDetailsStrings.email,
+                    isPhone ? phone : email,
                     style: TextThemes.heavySize20Text(Colors.black),
                     textAlign: TextAlign.center,
                   ),
                   mediumVerticalSizedBox,
                   Text(
-                    isPhone
-                        ? ContactDetailsStrings.phonesMessage
-                        : ContactDetailsStrings.emailMessage,
+                    isPhone ? phonesMessage : emailMessage,
                     style: TextThemes.normalSize15Text(),
                     textAlign: TextAlign.center,
                   ),
@@ -74,17 +70,17 @@ Future<dynamic> addContactInfoBottomSheet(
 /// adds a contact to an account
 /// optionally sends an otp first if [primary] flag is set to true in the case of a primary email
 class AddContactInfo extends StatefulWidget {
-  final ContactInfoType type;
-  final Function onSave;
-  final bool primary;
-  final ContactProvider? provider;
-
   const AddContactInfo({
     required this.type,
     required this.onSave,
     required this.primary,
     required this.provider,
   });
+
+  final ContactInfoType type;
+  final Function onSave;
+  final bool primary;
+  final ContactProvider? provider;
   @override
   _AddContactInfoState createState() => _AddContactInfoState();
 }
@@ -138,7 +134,7 @@ class _AddContactInfoState extends State<AddContactInfo> {
               SILPhoneInput(
                 inputController: phoneNumberInputController,
                 enabled: true,
-                labelText: ContactDetailsStrings.labelText,
+                labelText: labelText,
                 labelStyle: TextThemes.boldSize16Text(),
                 onChanged: (dynamic val) {
                   this.phoneNumberInputController.add(1);
@@ -151,18 +147,18 @@ class _AddContactInfoState extends State<AddContactInfo> {
               SILFormTextField(
                 key: const Key('add_email_field'),
                 context: context,
-                labelText: ContactDetailsStrings.email,
-                hintText: ContactDetailsStrings.emailHint,
+                labelText: email,
+                hintText: emailHint,
                 keyboardType: TextInputType.emailAddress,
                 borderColor: Colors.grey.withOpacity(0.5),
                 prefixIcon: const Icon(MdiIcons.email),
                 validator: (dynamic value) {
                   if (value.isEmpty as bool) {
-                    return ContactDetailsStrings.emailValidationMessage;
+                    return emailValidationMessage;
                   }
 
                   if (!ContactUtils.validateEmail(value.toString())) {
-                    return ContactDetailsStrings.emailValidationMessage;
+                    return emailValidationMessage;
                   }
 
                   return null;
@@ -228,7 +224,7 @@ class _AddContactInfoState extends State<AddContactInfo> {
             if (invalidCode) ...<Widget>[
               mediumVerticalSizedBox,
               Text(
-                ContactDetailsStrings.incorrectCode,
+                incorrectCode,
                 textAlign: TextAlign.center,
                 style: TextThemes.normalSize15Text(Colors.red),
               )

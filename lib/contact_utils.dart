@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
-import 'package:sil_user_profile/utils/constants.dart';
+import 'package:sil_user_profile/constants.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:sil_themes/constants.dart';
@@ -30,15 +30,15 @@ typedef UpdateStateFunc = void Function(
     required String? value});
 
 class ContactUtils {
-  final Function? toggleLoadingIndicator;
-  final dynamic client;
-  final UpdateStateFunc? updateStateFunc;
-
   ContactUtils({
     required this.toggleLoadingIndicator,
     required this.client,
     required this.updateStateFunc,
   });
+
+  final Function? toggleLoadingIndicator;
+  final dynamic client;
+  final UpdateStateFunc? updateStateFunc;
 
   static bool validateEmail(String email) {
     return emailValidator.hasMatch(email);
@@ -157,7 +157,7 @@ class ContactUtils {
       if (result['status'] == 'error') {
         Navigator.pop(context, <String, String>{
           'status': 'error',
-          'message': ContactDetailsStrings.sendOtpError(value),
+          'message': sendOtpError(value),
         });
         return;
       }
@@ -178,16 +178,13 @@ class ContactUtils {
       toggleLoadingIndicator!(context: context, flag: flag, show: false);
       Navigator.pop(context, <String, String>{
         'status': 'error',
-        'message':
-            ContactDetailsStrings.addContactFeedback(value, hasError: true)
+        'message': addContactFeedback(value, hasError: true)
       });
       return;
     }
     toggleLoadingIndicator!(context: context, flag: flag, show: false);
-    Navigator.pop(context, <String, String>{
-      'status': 'ok',
-      'message': ContactDetailsStrings.addContactFeedback(value)
-    });
+    Navigator.pop(context,
+        <String, String>{'status': 'ok', 'message': addContactFeedback(value)});
   }
 
   Future<Map<String, dynamic>> setPrimaryEmail(
@@ -414,15 +411,14 @@ class ContactUtils {
         toggleLoadingIndicator!(context: context, flag: flag, show: false);
         Navigator.pop(context, <String, String>{
           'status': 'error',
-          'message':
-              ContactDetailsStrings.addContactFeedback(email, hasError: true)
+          'message': addContactFeedback(email, hasError: true)
         });
         return;
       }
       toggleLoadingIndicator!(context: context, flag: flag, show: false);
       Navigator.pop(context, <String, String>{
         'status': 'ok',
-        'message': ContactDetailsStrings.addContactFeedback(email)
+        'message': addContactFeedback(email)
       });
       return;
     }
@@ -451,14 +447,13 @@ class ContactUtils {
       toggleLoadingIndicator!(context: context, flag: flag, show: false);
       Navigator.pop(context, <String, dynamic>{
         'status': 'error',
-        'message':
-            ContactDetailsStrings.setPrimaryFeedback(value, hasError: true)
+        'message': setPrimaryFeedback(value, hasError: true)
       });
     }
     toggleLoadingIndicator!(context: context, flag: flag, show: false);
     Navigator.pop(context, <String, dynamic>{
       'status': 'ok',
-      'message': ContactDetailsStrings.setPrimaryFeedback(value)
+      'message': setPrimaryFeedback(value)
     });
   }
 }

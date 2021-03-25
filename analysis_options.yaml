@@ -5,15 +5,13 @@ analyzer:
     implicit-dynamic: true
   errors:
     todo: ignore
-    sdk_version_async_exported_from_core: ignore
-    missing_required_param: error
+    sdk_version_async_exported_from_core: ignore    
     missing_return: error
   exclude:
     - 'lib/generated_plugin_*.dart'
     - 'bin/cache/**'
     - 'lib/**/*.g.dart'
     - 'lib/**/*.freezed.dart' 
-    - 'pubspec.yaml'
     
 
 linter:
@@ -35,7 +33,7 @@ linter:
     unnecessary_new: true
     unnecessary_const: true
     unnecessary_brace_in_string_interps: true
-    tighten_type_of_initializing_formals: false
+    tighten_type_of_initializing_formals: true
     test_types_in_equals: true
     slash_for_doc_comments: true
     prefer_void_to_null: true
@@ -45,9 +43,9 @@ linter:
     prefer_adjacent_string_concatenation: true
     package_api_docs: true
     no_duplicate_case_values: true
-    sort_pub_dependencies: false
+    sort_constructors_first: true
     avoid_escaping_inner_quotes: false
-    avoid_classes_with_only_static_members: false
-    prefer_constructors_over_static_methods: false
+    avoid_classes_with_only_static_members: true
+    prefer_constructors_over_static_methods: true
     file_names: false
     constant_identifier_names: false

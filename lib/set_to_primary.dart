@@ -4,7 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:sil_ui_components/sil_platform_loader.dart';
 import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
-import 'package:sil_user_profile/utils/constants.dart';
+import 'package:sil_user_profile/constants.dart';
 import 'package:sil_ui_components/sil_buttons.dart';
 import 'package:sil_ui_components/sil_inputs.dart';
 
@@ -55,15 +55,15 @@ Future<dynamic> upgradeToPrimaryBottomSheet(
 /// verifies the otp
 /// then uses the otp to set the [phone] or [email] as primary
 class SetContactToPrimary extends StatefulWidget {
-  final String? value;
-  final ContactInfoType? type;
-  final ContactProvider? provider;
-
   const SetContactToPrimary({
     required this.value,
     required this.type,
     required this.provider,
   });
+
+  final String? value;
+  final ContactInfoType? type;
+  final ContactProvider? provider;
 
   @override
   _SetContactToPrimaryState createState() => _SetContactToPrimaryState();
@@ -103,12 +103,12 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
     return Column(
       children: <Widget>[
         Text(
-          ContactDetailsStrings.verifyTitle,
+          verifyTitle,
           style: TextThemes.heavySize18Text(Colors.black),
         ),
         mediumVerticalSizedBox,
         Text(
-          ContactDetailsStrings.verificationMsg(widget.value),
+          verificationMsg(widget.value),
           style: TextThemes.normalSize15Text(),
           textAlign: TextAlign.center,
         ),
@@ -148,7 +148,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
         size15VerticalSizedBox,
         if (invalidCode)
           Text(
-            ContactDetailsStrings.incorrectCode,
+            incorrectCode,
             style: TextThemes.normalSize14Text(Colors.red),
             textAlign: TextAlign.center,
           ),
@@ -165,12 +165,12 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
         ),
         mediumVerticalSizedBox,
         Text(
-          ContactDetailsStrings.alertTitle,
+          alertTitle,
           style: TextThemes.heavySize20Text(Colors.black),
         ),
         mediumVerticalSizedBox,
         Text(
-          ContactDetailsStrings.alertMessage(widget.value),
+          alertMessage(widget.value),
           style: TextThemes.normalSize12Text().copyWith(height: 1.6),
           textAlign: TextAlign.center,
         ),
@@ -189,7 +189,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
                 if (result['status'] == 'error') {
                   Navigator.pop(context, <String, String>{
                     'status': 'error',
-                    'message': ContactDetailsStrings.sendOtpError(widget.value),
+                    'message': sendOtpError(widget.value),
                   });
                   return;
                 }
@@ -199,7 +199,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
                 return;
               },
               customRadius: 4,
-              text: ContactDetailsStrings.okayText,
+              text: okayText,
             ),
           ),
           mediumVerticalSizedBox,
@@ -210,7 +210,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              text: ContactDetailsStrings.cancelText,
+              text: cancelText,
               customRadius: 4,
               buttonColor: Colors.grey.withOpacity(0.1),
             ),
@@ -229,12 +229,12 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
         ),
         mediumVerticalSizedBox,
         Text(
-          ContactDetailsStrings.alertTitle,
+          alertTitle,
           style: TextThemes.heavySize20Text(Colors.black),
         ),
         mediumVerticalSizedBox,
         Text(
-          ContactDetailsStrings.alertMessage(widget.value, isPhone: false),
+          alertMessage(widget.value, isPhone: false),
           style: TextThemes.normalSize12Text().copyWith(height: 1.6),
           textAlign: TextAlign.center,
         ),
@@ -253,7 +253,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
                 if (result['status'] == 'error') {
                   Navigator.pop(context, <String, String>{
                     'status': 'error',
-                    'message': ContactDetailsStrings.sendOtpError(widget.value),
+                    'message': sendOtpError(widget.value),
                   });
                   return;
                 }
@@ -263,7 +263,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
                 return;
               },
               customRadius: 4,
-              text: ContactDetailsStrings.okayText,
+              text: okayText,
             ),
           ),
           mediumVerticalSizedBox,
@@ -274,7 +274,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              text: ContactDetailsStrings.cancelText,
+              text: cancelText,
               customRadius: 4,
               buttonColor: Colors.grey.withOpacity(0.1),
             ),
