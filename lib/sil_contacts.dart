@@ -1,7 +1,9 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:sil_core_domain_objects/value_objects.dart';
 import 'package:sil_user_profile/add_contact.dart';
 import 'package:sil_user_profile/contact_items_card.dart';
+import 'package:sil_user_profile/contact_type.dart';
 import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/utils/constants.dart';
 
@@ -16,27 +18,38 @@ class ContactDetails extends StatelessWidget {
           title: ContactDetailsStrings.primaryPhone,
           type: ContactInfoType.phone,
           addMessage: '',
-          data: provider.primaryPhone,
+          data: <ContactType<ValueObject<String>>>[
+            ContactType<ValueObject<String>>(provider.primaryPhone)
+          ],
         ),
-        ContactItemsCard(
-          title: ContactDetailsStrings.primaryEmail,
-          data: provider.primaryEmail,
-          type: ContactInfoType.email,
-          addMessage: ContactDetailsStrings.primaryEmailMessage,
-          onAddContactInfo: ([bool primary = false]) async {
-            final dynamic result = await addContactInfoBottomSheet(
-                context: context,
-                type: ContactInfoType.email,
-                onSave: provider.contactUtils.addPrimaryEmail,
-                primary: primary);
-            provider.contactUtils.showMessageFromModal(context, result);
-          },
-        ),
+        if (provider.primaryEmail != null)
+          ContactItemsCard(
+            title: ContactDetailsStrings.primaryEmail,
+            data: <ContactType<ValueObject<String>>>[
+              ContactType<ValueObject<String>>(provider.primaryEmail!)
+            ],
+            type: ContactInfoType.email,
+            addMessage: ContactDetailsStrings.primaryEmailMessage,
+            onAddContactInfo: ([bool primary = false]) async {
+              final dynamic result = await addContactInfoBottomSheet(
+                  context: context,
+                  type: ContactInfoType.email,
+                  onSave: provider.contactUtils.addPrimaryEmail,
+                  primary: primary);
+              provider.contactUtils.showMessageFromModal(context, result);
+            },
+          ),
         ContactItemsCard(
           title: ContactDetailsStrings.secondaryPhones,
           addMessage: ContactDetailsStrings.phonesMessage,
           type: ContactInfoType.phone,
-          data: provider.secondaryPhones,
+          data: <ContactType<ValueObject<String>>>[
+            for (PhoneNumber phoneNumber in provider.secondaryPhones)
+              ContactType<ValueObject<String>>(
+                phoneNumber,
+                isSecondary: true,
+              )
+          ],
           onAddContactInfo: ([bool primary = false]) async {
             final dynamic result = await addContactInfoBottomSheet(
                 context: context,
@@ -45,10 +58,16 @@ class ContactDetails extends StatelessWidget {
             provider.contactUtils.showMessageFromModal(context, result);
           },
         ),
-        if (provider.primaryEmail != 'UNKNOWN')
+        if (provider.primaryEmail != null)
           ContactItemsCard(
             title: ContactDetailsStrings.secondaryEmails,
-            data: provider.secondaryEmails,
+            data: <ContactType<ValueObject<String>>>[
+              for (EmailAddress emailAddress in provider.secondaryEmails)
+                ContactType<ValueObject<String>>(
+                  emailAddress,
+                  isSecondary: true,
+                )
+            ],
             type: ContactInfoType.email,
             addMessage: ContactDetailsStrings.secondaryEmailsMessage,
             onAddContactInfo: ([bool primary = false]) async {
@@ -78,10 +97,10 @@ class ContactProvider extends InheritedWidget {
   }) : super(key: key, child: child);
 
   final ContactUtils contactUtils;
-  final String primaryEmail;
-  final String primaryPhone;
-  final List<String> secondaryEmails;
-  final List<String> secondaryPhones;
+  final EmailAddress? primaryEmail;
+  final PhoneNumber primaryPhone;
+  final List<EmailAddress> secondaryEmails;
+  final List<PhoneNumber> secondaryPhones;
 
   final Wait wait;
   final Function checkWaitingFor;

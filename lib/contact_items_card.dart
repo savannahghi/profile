@@ -2,7 +2,9 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:sil_core_domain_objects/value_objects.dart';
 import 'package:sil_user_profile/contact_item.dart';
+import 'package:sil_user_profile/contact_type.dart';
 import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_themes/text_themes.dart';
 
@@ -12,7 +14,7 @@ import 'package:sil_themes/text_themes.dart';
 class ContactItemsCard extends StatelessWidget {
   final String title;
   final String? addMessage;
-  final dynamic data;
+  final List<ContactType<ValueObject<String>>> data;
   final Function? onAddContactInfo;
   final ContactInfoType type;
 
@@ -43,46 +45,50 @@ class ContactItemsCard extends StatelessWidget {
     );
   }
 
-  dynamic _buildContactItem(dynamic data) {
-    if (data == 'UNKNOWN' || data == null) {
+  Widget _buildContactItem({
+    required List<ContactType<ValueObject<String>>> data,
+  }) {
+    if (data.isEmpty) {
       /// there is no data, so show a message
       return _buildMsgWidget(true);
     }
 
-    if (data.runtimeType == String) {
-      /// data is a string and contains a [primary] contact
-      return ContactItem(
-        value: data as String,
-        type: type,
+    final List<ContactItem> widgets = <ContactItem>[];
+    for (final ContactType<ValueObject<String>> item in data) {
+      widgets.add(
+        ContactItem(
+          value: item.value(),
+          type: checkContactType(item),
+          editable: item.isSecondary,
+        ),
       );
     }
 
-    if (data is List) {
-      /// data is a list and contains [secondary] contacts
-      final List<String> items = data as List<String>;
-      return Column(
-        children: <Widget>[
-          for (String item in items)
-            ContactItem(
-              value: item,
-              type: type,
-              editable: true,
-            ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: DottedBorder(
-              color: Colors.grey.withOpacity(0.2),
-              child: Container(
-                width: double.infinity,
-              ),
+    return Column(
+      children: <Widget>[
+        ...widgets,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: DottedBorder(
+            color: Colors.grey.withOpacity(0.2),
+            child: Container(
+              width: double.infinity,
             ),
           ),
+        ),
 
-          /// at this point the data supplied is a [list of secondary contacts]
-          /// so communicate to the user that they can add more
-          _buildMsgWidget(),
-        ],
-      );
+        /// at this point the data supplied is a [list of secondary contacts]
+        /// so communicate to the user that they can add more
+        if (data.length > 1) _buildMsgWidget(),
+      ],
+    );
+  }
+
+  ContactInfoType checkContactType(ContactType<ValueObject<String>> item) {
+    if (item.typeOf() is PhoneNumber) {
+      return ContactInfoType.phone;
+    } else {
+      return ContactInfoType.email;
     }
   }
 
@@ -97,7 +103,9 @@ class ContactItemsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// takes data which can be [string] or [list] and return contact item(s)
-    final dynamic contactItem = _buildContactItem(data);
+    final dynamic contactItem = _buildContactItem(
+      data: data,
+    );
     return Column(
       children: <Widget>[
         // title
