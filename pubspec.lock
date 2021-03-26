@@ -49,7 +49,7 @@ packages:
       name: build
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.3"
+    version: "2.0.0"
   build_config:
     dependency: transitive
     description:
@@ -77,7 +77,7 @@ packages:
       name: camera
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.0"
+    version: "0.8.1"
   camera_platform_interface:
     dependency: transitive
     description:
@@ -161,7 +161,7 @@ packages:
       name: dart_style
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.3.14"
+    version: "2.0.0"
   dartz:
     dependency: transitive
     description:
@@ -241,7 +241,7 @@ packages:
       name: freezed
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.1"
+    version: "0.14.1+1"
   freezed_annotation:
     dependency: transitive
     description:
@@ -297,7 +297,7 @@ packages:
       name: json_serializable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.2"
+    version: "4.1.0"
   lint:
     dependency: "direct dev"
     description:
@@ -318,7 +318,7 @@ packages:
       name: logging
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1"
   matcher:
     dependency: transitive
     description:
@@ -346,7 +346,7 @@ packages:
       name: mockito
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.2"
+    version: "5.0.3"
   package_config:
     dependency: transitive
     description:
@@ -486,13 +486,13 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.11-nullsafety"
-      resolved-ref: "6f643013d05854bfe75871ae27259bc7109f4359"
+      ref: "0.0.12-nullsafety"
+      resolved-ref: d82f705cd5a0455489b031529e505b1e7f3320e6
       url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_core_domain_objects.git"
     source: git
     version: "0.0.1"
   sil_graphql_client:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "."
       ref: "0.0.7-nullsafety"
@@ -529,7 +529,7 @@ packages:
       name: source_gen
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.10+3"
+    version: "1.0.0"
   source_span:
     dependency: transitive
     description:
