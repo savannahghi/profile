@@ -35,7 +35,7 @@ packages:
       name: async_redux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.0.0"
+    version: "9.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -77,7 +77,7 @@ packages:
       name: camera
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.0"
+    version: "0.8.1"
   camera_platform_interface:
     dependency: transitive
     description:
@@ -318,7 +318,7 @@ packages:
       name: logging
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1"
   matcher:
     dependency: transitive
     description:
@@ -444,7 +444,7 @@ packages:
       name: process
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.1"
+    version: "4.2.1"
   pub_semver:
     dependency: transitive
     description:
@@ -513,8 +513,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.32-nullsafety"
-      resolved-ref: df0c07edda6fa7d19a8ac53195d5ded2e3ec2e23
+      ref: "0.0.33-nullsafety"
+      resolved-ref: f4ed60a6df84101841a1ed72abf63a86b26d9d71
       url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_ui_components.git"
     source: git
     version: "0.0.1"
