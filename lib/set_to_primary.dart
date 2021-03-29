@@ -181,8 +181,8 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
             height: 44,
             child: SILPrimaryButton(
               onPressed: () async {
-                provider.contactUtils.toggleLoadingIndicator!(
-                    context: context, flag: flag);
+                provider.contactUtils
+                    .toggleLoadingIndicator(context: context, flag: flag);
                 final Map<String, dynamic> result = await provider.contactUtils
                     .sendPhoneOtp(
                         phone: widget.value, context: context, flag: flag);
@@ -245,8 +245,8 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
             height: 44,
             child: SILPrimaryButton(
               onPressed: () async {
-                provider.contactUtils.toggleLoadingIndicator!(
-                    context: context, flag: flag);
+                provider.contactUtils
+                    .toggleLoadingIndicator(context: context, flag: flag);
                 final Map<String, dynamic> result = await provider.contactUtils
                     .sendEmailOtp(
                         email: widget.value, context: context, flag: flag);

@@ -7,8 +7,16 @@ import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
 import 'package:sil_user_profile/constants.dart';
 
+import 'mocks.dart';
+
 void main() {
   group('ContactItem', () {
+    void testUpdateState(
+        {required BuildContext context,
+        required StateContactType type,
+        required String? value}) {}
+    final MockSILGraphQlClient mockSILGraphQlClient = MockSILGraphQlClient();
+
     testWidgets(
         'renders correctly when the item is type phone and  not editable',
         (WidgetTester tester) async {
@@ -25,9 +33,9 @@ void main() {
                 PhoneNumber.withValue('+254189123456')
               ],
               contactUtils: ContactUtils(
-                toggleLoadingIndicator: null,
-                client: null,
-                updateStateFunc: null,
+                toggleLoadingIndicator: () {},
+                client: mockSILGraphQlClient,
+                updateStateFunc: testUpdateState,
               ),
               wait: Wait(),
               checkWaitingFor: () {},
@@ -79,9 +87,9 @@ void main() {
                 PhoneNumber.withValue('+254189123456')
               ],
               contactUtils: ContactUtils(
-                toggleLoadingIndicator: null,
-                client: null,
-                updateStateFunc: null,
+                toggleLoadingIndicator: () {},
+                client: mockSILGraphQlClient,
+                updateStateFunc: testUpdateState,
               ),
               wait: Wait(),
               checkWaitingFor: () {},
@@ -137,9 +145,9 @@ void main() {
                 PhoneNumber.withValue('+254189123456')
               ],
               contactUtils: ContactUtils(
-                toggleLoadingIndicator: null,
-                client: null,
-                updateStateFunc: null,
+                toggleLoadingIndicator: () {},
+                client: mockSILGraphQlClient,
+                updateStateFunc: testUpdateState,
               ),
               wait: Wait(),
               checkWaitingFor: setToTrue,

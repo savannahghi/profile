@@ -126,8 +126,8 @@ Future<dynamic> deleteContactDialogue({
             : <Widget>[
                 TextButton(
                   onPressed: () async {
-                    provider.contactUtils.toggleLoadingIndicator!(
-                        context: context, flag: flag);
+                    provider.contactUtils
+                        .toggleLoadingIndicator(context: context, flag: flag);
                     final Map<String, dynamic> result =
                         await provider.contactUtils.retireSecondaryContact(
                             value: value,
@@ -135,7 +135,7 @@ Future<dynamic> deleteContactDialogue({
                             context: context,
                             flag: flag);
                     if (result['status'] == 'error') {
-                      provider.contactUtils.toggleLoadingIndicator!(
+                      provider.contactUtils.toggleLoadingIndicator(
                           context: context, flag: flag, show: false);
                       Navigator.pop(context, <String, String>{
                         'status': 'error',

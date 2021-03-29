@@ -7,10 +7,17 @@ import 'package:sil_user_profile/contact_items_card.dart';
 import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
 
+import 'mocks.dart';
+
 void main() {
   group(
     'ContactDetails',
     () {
+      void testUpdateState(
+          {required BuildContext context,
+          required StateContactType type,
+          required String? value}) {}
+      final MockSILGraphQlClient mockSILGraphQlClient = MockSILGraphQlClient();
       testWidgets(
         'renders 4 ContactItemsCard widgets if primaryEmail is defined',
         (WidgetTester tester) async {
@@ -27,9 +34,9 @@ void main() {
                     PhoneNumber.withValue('+254189123456')
                   ],
                   contactUtils: ContactUtils(
-                    toggleLoadingIndicator: null,
-                    client: null,
-                    updateStateFunc: null,
+                    toggleLoadingIndicator: () {},
+                    client: mockSILGraphQlClient,
+                    updateStateFunc: testUpdateState,
                   ),
                   wait: Wait(),
                   checkWaitingFor: () {},
@@ -50,7 +57,7 @@ void main() {
             MaterialApp(
               home: Scaffold(
                 body: ContactProvider(
-                  primaryEmail: null,
+                  primaryEmail: EmailAddress.withValue(UNKNOWN),
                   primaryPhone: PhoneNumber.withValue('+254728101710'),
                   secondaryEmails: <EmailAddress>[
                     EmailAddress.withValue('example@mail.com')
@@ -59,9 +66,9 @@ void main() {
                     PhoneNumber.withValue('+254189123456')
                   ],
                   contactUtils: ContactUtils(
-                    toggleLoadingIndicator: null,
-                    client: null,
-                    updateStateFunc: null,
+                    toggleLoadingIndicator: () {},
+                    client: mockSILGraphQlClient,
+                    updateStateFunc: testUpdateState,
                   ),
                   wait: Wait(),
                   checkWaitingFor: () {},

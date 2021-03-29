@@ -36,9 +36,9 @@ class ContactUtils {
     required this.updateStateFunc,
   });
 
-  final Function? toggleLoadingIndicator;
+  final Function toggleLoadingIndicator;
   final dynamic client;
-  final UpdateStateFunc? updateStateFunc;
+  final UpdateStateFunc updateStateFunc;
 
   static bool validateEmail(String email) {
     return emailValidator.hasMatch(email);
@@ -64,7 +64,7 @@ class ContactUtils {
       }
 
       /// update user profile with the primary email
-      updateStateFunc!(
+      updateStateFunc(
           context: context, type: StateContactType.primaryEmail, value: email);
 
       return <String, dynamic>{
@@ -94,7 +94,7 @@ class ContactUtils {
       }
 
       /// update user profile with the secondary phone number
-      updateStateFunc!(
+      updateStateFunc(
           context: context,
           type: StateContactType.secondaryPhones,
           value: phoneNumber);
@@ -126,7 +126,7 @@ class ContactUtils {
       }
 
       /// update user profile with the secondary email
-      updateStateFunc!(
+      updateStateFunc(
           context: context,
           type: StateContactType.secondaryEmails,
           value: email);
@@ -149,7 +149,7 @@ class ContactUtils {
     required String flag,
     required bool primary,
   }) async {
-    toggleLoadingIndicator!(context: context, flag: flag);
+    toggleLoadingIndicator(context: context, flag: flag);
     // add primary contact info
     if (primary) {
       final Map<String, dynamic> result =
@@ -175,14 +175,14 @@ class ContactUtils {
       result = await addSecondaryEmail(context: context, email: value);
     }
     if (result['status'] == 'error') {
-      toggleLoadingIndicator!(context: context, flag: flag, show: false);
+      toggleLoadingIndicator(context: context, flag: flag, show: false);
       Navigator.pop(context, <String, String>{
         'status': 'error',
         'message': addContactFeedback(value, hasError: true)
       });
       return;
     }
-    toggleLoadingIndicator!(context: context, flag: flag, show: false);
+    toggleLoadingIndicator(context: context, flag: flag, show: false);
     Navigator.pop(context,
         <String, String>{'status': 'ok', 'message': addContactFeedback(value)});
   }
@@ -206,7 +206,7 @@ class ContactUtils {
       }
 
       /// update user profile with the secondary email as primary
-      updateStateFunc!(
+      updateStateFunc(
           context: context,
           type: StateContactType.setPrimaryEmail,
           value: email);
@@ -240,7 +240,7 @@ class ContactUtils {
       }
 
       /// update user profile with the secondary phone number as primary
-      updateStateFunc!(
+      updateStateFunc(
           context: context,
           type: StateContactType.setPrimaryPhone,
           value: phoneNumber);
@@ -264,7 +264,7 @@ class ContactUtils {
           await client.query(generateEmailOTPQuery, <String, dynamic>{
         'email': email,
       }) as http.Response;
-      toggleLoadingIndicator!(context: context, flag: flag, show: false);
+      toggleLoadingIndicator(context: context, flag: flag, show: false);
       final Map<String, dynamic> body =
           client.toMap(result) as Map<String, dynamic>;
       if (client.parseError(body) != null) {
@@ -292,7 +292,7 @@ class ContactUtils {
           await client.query(generateOTPQuery, <String, dynamic>{
         'msisdn': phone,
       }) as http.Response;
-      toggleLoadingIndicator!(context: context, flag: flag, show: false);
+      toggleLoadingIndicator(context: context, flag: flag, show: false);
       final Map<String, dynamic> body =
           client.toMap(result) as Map<String, dynamic>;
       if (client.parseError(body) != null) {
@@ -330,7 +330,7 @@ class ContactUtils {
       final http.Response result = await client.query(
           isPhone ? retireSecondaryPhoneQuery : retireSecondaryEmailQuery,
           variables) as http.Response;
-      toggleLoadingIndicator!(context: context, flag: flag, show: false);
+      toggleLoadingIndicator(context: context, flag: flag, show: false);
       final Map<String, dynamic> body =
           client.toMap(result) as Map<String, dynamic>;
       if (client.parseError(body) != null) {
@@ -341,13 +341,13 @@ class ContactUtils {
 
       if (isPhone) {
         /// remove the retired phone number from state
-        updateStateFunc!(
+        updateStateFunc(
             context: context,
             type: StateContactType.retireSecondaryPhone,
             value: value);
       } else {
         /// remove the retired email from state
-        updateStateFunc!(
+        updateStateFunc(
             context: context,
             type: StateContactType.retireSecondaryEmail,
             value: value);
@@ -374,7 +374,7 @@ class ContactUtils {
 
       void clearFlag(String flag) {
         if (provider!.checkWaitingFor(flag: flag) as bool) {
-          toggleLoadingIndicator!(context: context, flag: flag, show: false);
+          toggleLoadingIndicator(context: context, flag: flag, show: false);
           return;
         }
       }
@@ -404,18 +404,18 @@ class ContactUtils {
   }) async {
     /// check if otps match
     if (userInput == otp) {
-      toggleLoadingIndicator!(context: context, flag: flag);
+      toggleLoadingIndicator(context: context, flag: flag);
       final Map<String, dynamic> result =
           await addPrimaryEmail(context: context, email: email, otp: otp);
       if (result['status'] == 'error') {
-        toggleLoadingIndicator!(context: context, flag: flag, show: false);
+        toggleLoadingIndicator(context: context, flag: flag, show: false);
         Navigator.pop(context, <String, String>{
           'status': 'error',
           'message': addContactFeedback(email, hasError: true)
         });
         return;
       }
-      toggleLoadingIndicator!(context: context, flag: flag, show: false);
+      toggleLoadingIndicator(context: context, flag: flag, show: false);
       Navigator.pop(context, <String, String>{
         'status': 'ok',
         'message': addContactFeedback(email)
@@ -434,7 +434,7 @@ class ContactUtils {
     String? value,
     String? otp,
   }) async {
-    toggleLoadingIndicator!(context: context, flag: flag);
+    toggleLoadingIndicator(context: context, flag: flag);
     late Map<String, dynamic> result;
     if (isPhone) {
       result =
@@ -444,13 +444,13 @@ class ContactUtils {
       result = await setPrimaryEmail(context: context, email: value, otp: otp);
     }
     if (result['status'] == 'error') {
-      toggleLoadingIndicator!(context: context, flag: flag, show: false);
+      toggleLoadingIndicator(context: context, flag: flag, show: false);
       Navigator.pop(context, <String, dynamic>{
         'status': 'error',
         'message': setPrimaryFeedback(value, hasError: true)
       });
     }
-    toggleLoadingIndicator!(context: context, flag: flag, show: false);
+    toggleLoadingIndicator(context: context, flag: flag, show: false);
     Navigator.pop(context, <String, dynamic>{
       'status': 'ok',
       'message': setPrimaryFeedback(value)

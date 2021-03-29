@@ -22,12 +22,11 @@ class ContactDetails extends StatelessWidget {
             ContactType<ValueObject<String>>(provider.primaryPhone)
           ],
         ),
-        if (provider.primaryEmail != null &&
-            provider.primaryEmail != EmailAddress.withValue(UNKNOWN))
+        if (provider.primaryEmail != EmailAddress.withValue(UNKNOWN))
           ContactItemsCard(
             title: primaryEmail,
             data: <ContactType<ValueObject<String>>>[
-              ContactType<ValueObject<String>>(provider.primaryEmail!)
+              ContactType<ValueObject<String>>(provider.primaryEmail)
             ],
             type: ContactInfoType.email,
             addMessage: primaryEmailMessage,
@@ -40,8 +39,7 @@ class ContactDetails extends StatelessWidget {
               provider.contactUtils.showMessageFromModal(context, result);
             },
           ),
-        if (provider.secondaryPhones !=
-            <PhoneNumber>[PhoneNumber.withValue(UNKNOWN)])
+        if (provider.secondaryPhones.first != PhoneNumber.withValue(UNKNOWN))
           ContactItemsCard(
             title: secondaryPhones,
             addMessage: phonesMessage,
@@ -61,9 +59,8 @@ class ContactDetails extends StatelessWidget {
               provider.contactUtils.showMessageFromModal(context, result);
             },
           ),
-        if (provider.primaryEmail != null &&
-            provider.secondaryEmails !=
-                <EmailAddress>[EmailAddress.withValue(UNKNOWN)])
+        if (provider.primaryEmail != EmailAddress.withValue(UNKNOWN) &&
+            provider.secondaryEmails.first != EmailAddress.withValue(UNKNOWN))
           ContactItemsCard(
             title: secondaryEmails,
             data: <ContactType<ValueObject<String>>>[
@@ -102,7 +99,7 @@ class ContactProvider extends InheritedWidget {
   }) : super(key: key, child: child);
 
   final ContactUtils contactUtils;
-  final EmailAddress? primaryEmail;
+  final EmailAddress primaryEmail;
   final PhoneNumber primaryPhone;
   final List<EmailAddress> secondaryEmails;
   final List<PhoneNumber> secondaryPhones;
