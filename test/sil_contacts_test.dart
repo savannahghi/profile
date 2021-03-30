@@ -51,7 +51,7 @@ void main() {
         },
       );
       testWidgets(
-        'renders 2 ContactItemsCard widgets if primaryEmail is not defined',
+        'renders 3 ContactItemsCard widgets if primaryEmail is not defined',
         (WidgetTester tester) async {
           await tester.pumpWidget(
             MaterialApp(
@@ -78,7 +78,7 @@ void main() {
             ),
           );
 
-          expect(find.byType(ContactItemsCard), findsNWidgets(2));
+          expect(find.byType(ContactItemsCard), findsNWidgets(3));
           expect(find.byType(ContactDetails), findsOneWidget);
         },
       );
