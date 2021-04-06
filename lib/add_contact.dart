@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -87,7 +85,7 @@ class AddContactInfo extends StatefulWidget {
 
 class _AddContactInfoState extends State<AddContactInfo> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  Queue<int> phoneNumberInputController = Queue<int>();
+  TextEditingController phoneNumberInputController = TextEditingController();
   TextEditingController textEditingController = TextEditingController();
 
   String? value;
@@ -136,9 +134,8 @@ class _AddContactInfoState extends State<AddContactInfo> {
                 enabled: true,
                 labelText: labelText,
                 labelStyle: TextThemes.boldSize16Text(),
-                onChanged: (dynamic val) {
-                  this.phoneNumberInputController.add(1);
-                  value = val.toString();
+                onChanged: (String? val) {
+                  value = val;
                 },
                 phoneNumberFormatter: formatPhoneNumber,
               ),
