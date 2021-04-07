@@ -198,10 +198,12 @@ void primaryContactInfo(
                         style: TextThemes.heavySize10Text(
                             const Color(0xFF1ba376))),
                   ),
-                  Text(
-                    value,
-                    style: TextThemes.normalSize14Text(
-                        Theme.of(context).accentColor),
+                  Expanded(
+                    child: Text(
+                      value,
+                      style: TextThemes.normalSize14Text(
+                          Theme.of(context).accentColor),
+                    ),
                   ),
                 ],
               ),

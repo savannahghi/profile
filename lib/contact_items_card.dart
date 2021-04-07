@@ -118,9 +118,11 @@ class ContactItemsCard extends StatelessWidget {
           ),
           child: Row(
             children: <Widget>[
-              Text(
-                title,
-                style: TextThemes.heavySize16Text(),
+              Expanded(
+                child: Text(
+                  title,
+                  style: TextThemes.heavySize16Text(),
+                ),
               ),
             ],
           ),
