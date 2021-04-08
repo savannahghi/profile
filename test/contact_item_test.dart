@@ -2,12 +2,14 @@ import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sil_core_domain_objects/value_objects.dart';
+import 'package:sil_user_profile/constants.dart';
 import 'package:sil_user_profile/contact_item.dart';
 import 'package:sil_user_profile/contact_utils.dart';
+import 'package:sil_user_profile/set_to_primary.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
-import 'package:sil_user_profile/constants.dart';
 
 import 'mocks.dart';
+import 'test_utils.dart';
 
 void main() {
   group('ContactItem', () {
@@ -25,12 +27,12 @@ void main() {
           home: Scaffold(
             body: ContactProvider(
               primaryEmail: EmailAddress.withValue('someone@example.com'),
-              primaryPhone: PhoneNumber.withValue('+254728101710'),
+              primaryPhone: PhoneNumber.withValue(testPhoneNumber),
               secondaryEmails: <EmailAddress>[
                 EmailAddress.withValue('example@mail')
               ],
               secondaryPhones: <PhoneNumber>[
-                PhoneNumber.withValue('+254189123456')
+                PhoneNumber.withValue(testPhoneNumber)
               ],
               contactUtils: ContactUtils(
                 toggleLoadingIndicator: () {},
@@ -41,7 +43,7 @@ void main() {
               checkWaitingFor: () {},
               child: const ContactItem(
                 type: ContactInfoType.phone,
-                value: '0712345678',
+                value: testPhoneNumber,
               ),
             ),
           ),
@@ -56,7 +58,7 @@ void main() {
 
       // expect to find widget in the bottom sheet
       expect(find.text(phoneTitle), findsOneWidget);
-      expect(find.text('0712345678'), findsWidgets);
+      expect(find.text(testPhoneNumber), findsWidgets);
       expect(find.text(closeText), findsOneWidget);
 
       //expect to find the close button
@@ -67,7 +69,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text(phoneTitle), findsNothing);
-      expect(find.text('0712345678'), findsOneWidget);
+      expect(find.text(testPhoneNumber), findsOneWidget);
       expect(find.text(closeText), findsNothing);
     });
 
@@ -79,12 +81,12 @@ void main() {
           home: Scaffold(
             body: ContactProvider(
               primaryEmail: EmailAddress.withValue('someone@example.com'),
-              primaryPhone: PhoneNumber.withValue('+254728101710'),
+              primaryPhone: PhoneNumber.withValue(testPhoneNumber),
               secondaryEmails: <EmailAddress>[
                 EmailAddress.withValue('example@mail')
               ],
               secondaryPhones: <PhoneNumber>[
-                PhoneNumber.withValue('+254189123456')
+                PhoneNumber.withValue(testPhoneNumber)
               ],
               contactUtils: ContactUtils(
                 toggleLoadingIndicator: () {},
@@ -127,54 +129,106 @@ void main() {
 
     testWidgets('renders correctly when the item is editable',
         (WidgetTester tester) async {
-      // await tester.runAsync(() async {
-      bool setToTrue({required String flag}) {
-        return true;
-      }
+      await tester.runAsync(() async {
+        bool setToTrue({required String flag}) {
+          return false;
+        }
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ContactProvider(
-              primaryEmail: EmailAddress.withValue('someone@example.com'),
-              primaryPhone: PhoneNumber.withValue('+254728101710'),
-              secondaryEmails: <EmailAddress>[
-                EmailAddress.withValue('example@mail')
-              ],
-              secondaryPhones: <PhoneNumber>[
-                PhoneNumber.withValue('+254189123456')
-              ],
-              contactUtils: ContactUtils(
-                toggleLoadingIndicator: () {},
-                client: mockSILGraphQlClient,
-                updateStateFunc: testUpdateState,
-              ),
-              wait: Wait(),
-              checkWaitingFor: setToTrue,
-              child: const ContactItem(
-                type: ContactInfoType.phone,
-                value: '0712345678',
-                editable: true,
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ContactProvider(
+                primaryEmail: EmailAddress.withValue('someone@example.com'),
+                primaryPhone: PhoneNumber.withValue(testPhoneNumber),
+                secondaryEmails: <EmailAddress>[
+                  EmailAddress.withValue('example@mail')
+                ],
+                secondaryPhones: <PhoneNumber>[
+                  PhoneNumber.withValue(testPhoneNumber)
+                ],
+                contactUtils: ContactUtils(
+                  toggleLoadingIndicator: () {},
+                  client: mockSILGraphQlClient,
+                  updateStateFunc: testUpdateState,
+                ),
+                wait: Wait(),
+                checkWaitingFor: setToTrue,
+                child: const ContactItem(
+                  type: ContactInfoType.phone,
+                  value: testPhoneNumber,
+                  editable: true,
+                ),
               ),
             ),
           ),
-        ),
-      );
+        );
 
-      // expect to find the guesture detectors when the number is  editable
-      expect(find.byKey(const Key('editable_contact_key')), findsOneWidget);
-      expect(find.byKey(const Key('delete_contact_key')), findsOneWidget);
+        // expect to find the guesture detectors when the number is  editable
+        expect(find.byKey(const Key('editable_contact_key')), findsOneWidget);
+        expect(find.byKey(const Key('delete_contact_key')), findsOneWidget);
 
-      // expect that tapping the edit button calls the upgradeToPrimaryBottomSheet method
+        // expect that tapping the edit button calls the upgradeToPrimaryBottomSheet method
+        await tester.tap(find.byKey(const Key('editable_contact_key')));
+        await tester.pump();
 
-      // await tester.tap(find.byKey(const Key('editable_contact_key')));
-      // await tester.pump();
+        // expect to find widget in the bottom sheet
+        expect(find.byType(SingleChildScrollView), findsOneWidget);
+        expect(find.byType(SetContactToPrimary), findsOneWidget);
 
-      // expect to find widget in the bottom sheet
-      // expect(find.byType(SingleChildScrollView), findsOneWidget);
-
-      // expect(find.byType(SetContactToPrimary), findsOneWidget);
+        await tester.tap(find.byKey(const Key('delete_contact_key')));
+        await tester.pump();
+        expect(find.byKey(const Key('editable_contact_key')), findsOneWidget);
+      });
     });
-    // });
+
+    testWidgets('should render deleteContactDialogue correctly',
+        (WidgetTester tester) async {
+      await tester.runAsync(() async {
+        bool setToTrue({required String flag}) {
+          return false;
+        }
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ContactProvider(
+                primaryEmail: EmailAddress.withValue('someone@example.com'),
+                primaryPhone: PhoneNumber.withValue(testPhoneNumber),
+                secondaryEmails: <EmailAddress>[
+                  EmailAddress.withValue('example@mail')
+                ],
+                secondaryPhones: <PhoneNumber>[
+                  PhoneNumber.withValue(testPhoneNumber)
+                ],
+                contactUtils: ContactUtils(
+                  toggleLoadingIndicator: () {},
+                  client: mockSILGraphQlClient,
+                  updateStateFunc: testUpdateState,
+                ),
+                wait: Wait(),
+                checkWaitingFor: setToTrue,
+                child: const ContactItem(
+                  type: ContactInfoType.phone,
+                  value: testPhoneNumber,
+                  editable: true,
+                ),
+              ),
+            ),
+          ),
+        );
+
+        // expect to find the guesture detectors when the number is  editable
+        expect(find.byKey(const Key('editable_contact_key')), findsOneWidget);
+        expect(find.byKey(const Key('delete_contact_key')), findsOneWidget);
+
+        // expect that tapping the edit button calls the upgradeToPrimaryBottomSheet method
+
+        await tester.tap(find.byKey(const Key('delete_contact_key')));
+        await tester.pump();
+
+        // expect to find widget in the bottom sheet
+        expect(find.byType(AlertDialog), findsOneWidget);
+      });
+    });
   });
 }

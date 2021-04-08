@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sil_app_wrapper/sil_app_wrapper.dart';
 import 'package:sil_graphql_client/graph_client.dart';
+import 'package:sil_user_profile/constants.dart';
 
 class MockDeviceCapabilities extends IDeviceCapabilities {}
 
@@ -83,6 +84,17 @@ class MockSILGraphQlClient extends Mock implements ISILGraphQlClient {
         Response(json.encode(<String, dynamic>{'error': 'error'}), 201),
       );
     }
+
+    if (queryString == generateOTPQuery) {
+      return Future<Response>.value(
+        Response(
+            json.encode(<String, dynamic>{
+              'data': <String, dynamic>{'generateOTP': '1234'}
+            }),
+            201),
+      );
+    }
+
     return Future<Response>.value();
   }
 

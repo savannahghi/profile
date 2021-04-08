@@ -8,6 +8,7 @@ import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
 
 import 'mocks.dart';
+import 'test_utils.dart';
 
 void main() {
   group(
@@ -26,12 +27,12 @@ void main() {
               home: Scaffold(
                 body: ContactProvider(
                   primaryEmail: EmailAddress.withValue('someone@example.com'),
-                  primaryPhone: PhoneNumber.withValue('+254728101710'),
+                  primaryPhone: PhoneNumber.withValue(testPhoneNumber),
                   secondaryEmails: <EmailAddress>[
                     EmailAddress.withValue('example@mail.com')
                   ],
                   secondaryPhones: <PhoneNumber>[
-                    PhoneNumber.withValue('+254189123456')
+                    PhoneNumber.withValue(testPhoneNumber)
                   ],
                   contactUtils: ContactUtils(
                     toggleLoadingIndicator: () {},
@@ -58,12 +59,12 @@ void main() {
               home: Scaffold(
                 body: ContactProvider(
                   primaryEmail: EmailAddress.withValue(UNKNOWN),
-                  primaryPhone: PhoneNumber.withValue('+254728101710'),
+                  primaryPhone: PhoneNumber.withValue(testPhoneNumber),
                   secondaryEmails: <EmailAddress>[
                     EmailAddress.withValue('example@mail.com')
                   ],
                   secondaryPhones: <PhoneNumber>[
-                    PhoneNumber.withValue('+254189123456')
+                    PhoneNumber.withValue(testPhoneNumber)
                   ],
                   contactUtils: ContactUtils(
                     toggleLoadingIndicator: () {},
