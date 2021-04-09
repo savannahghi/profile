@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,7 +8,9 @@ import 'package:sil_user_profile/constants.dart';
 import 'package:sil_user_profile/contact_item.dart';
 import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/set_to_primary.dart';
+import 'package:sil_user_profile/shared/widget_keys.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
+import 'package:http/http.dart' as http;
 
 import 'mocks.dart';
 import 'test_utils.dart';
@@ -228,6 +232,125 @@ void main() {
 
         // expect to find widget in the bottom sheet
         expect(find.byType(AlertDialog), findsOneWidget);
+      });
+    });
+
+    testWidgets('should confirm deleting contact and navigate successfully',
+        (WidgetTester tester) async {
+      await tester.runAsync(() async {
+        bool setToTrue({required String flag}) {
+          return false;
+        }
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ContactProvider(
+                primaryEmail: EmailAddress.withValue('someone@example.com'),
+                primaryPhone: PhoneNumber.withValue(testPhoneNumber),
+                secondaryEmails: <EmailAddress>[
+                  EmailAddress.withValue('example@mail')
+                ],
+                secondaryPhones: <PhoneNumber>[
+                  PhoneNumber.withValue(testPhoneNumber)
+                ],
+                contactUtils: ContactUtils(
+                  toggleLoadingIndicator: (
+                      {BuildContext? context, String? flag, bool? show}) {},
+                  client: mockSILGraphQlClient,
+                  updateStateFunc: testUpdateState,
+                ),
+                wait: Wait(),
+                checkWaitingFor: setToTrue,
+                child: const ContactItem(
+                  type: ContactInfoType.phone,
+                  value: testPhoneNumber,
+                  editable: true,
+                ),
+              ),
+            ),
+          ),
+        );
+
+        // expect to find the guesture detectors when the number is  editable
+        expect(find.byKey(const Key('editable_contact_key')), findsOneWidget);
+        expect(find.byKey(const Key('delete_contact_key')), findsOneWidget);
+
+        // expect that tapping the edit button calls the upgradeToPrimaryBottomSheet method
+
+        await tester.tap(find.byKey(const Key('delete_contact_key')));
+        await tester.pump();
+
+        // expect to find widget in the bottom sheet
+        expect(find.byType(AlertDialog), findsOneWidget);
+        expect(find.byKey(confirmButtonKey), findsOneWidget);
+
+        await tester.tap(find.byKey(confirmButtonKey));
+      });
+    });
+
+    testWidgets('should confirm deleting contact and navigate with error',
+        (WidgetTester tester) async {
+      await tester.runAsync(() async {
+        bool setToTrue({required String flag}) {
+          return false;
+        }
+
+        final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+            MockShortSILGraphQlClient.withResponse(
+          'idToken',
+          'endpoint',
+          http.Response(
+              json.encode(<String, dynamic>{
+                'error': 'not found',
+              }),
+              402),
+        );
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ContactProvider(
+                primaryEmail: EmailAddress.withValue('someone@example.com'),
+                primaryPhone: PhoneNumber.withValue(testPhoneNumber),
+                secondaryEmails: <EmailAddress>[
+                  EmailAddress.withValue('example@mail')
+                ],
+                secondaryPhones: <PhoneNumber>[
+                  PhoneNumber.withValue(testPhoneNumber)
+                ],
+                contactUtils: ContactUtils(
+                  toggleLoadingIndicator: (
+                      {BuildContext? context, String? flag, bool? show}) {},
+                  client: mockShortSILGraphQlClient,
+                  updateStateFunc: testUpdateState,
+                ),
+                wait: Wait(),
+                checkWaitingFor: setToTrue,
+                child: const ContactItem(
+                  type: ContactInfoType.phone,
+                  value: testPhoneNumber,
+                  editable: true,
+                ),
+              ),
+            ),
+          ),
+        );
+
+        // expect to find the guesture detectors when the number is  editable
+        expect(find.byKey(const Key('editable_contact_key')), findsOneWidget);
+        expect(find.byKey(const Key('delete_contact_key')), findsOneWidget);
+
+        // expect that tapping the edit button calls the upgradeToPrimaryBottomSheet method
+
+        await tester.tap(find.byKey(const Key('delete_contact_key')));
+        await tester.pump();
+
+        // expect to find widget in the bottom sheet
+        expect(find.byType(AlertDialog), findsOneWidget);
+        expect(find.byKey(confirmButtonKey), findsOneWidget);
+
+        await tester.tap(find.byKey(confirmButtonKey));
       });
     });
   });

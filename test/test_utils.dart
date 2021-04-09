@@ -17,7 +17,8 @@ ContactProvider testContactProvider(
       secondaryEmails: <EmailAddress>[EmailAddress.withValue('example@mail')],
       secondaryPhones: <PhoneNumber>[PhoneNumber.withValue(testPhoneNumber)],
       contactUtils: ContactUtils(
-        toggleLoadingIndicator: () {},
+        toggleLoadingIndicator: (
+            {BuildContext? context, String? flag, bool? show}) {},
         client: mockSILGraphQlClient,
         updateStateFunc: testUpdateState,
       ),

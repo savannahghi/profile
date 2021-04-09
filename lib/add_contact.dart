@@ -166,29 +166,29 @@ class _AddContactInfoState extends State<AddContactInfo> {
               ),
             size40VerticalSizedBox,
             // save button
-            if (!(widget.provider!.checkWaitingFor(flag: flag) as bool))
-              // ignore: sized_box_for_whitespace
-              Container(
-                width: double.infinity,
-                height: 48,
-                child: SILPrimaryButton(
-                  onPressed: () async {
-                    if (value == null) {
-                      return;
-                    }
-                    if (_formKey.currentState!.validate()) {
-                      await widget.provider!.contactUtils.genericAddContact(
-                          context: context,
-                          value: value,
-                          type: widget.type,
-                          setOtp: setOtp,
-                          flag: flag,
-                          primary: widget.primary);
-                    }
-                  },
-                  text: 'Save',
+            if (widget.provider != null)
+              if (!(widget.provider?.checkWaitingFor(flag: flag) as bool))
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: SILPrimaryButton(
+                    onPressed: () async {
+                      if (value == null) {
+                        return;
+                      }
+                      if (_formKey.currentState!.validate()) {
+                        await widget.provider!.contactUtils.genericAddContact(
+                            context: context,
+                            value: value,
+                            type: widget.type,
+                            setOtp: setOtp,
+                            flag: flag,
+                            primary: widget.primary);
+                      }
+                    },
+                    text: 'Save',
+                  ),
                 ),
-              ),
           ],
           if (otp != null) ...<Widget>[
             // verify otp input here
@@ -228,10 +228,11 @@ class _AddContactInfoState extends State<AddContactInfo> {
             ],
             size40VerticalSizedBox,
           ],
-          if (widget.provider!.checkWaitingFor(flag: flag) as bool)
-            const Center(
-              child: SILPlatformLoader(),
-            )
+          if (widget.provider != null)
+            if (widget.provider?.checkWaitingFor(flag: flag) as bool)
+              const Center(
+                child: SILPlatformLoader(),
+              )
         ],
       ),
     );

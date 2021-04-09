@@ -2,12 +2,30 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:sil_app_wrapper/sil_app_wrapper.dart';
 import 'package:sil_graphql_client/graph_client.dart';
 import 'package:sil_user_profile/constants.dart';
 
 class MockDeviceCapabilities extends IDeviceCapabilities {}
+
+class MockShortSILGraphQlClient extends ISILGraphQlClient {
+  MockShortSILGraphQlClient.withResponse(
+      String idToken, String endpoint, this.response) {
+    super.idToken = idToken;
+    super.endpoint = endpoint;
+  }
+
+  final http.Response response;
+
+  @override
+  Future<http.Response> query(
+      String queryString, Map<String, dynamic> variables,
+      [ContentType contentType = ContentType.json]) {
+    return Future<http.Response>.value(response);
+  }
+}
 
 class MockSILGraphQlClient extends Mock implements ISILGraphQlClient {
   String setupUserAsExperimentorVariables =
@@ -86,6 +104,25 @@ class MockSILGraphQlClient extends Mock implements ISILGraphQlClient {
     }
 
     if (queryString == generateOTPQuery) {
+      return Future<Response>.value(
+        Response(
+            json.encode(<String, dynamic>{
+              'data': <String, dynamic>{'generateOTP': '1234'}
+            }),
+            201),
+      );
+    }
+
+    if (queryString == retireSecondaryPhoneQuery) {
+      return Future<Response>.value(
+        Response(
+            json.encode(<String, dynamic>{
+              'data': <String, dynamic>{'generateOTP': '1234'}
+            }),
+            201),
+      );
+    }
+    if (queryString == setPrimaryEmailQuery) {
       return Future<Response>.value(
         Response(
             json.encode(<String, dynamic>{
