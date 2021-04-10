@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:sil_ui_components/sil_platform_loader.dart';
 import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
@@ -71,8 +72,9 @@ class SetContactToPrimary extends StatefulWidget {
 
 class _SetContactToPrimaryState extends State<SetContactToPrimary> {
   TextEditingController textEditingController = TextEditingController();
-  String? otp;
-  bool invalidCode = false;
+  SetToPrimaryBehaviorSubject setToPrimaryBehaviorSubject =
+      SetToPrimaryBehaviorSubject();
+
   late bool isPhone;
   final String flag = 'set_to_primary';
 
@@ -84,6 +86,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
 
   @override
   Widget build(BuildContext context) {
+    final String? otp = setToPrimaryBehaviorSubject.otp.valueWrapper?.value;
     return Column(
       children: <Widget>[
         if (otp == null) ...<Widget>[
@@ -100,6 +103,10 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
   }
 
   Widget _buildVerifyWidget(BuildContext context, ContactProvider? provider) {
+    final String? otp = setToPrimaryBehaviorSubject.otp.valueWrapper?.value;
+    final bool invalidCode =
+        setToPrimaryBehaviorSubject.invalidCode.valueWrapper!.value;
+
     return Column(
       children: <Widget>[
         Text(
@@ -122,9 +129,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
           wrapAlignment: WrapAlignment.spaceAround,
           onTextChanged: (dynamic val) {
             if (invalidCode) {
-              setState(() {
-                invalidCode = false;
-              });
+              setToPrimaryBehaviorSubject.invalidCode.add(false);
             }
           },
           onDone: (dynamic val) async {
@@ -139,10 +144,8 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
               return;
             }
             textEditingController.clear();
+            setToPrimaryBehaviorSubject.invalidCode.add(true);
             await HapticFeedback.vibrate();
-            setState(() {
-              invalidCode = true;
-            });
           },
         ),
         size15VerticalSizedBox,
@@ -194,9 +197,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
                   });
                   return;
                 }
-                setState(() {
-                  otp = result['otp'].toString();
-                });
+                setToPrimaryBehaviorSubject.otp.add(result['otp'].toString());
                 return;
               },
               customRadius: 4,
@@ -258,9 +259,8 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
                   });
                   return;
                 }
-                setState(() {
-                  otp = result['otp'].toString();
-                });
+                setToPrimaryBehaviorSubject.otp.add(result['otp'].toString());
+
                 return;
               },
               customRadius: 4,
@@ -284,4 +284,16 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
       ],
     );
   }
+}
+
+class SetToPrimaryBehaviorSubject {
+  factory SetToPrimaryBehaviorSubject() {
+    return _singleton;
+  }
+  SetToPrimaryBehaviorSubject._internal();
+  static final SetToPrimaryBehaviorSubject _singleton =
+      SetToPrimaryBehaviorSubject._internal();
+
+  BehaviorSubject<String> otp = BehaviorSubject<String>();
+  BehaviorSubject<bool> invalidCode = BehaviorSubject<bool>.seeded(false);
 }

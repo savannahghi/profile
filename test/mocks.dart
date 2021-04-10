@@ -107,7 +107,7 @@ class MockSILGraphQlClient extends Mock implements ISILGraphQlClient {
       return Future<Response>.value(
         Response(
             json.encode(<String, dynamic>{
-              'data': <String, dynamic>{'generateOTP': '1234'}
+              'data': <String, dynamic>{'generateOTP': '123456'}
             }),
             201),
       );
@@ -117,7 +117,7 @@ class MockSILGraphQlClient extends Mock implements ISILGraphQlClient {
       return Future<Response>.value(
         Response(
             json.encode(<String, dynamic>{
-              'data': <String, dynamic>{'generateOTP': '1234'}
+              'data': <String, dynamic>{'generateOTP': '123456'}
             }),
             201),
       );
@@ -126,7 +126,7 @@ class MockSILGraphQlClient extends Mock implements ISILGraphQlClient {
       return Future<Response>.value(
         Response(
             json.encode(<String, dynamic>{
-              'data': <String, dynamic>{'generateOTP': '1234'}
+              'data': <String, dynamic>{'generateOTP': '123456'}
             }),
             201),
       );

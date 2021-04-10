@@ -14,6 +14,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.0
+  rxdart: ^0.26.0
 
   sil_app_wrapper:
     git:
