@@ -11,6 +11,7 @@ const String testInvalidEmail = 'examplemail.com';
 const String testOTP = '123456';
 
 const Key testButtonKey = Key('button_Key');
+const Key testGenericButtonKey = Key('generic_button_Key');
 
 ContactProvider testContactProvider(
         dynamic mockSILGraphQlClient, UpdateStateFunc testUpdateState) =>

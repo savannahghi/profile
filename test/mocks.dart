@@ -134,6 +134,18 @@ class MockSILGraphQlClient extends Mock implements ISILGraphQlClient {
             201),
       );
     }
+    if (queryString == setPrimaryPhoneQuery) {
+      return Future<Response>.value(
+        Response(
+            json.encode(<String, dynamic>{
+              'data': <String, dynamic>{
+                'generateOTP': '123456',
+                'setPrimaryPhoneNumber': true,
+              }
+            }),
+            201),
+      );
+    }
     if (queryString == generateEmailOTPQuery) {
       return Future<Response>.value(
         Response(

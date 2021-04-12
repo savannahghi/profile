@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
 import 'package:sil_app_wrapper/sil_app_wrapper.dart';
 import 'package:sil_ui_components/sil_buttons.dart';
 import 'package:sil_user_profile/contact_utils.dart';
-import 'package:http/http.dart' as http;
 
 import 'mocks.dart';
 import 'test_utils.dart';
@@ -329,7 +329,8 @@ void main() {
     expect(result, resultOK);
   });
 
-  testWidgets('should render genericAddContact', (WidgetTester tester) async {
+  testWidgets('should render genericAddContact when primary is true',
+      (WidgetTester tester) async {
     String? otp;
     void setOtp(String val) {
       otp = val;
@@ -372,4 +373,268 @@ void main() {
     await tester.pumpAndSettle();
     expect(otp, testOTP);
   });
+
+  testWidgets(
+      'should render genericAddContact when primary is false and ContactInfoType is phone',
+      (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(
+          json.encode(
+            <String, dynamic>{
+              'data': <String, dynamic>{'addSecondaryPhoneNumber': true}
+            },
+          ),
+          201),
+    );
+
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockShortSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                          builder: (BuildContext context) =>
+                              BuildGenericAddContactTest(
+                                mockShortSILGraphQlClient:
+                                    mockShortSILGraphQlClient,
+                                type: ContactInfoType.phone,
+                                primary: false,
+                              )),
+                    );
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(testGenericButtonKey), findsOneWidget);
+    await tester.tap(find.byKey(testGenericButtonKey));
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets(
+      'should render genericAddContact when primary is false and ContactInfoType is email',
+      (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(
+          json.encode(
+            <String, dynamic>{
+              'data': <String, dynamic>{'emailVerificationOTP': testOTP}
+            },
+          ),
+          200),
+    );
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                          builder: (BuildContext context) =>
+                              BuildGenericAddContactTest(
+                                mockShortSILGraphQlClient:
+                                    mockShortSILGraphQlClient,
+                                type: ContactInfoType.email,
+                                primary: true,
+                              )),
+                    );
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(testGenericButtonKey), findsOneWidget);
+    await tester.tap(find.byKey(testGenericButtonKey));
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets(
+      'should render genericAddContact and navigate with error when primary is true',
+      (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(
+          json.encode(<String, dynamic>{
+            'error': 'not found',
+          }),
+          402),
+    );
+
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: Scaffold(
+            body: Builder(builder: (BuildContext context) {
+              return SILPrimaryButton(
+                buttonKey: testButtonKey,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<dynamic>(
+                        builder: (BuildContext context) =>
+                            BuildGenericAddContactTest(
+                              mockShortSILGraphQlClient:
+                                  mockShortSILGraphQlClient,
+                              type: ContactInfoType.phone,
+                              primary: true,
+                            )),
+                  );
+                },
+              );
+            }),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(testGenericButtonKey), findsOneWidget);
+    await tester.tap(find.byKey(testGenericButtonKey));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(testGenericButtonKey), findsNothing);
+  });
+
+  testWidgets(
+      'should render genericAddContact and navigate with error when primary is false',
+      (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(
+          json.encode(<String, dynamic>{
+            'error': 'not found',
+          }),
+          402),
+    );
+
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: Scaffold(
+            body: Builder(builder: (BuildContext context) {
+              return SILPrimaryButton(
+                buttonKey: testButtonKey,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<dynamic>(
+                        builder: (BuildContext context) =>
+                            BuildGenericAddContactTest(
+                              mockShortSILGraphQlClient:
+                                  mockShortSILGraphQlClient,
+                              type: ContactInfoType.phone,
+                              primary: false,
+                            )),
+                  );
+                },
+              );
+            }),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(testGenericButtonKey), findsOneWidget);
+    await tester.tap(find.byKey(testGenericButtonKey));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(testGenericButtonKey), findsNothing);
+  });
+}
+
+class BuildGenericAddContactTest extends StatelessWidget {
+  const BuildGenericAddContactTest({
+    Key? key,
+    required this.mockShortSILGraphQlClient,
+    required this.type,
+    required this.primary,
+  }) : super(key: key);
+
+  final MockShortSILGraphQlClient mockShortSILGraphQlClient;
+  final ContactInfoType type;
+  final bool primary;
+
+  @override
+  Widget build(BuildContext context) {
+    void testUpdateState(
+        {required BuildContext context,
+        required StateContactType type,
+        required String? value}) {}
+    return SILAppWrapperBase(
+      appName: 'testAppName',
+      appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+      graphQLClient: mockShortSILGraphQlClient,
+      deviceCapabilities: MockDeviceCapabilities(),
+      child: Scaffold(
+        body:
+            LayoutBuilder(builder: (BuildContext context, BoxConstraints box) {
+          return SILPrimaryButton(
+            buttonKey: testGenericButtonKey,
+            onPressed: () {
+              testContactProvider(mockShortSILGraphQlClient, testUpdateState)
+                  .contactUtils
+                  .genericAddContact(
+                    context: context,
+                    flag: 'add_contact_info',
+                    primary: primary,
+                    setOtp: (String val) {},
+                    type: type,
+                    value: testPhoneNumber,
+                  );
+            },
+          );
+        }),
+      ),
+    );
+  }
 }

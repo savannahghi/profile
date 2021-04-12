@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,6 +11,7 @@ import 'package:sil_user_profile/contact_item.dart';
 import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/set_to_primary.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
+import 'package:http/http.dart' as http;
 
 import 'mocks.dart';
 import 'test_utils.dart';
@@ -137,7 +140,8 @@ void main() {
       expect(setToPrimaryBehaviorSubject.otp.valueWrapper!.value, '123456');
     });
 
-    testWidgets('should buildVerifyWidget with valid code and navgate',
+    testWidgets(
+        'should buildVerifyWidget with valid code and Contact type is phone and navgate',
         (WidgetTester tester) async {
       setToPrimaryBehaviorSubject.otp.add('123456');
 
@@ -155,6 +159,101 @@ void main() {
                             BuildSetContactToPrimaryPhone(
                               mockSILGraphQlClient: mockSILGraphQlClient,
                               type: ContactInfoType.phone,
+                            )),
+                  );
+                },
+              );
+            }),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(testButtonKey));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(Column), findsWidgets);
+
+      expect(find.byType(SILPinCodeTextField), findsOneWidget);
+      await tester.tap(find.byType(SILPinCodeTextField));
+      await tester.pump(const Duration(seconds: 1));
+      await tester.enterText(find.byType(SILPinCodeTextField), '123456');
+      await tester.pumpAndSettle();
+
+      expect(find.byType(BuildSetContactToPrimaryPhone), findsNothing);
+    });
+
+    testWidgets(
+        'should buildVerifyWidget with valid code and navgate successfully',
+        (WidgetTester tester) async {
+      setToPrimaryBehaviorSubject.otp.add('123456');
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Builder(builder: (BuildContext context) {
+              return SILPrimaryButton(
+                buttonKey: testButtonKey,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<dynamic>(
+                        builder: (BuildContext context) =>
+                            BuildSetContactToPrimaryPhone(
+                              mockSILGraphQlClient: mockSILGraphQlClient,
+                              type: ContactInfoType.email,
+                            )),
+                  );
+                },
+              );
+            }),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(testButtonKey));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(Column), findsWidgets);
+
+      expect(find.byType(SILPinCodeTextField), findsOneWidget);
+      await tester.tap(find.byType(SILPinCodeTextField));
+      await tester.pump(const Duration(seconds: 1));
+      await tester.enterText(find.byType(SILPinCodeTextField), '123456');
+      await tester.pumpAndSettle();
+
+      expect(find.byType(BuildSetContactToPrimaryPhone), findsNothing);
+    });
+
+    testWidgets(
+        'should buildVerifyWidget with valid code and navgate with error',
+        (WidgetTester tester) async {
+      setToPrimaryBehaviorSubject.otp.add('123456');
+
+      final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+          MockShortSILGraphQlClient.withResponse(
+        'idToken',
+        'endpoint',
+        http.Response(
+            json.encode(<String, dynamic>{
+              'error': 'not found',
+            }),
+            402),
+      );
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Builder(builder: (BuildContext context) {
+              return SILPrimaryButton(
+                buttonKey: testButtonKey,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<dynamic>(
+                        builder: (BuildContext context) =>
+                            BuildSetContactToPrimaryPhone(
+                              mockShortSILGraphQlClient:
+                                  mockShortSILGraphQlClient,
+                              type: ContactInfoType.email,
                             )),
                   );
                 },
@@ -224,11 +323,13 @@ void main() {
 class BuildSetContactToPrimaryPhone extends StatelessWidget {
   const BuildSetContactToPrimaryPhone({
     Key? key,
-    required this.mockSILGraphQlClient,
+    this.mockSILGraphQlClient,
     required this.type,
+    this.mockShortSILGraphQlClient,
   }) : super(key: key);
 
-  final MockSILGraphQlClient mockSILGraphQlClient;
+  final MockSILGraphQlClient? mockSILGraphQlClient;
+  final MockShortSILGraphQlClient? mockShortSILGraphQlClient;
   final ContactInfoType type;
 
   @override
@@ -255,7 +356,9 @@ class BuildSetContactToPrimaryPhone extends StatelessWidget {
           contactUtils: ContactUtils(
             toggleLoadingIndicator: (
                 {BuildContext? context, String? flag, bool? show}) {},
-            client: mockSILGraphQlClient,
+            client: mockShortSILGraphQlClient != null
+                ? mockSILGraphQlClient
+                : mockSILGraphQlClient,
             updateStateFunc: testUpdateState,
           ),
           wait: Wait(),

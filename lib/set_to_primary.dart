@@ -4,6 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:rxdart/rxdart.dart';
 import 'package:sil_ui_components/sil_platform_loader.dart';
 import 'package:sil_user_profile/contact_utils.dart';
+import 'package:sil_user_profile/shared/widget_keys.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
 import 'package:sil_user_profile/constants.dart';
 import 'package:sil_ui_components/sil_buttons.dart';
@@ -246,6 +247,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
             width: double.infinity,
             height: 44,
             child: SILPrimaryButton(
+              buttonKey: emailAlertContinueButtonKey,
               onPressed: () async {
                 provider.contactUtils
                     .toggleLoadingIndicator(context: context, flag: flag);
