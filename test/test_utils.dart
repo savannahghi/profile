@@ -7,6 +7,8 @@ import 'package:sil_user_profile/sil_contacts.dart';
 
 const String testPhoneNumber = '+254712345678';
 const String testEmail = 'example@mail.com';
+const String testInvalidEmail = 'examplemail.com';
+const String testOTP = '123456';
 
 const Key testButtonKey = Key('button_Key');
 

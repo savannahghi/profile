@@ -17,6 +17,11 @@ void main() {
       required StateContactType type,
       required String? value}) {}
   final MockSILGraphQlClient mockSILGraphQlClient = MockSILGraphQlClient();
+  late Map<String, dynamic> result;
+  late final Map<String, dynamic> resultOK = <String, dynamic>{
+    'status': 'ok',
+    'value': true,
+  };
 
   testWidgets('should sendPhoneOtp sucessfully', (WidgetTester tester) async {
     await tester.pumpWidget(Builder(
@@ -217,5 +222,154 @@ void main() {
     await tester.tap(find.byKey(testButtonKey));
     await tester.pumpAndSettle();
     expect(controller.value.text, '');
+  });
+
+  testWidgets('should addSecondaryPhone sucessfully',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () async {
+                    result = await testContactProvider(
+                            mockSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .addSecondaryPhone(
+                            context: context, phoneNumber: testPhoneNumber);
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    expect(result, resultOK);
+  });
+
+  testWidgets('should addSecondaryEmail sucessfully',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () async {
+                    result = await testContactProvider(
+                            mockSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .addSecondaryEmail(context: context, email: testEmail);
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    expect(result, resultOK);
+  });
+
+  testWidgets('should setPrimaryEmail sucessfully',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () async {
+                    result = await testContactProvider(
+                            mockSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .setPrimaryEmail(
+                          context: context,
+                          email: testEmail,
+                          otp: testOTP,
+                        );
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    await tester.pumpAndSettle();
+    expect(result, resultOK);
+  });
+
+  testWidgets('should render genericAddContact', (WidgetTester tester) async {
+    String? otp;
+    void setOtp(String val) {
+      otp = val;
+    }
+
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () {
+                    testContactProvider(mockSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .genericAddContact(
+                          context: context,
+                          flag: 'add_contact_info',
+                          primary: true,
+                          setOtp: setOtp,
+                          type: ContactInfoType.phone,
+                          value: testPhoneNumber,
+                        );
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    await tester.pumpAndSettle();
+    expect(otp, testOTP);
   });
 }
