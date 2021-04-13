@@ -7,14 +7,14 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.0.0"
+    version: "19.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.0"
+    version: "1.3.0"
   args:
     dependency: transitive
     description:
@@ -35,7 +35,7 @@ packages:
       name: async_redux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.0.3"
+    version: "9.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -154,7 +154,7 @@ packages:
       name: crypto
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.0"
   dart_style:
     dependency: transitive
     description:
@@ -189,7 +189,7 @@ packages:
       name: fast_immutable_collections
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.2"
   ffi:
     dependency: transitive
     description:
@@ -236,7 +236,7 @@ packages:
       name: flutter_plugin_android_lifecycle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.0"
   flutter_spinkit:
     dependency: transitive
     description:
@@ -250,7 +250,7 @@ packages:
       name: flutter_svg
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.21.0+1"
+    version: "0.21.0-nullsafety.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -267,7 +267,7 @@ packages:
       name: freezed
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.1+2"
+    version: "0.14.1+1"
   freezed_annotation:
     dependency: transitive
     description:
@@ -316,7 +316,7 @@ packages:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.4"
+    version: "0.7.3"
   image_picker_for_web:
     dependency: transitive
     description:
@@ -372,7 +372,7 @@ packages:
       name: local_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.4"
+    version: "1.1.0"
   logging:
     dependency: transitive
     description:
@@ -407,7 +407,7 @@ packages:
       name: mockito
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.4"
+    version: "5.0.3"
   package_config:
     dependency: transitive
     description:
@@ -428,14 +428,14 @@ packages:
       name: path_drawing
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.0"
+    version: "0.5.0-nullsafety.0"
   path_parsing:
     dependency: transitive
     description:
       name: path_parsing
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.0-nullsafety.0"
   path_provider:
     dependency: transitive
     description:
@@ -533,7 +533,7 @@ packages:
       name: quiver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.0"
   rxdart:
     dependency: "direct main"
     description:
@@ -590,8 +590,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.47-nullsafety"
-      resolved-ref: "1f2f619337f2c48b991b2c3d685f1bcf8c0de466"
+      ref: "0.0.48-nullsafety"
+      resolved-ref: d611fad891bd8dd623acbac26448baf40c7ca86e
       url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_ui_components.git"
     source: git
     version: "0.0.1"
@@ -753,7 +753,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.5"
+    version: "2.0.4"
   xdg_directories:
     dependency: transitive
     description:
