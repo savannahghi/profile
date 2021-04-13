@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:sil_ui_components/sil_platform_loader.dart';
 import 'package:sil_user_profile/contact_utils.dart';
+import 'package:sil_user_profile/shared/widget_keys.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
 import 'package:sil_user_profile/constants.dart';
 import 'package:sil_ui_components/sil_buttons.dart';
@@ -87,10 +89,11 @@ class _AddContactInfoState extends State<AddContactInfo> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController phoneNumberInputController = TextEditingController();
   TextEditingController textEditingController = TextEditingController();
+  AddContactBehaviorSubject addContactBehaviorSubject =
+      AddContactBehaviorSubject();
 
   String? value;
   String? otp;
-  bool invalidCode = false;
 
   final String flag = 'add_contact_info';
 
@@ -101,9 +104,8 @@ class _AddContactInfoState extends State<AddContactInfo> {
   }
 
   void toggleInvalidCodeMsg({required bool val}) {
-    setState(() {
-      invalidCode = val;
-    });
+    addContactBehaviorSubject.invalidCode.add(val);
+    setState(() {});
   }
 
   String formatPhoneNumber(
@@ -122,6 +124,8 @@ class _AddContactInfoState extends State<AddContactInfo> {
 
   @override
   Widget build(BuildContext context) {
+    final bool invalidCode =
+        addContactBehaviorSubject.invalidCode.valueWrapper!.value;
     return Form(
       key: _formKey,
       child: Column(
@@ -172,6 +176,7 @@ class _AddContactInfoState extends State<AddContactInfo> {
                   width: double.infinity,
                   height: 48,
                   child: SILPrimaryButton(
+                    buttonKey: saveButtonKey,
                     onPressed: () async {
                       if (value == null) {
                         return;
@@ -237,4 +242,15 @@ class _AddContactInfoState extends State<AddContactInfo> {
       ),
     );
   }
+}
+
+class AddContactBehaviorSubject {
+  factory AddContactBehaviorSubject() {
+    return _singleton;
+  }
+  AddContactBehaviorSubject._internal();
+  static final AddContactBehaviorSubject _singleton =
+      AddContactBehaviorSubject._internal();
+
+  BehaviorSubject<bool> invalidCode = BehaviorSubject<bool>.seeded(false);
 }

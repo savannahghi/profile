@@ -208,7 +208,7 @@ void main() {
                             controller: controller,
                             email: '',
                             otp: '1234',
-                            toggleInvalidCodeMsg: (_) {},
+                            toggleInvalidCodeMsg: ({required bool val}) {},
                             userInput: '4321');
                   },
                 );

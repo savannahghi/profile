@@ -146,6 +146,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
             }
             textEditingController.clear();
             setToPrimaryBehaviorSubject.invalidCode.add(true);
+            setState(() {});
             await HapticFeedback.vibrate();
           },
         ),

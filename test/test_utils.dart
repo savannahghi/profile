@@ -9,6 +9,7 @@ const String testPhoneNumber = '+254712345678';
 const String testEmail = 'example@mail.com';
 const String testInvalidEmail = 'examplemail.com';
 const String testOTP = '123456';
+const String testInvalidOTP = '654321';
 
 const Key testButtonKey = Key('button_Key');
 const Key testGenericButtonKey = Key('generic_button_Key');

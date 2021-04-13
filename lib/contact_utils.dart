@@ -422,7 +422,7 @@ class ContactUtils {
       });
       return;
     }
-    toggleInvalidCodeMsg(true);
+    toggleInvalidCodeMsg(val: true);
     controller.clear();
     await HapticFeedback.vibrate();
   }
