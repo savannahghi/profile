@@ -35,7 +35,7 @@ packages:
       name: async_redux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.0.3"
+    version: "9.0.7"
   boolean_selector:
     dependency: transitive
     description:
@@ -175,7 +175,7 @@ packages:
       name: dotted_border
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0-nullsafety.0"
+    version: "2.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -189,7 +189,7 @@ packages:
       name: fast_immutable_collections
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "4.0.4"
   ffi:
     dependency: transitive
     description:
@@ -590,8 +590,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.54-nullsafety"
-      resolved-ref: ed0157ece4bac71e390be37646904363c65b4e0a
+      ref: "0.0.55-nullsafety"
+      resolved-ref: "5aa740df942a74bc81475cc5aaec96dfb3ba70c8"
       url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_ui_components.git"
     source: git
     version: "0.0.1"
