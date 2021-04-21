@@ -64,7 +64,7 @@ void main() {
             MaterialApp(
               home: Scaffold(
                 body: ContactProvider(
-                  primaryEmail: EmailAddress.withValue(UNKNOWN),
+                  primaryEmail: EmailAddress.withValue(UNKNOWNEMAIL),
                   primaryPhone: PhoneNumber.withValue(testPhoneNumber),
                   secondaryEmails: <EmailAddress>[
                     EmailAddress.withValue('example@mail.com')
@@ -97,7 +97,7 @@ void main() {
             MaterialApp(
               home: Scaffold(
                 body: ContactProvider(
-                  primaryEmail: EmailAddress.withValue(UNKNOWN),
+                  primaryEmail: EmailAddress.withValue(UNKNOWNEMAIL),
                   primaryPhone: PhoneNumber.withValue(testPhoneNumber),
                   secondaryEmails: <EmailAddress>[
                     EmailAddress.withValue('example@mail.com')

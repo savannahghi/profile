@@ -25,7 +25,7 @@ class ContactDetails extends StatelessWidget {
         ContactItemsCard(
           title: primaryEmail,
           data: <ContactType<ValueObject<String>>>[
-            if (provider.primaryEmail != EmailAddress.withValue(UNKNOWN))
+            if (provider.primaryEmail != EmailAddress.withValue(UNKNOWNEMAIL))
               ContactType<ValueObject<String>>(provider.primaryEmail)
           ],
           type: ContactInfoType.email,
@@ -58,7 +58,7 @@ class ContactDetails extends StatelessWidget {
             provider.contactUtils.showMessageFromModal(context, result);
           },
         ),
-        if (provider.primaryEmail != EmailAddress.withValue(UNKNOWN))
+        if (provider.primaryEmail != EmailAddress.withValue(UNKNOWNEMAIL))
           ContactItemsCard(
             title: secondaryEmails,
             data: <ContactType<ValueObject<String>>>[
