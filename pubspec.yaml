@@ -5,8 +5,8 @@ publish_to: none
 author:
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
-  flutter: '>=2.0.0'
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.0"
 
 dependencies:
   async_redux: ^9.0.0
@@ -37,7 +37,7 @@ dependencies:
   sil_ui_components:
     git:
       url: https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_ui_components.git
-      ref: 0.0.58-nullsafety
+      ref: 0.0.59-nullsafety
 
 dev_dependencies:
   flutter_test:
