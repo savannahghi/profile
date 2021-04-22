@@ -146,7 +146,7 @@ class _AddContactInfoState extends State<AddContactInfo> {
             // email
             if (widget.type == ContactInfoType.email)
               SILFormTextField(
-                textFieldKey: addEmailAddressKey,
+                key: addEmailAddressKey,
                 labelText: email,
                 hintText: emailHint,
                 keyboardType: TextInputType.emailAddress,
