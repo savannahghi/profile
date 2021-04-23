@@ -187,28 +187,23 @@ void primaryContactInfo(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1ba376).withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Text(isPhone ? phoneTitle : emailTitle,
-                        style: TextThemes.heavySize10Text(
-                            const Color(0xFF1ba376))),
-                  ),
-                  Expanded(
-                    child: Text(
-                      value,
-                      style: TextThemes.normalSize14Text(
-                          Theme.of(context).accentColor),
-                    ),
-                  ),
-                ],
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF1ba376).withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Text(isPhone ? phoneTitle : emailTitle,
+                    style: TextThemes.heavySize10Text(
+                        const Color(0xFF1ba376))),
+              ),
+              Expanded(
+                child: Text(
+                  value,
+                  style: TextThemes.normalSize14Text(
+                      Theme.of(context).accentColor),
+                ),
               ),
               mediumVerticalSizedBox,
               Text(
