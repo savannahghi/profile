@@ -52,7 +52,7 @@ const String email = 'Email address';
 const String emailHint = 'Enter your email address';
 const String emailValidationMessage = 'Valid email is required';
 const String emailMessage =
-    'Add an email address that we can use to \nreach you to your account';
+    'Please check your email for otp \nverification code';
 const String phoneTitle = 'Primary phone number';
 const String emailTitle = 'Primary email address';
 final List<String> phoneChangeInstructions = <String>[
