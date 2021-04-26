@@ -182,7 +182,7 @@ void primaryContactInfo(
             isPhone ? phoneChangeInstructions : emailChangeInstructions;
         return SingleChildScrollView(
           child: Container(
-            height: 320,
+            height: 360,
             padding: const EdgeInsets.all(20),
             color: Colors.white,
             child: Column(
@@ -200,17 +200,15 @@ void primaryContactInfo(
                           TextThemes.heavySize10Text(const Color(0xFF1ba376))),
                 ),
                 smallVerticalSizedBox,
-                Expanded(
-                  child: Text(
-                    value,
-                    style: TextThemes.normalSize14Text(
-                        Theme.of(context).accentColor),
-                  ),
+                Text(
+                  value,
+                  style: TextThemes.normalSize14Text(
+                      Theme.of(context).accentColor),
                 ),
                 mediumVerticalSizedBox,
                 Text(
                   instructions[0],
-                  style: TextThemes.normalSize13Text().copyWith(height: 1.6),
+                  style: TextThemes.normalSize12Text().copyWith(height: 1.6),
                 ),
                 mediumVerticalSizedBox,
                 Text(

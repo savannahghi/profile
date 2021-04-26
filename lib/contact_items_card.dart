@@ -1,8 +1,10 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sil_core_domain_objects/value_objects.dart';
+import 'package:sil_themes/app_theme.dart';
+import 'package:sil_themes/spaces.dart';
+import 'package:sil_ui_components/sil_buttons.dart';
 import 'package:sil_user_profile/contact_item.dart';
 import 'package:sil_user_profile/contact_type.dart';
 import 'package:sil_user_profile/contact_utils.dart';
@@ -36,17 +38,28 @@ class ContactItemsCard extends StatelessWidget {
           Expanded(
             child: Text(
               addMessage!,
-              style: TextThemes.normalSize14Text(),
+              style: TextThemes.normalSize13Text(),
             ),
           ),
+          mediumHorizontalSizedBox,
           GestureDetector(
             key: Key(title),
             onTap: () {
               onAddContactInfo!(primary);
             },
-            child: const Icon(
-              MdiIcons.plusCircle,
-              color: Colors.green,
+            child: SILPrimaryButton(
+              buttonColor: AppColors.consumerColors['primaryColor'],
+              customRadius: 12,
+              onPressed: () => onAddContactInfo!(primary),
+              customChild: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Add',
+                    style: TextThemes.boldSize14Text(Colors.white),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

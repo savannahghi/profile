@@ -12,77 +12,80 @@ class ContactDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ContactProvider provider = ContactProvider.of(context)!;
-    return Column(
-      children: <Widget>[
-        ContactItemsCard(
-          title: primaryPhone,
-          type: ContactInfoType.phone,
-          addMessage: '',
-          data: <ContactType<ValueObject<String>>>[
-            ContactType<ValueObject<String>>(provider.primaryPhone)
-          ],
-        ),
-        ContactItemsCard(
-          title: primaryEmail,
-          data: <ContactType<ValueObject<String>>>[
-            if (provider.primaryEmail != EmailAddress.withValue(UNKNOWNEMAIL))
-              ContactType<ValueObject<String>>(provider.primaryEmail!)
-          ],
-          type: ContactInfoType.email,
-          addMessage: primaryEmailMessage,
-          onAddContactInfo: ([bool primary = false]) async {
-            final dynamic result = await addContactInfoBottomSheet(
-                context: context,
-                type: ContactInfoType.email,
-                onSave: provider.contactUtils.addPrimaryEmail,
-                primary: primary);
-            provider.contactUtils.showMessageFromModal(context, result);
-          },
-        ),
-        ContactItemsCard(
-          title: secondaryPhones,
-          addMessage: phonesMessage,
-          type: ContactInfoType.phone,
-          data: provider.secondaryPhones != null
-              ? <ContactType<ValueObject<String>>>[
-                  for (PhoneNumber phoneNumber in provider.secondaryPhones!)
-                    ContactType<ValueObject<String>>(
-                      phoneNumber,
-                      isSecondary: true,
-                    )
-                ]
-              : null,
-          onAddContactInfo: ([bool primary = false]) async {
-            final dynamic result = await addContactInfoBottomSheet(
-                context: context,
-                type: ContactInfoType.phone,
-                onSave: provider.contactUtils.addSecondaryPhone);
-            provider.contactUtils.showMessageFromModal(context, result);
-          },
-        ),
-        if (provider.primaryEmail != EmailAddress.withValue(UNKNOWNEMAIL))
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
           ContactItemsCard(
-            title: secondaryEmails,
-            data: provider.secondaryEmails != null
-                ? <ContactType<ValueObject<String>>>[
-                    for (EmailAddress emailAddress in provider.secondaryEmails!)
-                      ContactType<ValueObject<String>>(
-                        emailAddress,
-                        isSecondary: true,
-                      )
-                  ]
-                : null,
+            title: primaryPhone,
+            type: ContactInfoType.phone,
+            addMessage: '',
+            data: <ContactType<ValueObject<String>>>[
+              ContactType<ValueObject<String>>(provider.primaryPhone)
+            ],
+          ),
+          ContactItemsCard(
+            title: primaryEmail,
+            data: <ContactType<ValueObject<String>>>[
+              if (provider.primaryEmail != EmailAddress.withValue(UNKNOWNEMAIL))
+                ContactType<ValueObject<String>>(provider.primaryEmail!)
+            ],
             type: ContactInfoType.email,
-            addMessage: secondaryEmailsMessage,
+            addMessage: primaryEmailMessage,
             onAddContactInfo: ([bool primary = false]) async {
               final dynamic result = await addContactInfoBottomSheet(
                   context: context,
                   type: ContactInfoType.email,
-                  onSave: provider.contactUtils.addSecondaryEmail);
+                  onSave: provider.contactUtils.addPrimaryEmail,
+                  primary: primary);
               provider.contactUtils.showMessageFromModal(context, result);
             },
           ),
-      ],
+          ContactItemsCard(
+            title: secondaryPhones,
+            addMessage: phonesMessage,
+            type: ContactInfoType.phone,
+            data: provider.secondaryPhones != null
+                ? <ContactType<ValueObject<String>>>[
+                    for (PhoneNumber phoneNumber in provider.secondaryPhones!)
+                      ContactType<ValueObject<String>>(
+                        phoneNumber,
+                        isSecondary: true,
+                      )
+                  ]
+                : null,
+            onAddContactInfo: ([bool primary = false]) async {
+              final dynamic result = await addContactInfoBottomSheet(
+                  context: context,
+                  type: ContactInfoType.phone,
+                  onSave: provider.contactUtils.addSecondaryPhone);
+              provider.contactUtils.showMessageFromModal(context, result);
+            },
+          ),
+          if (provider.primaryEmail != EmailAddress.withValue(UNKNOWNEMAIL))
+            ContactItemsCard(
+              title: secondaryEmails,
+              data: provider.secondaryEmails != null
+                  ? <ContactType<ValueObject<String>>>[
+                      for (EmailAddress emailAddress
+                          in provider.secondaryEmails!)
+                        ContactType<ValueObject<String>>(
+                          emailAddress,
+                          isSecondary: true,
+                        )
+                    ]
+                  : null,
+              type: ContactInfoType.email,
+              addMessage: secondaryEmailsMessage,
+              onAddContactInfo: ([bool primary = false]) async {
+                final dynamic result = await addContactInfoBottomSheet(
+                    context: context,
+                    type: ContactInfoType.email,
+                    onSave: provider.contactUtils.addSecondaryEmail);
+                provider.contactUtils.showMessageFromModal(context, result);
+              },
+            ),
+        ],
+      ),
     );
   }
 }
