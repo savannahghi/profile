@@ -163,3 +163,8 @@ query GenerateEmailVerificationOTP($email: String!){
   emailVerificationOTP(email: $email)
 }
  ''';
+
+
+// terms and conditions
+const String termsTitle = 'Terms and Conditions';
+const String url = 'https://bewell.co.ke/privacy.html';

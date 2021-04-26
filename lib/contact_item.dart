@@ -180,58 +180,61 @@ void primaryContactInfo(
       builder: (BuildContext context) {
         final List<String> instructions =
             isPhone ? phoneChangeInstructions : emailChangeInstructions;
-        return Container(
-          height: 320,
-          padding: const EdgeInsets.all(20),
-          color: Colors.white,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF1ba376).withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(25),
+        return SingleChildScrollView(
+          child: Container(
+            height: 320,
+            padding: const EdgeInsets.all(20),
+            color: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1ba376).withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: Text(isPhone ? phoneTitle : emailTitle,
+                      style:
+                          TextThemes.heavySize10Text(const Color(0xFF1ba376))),
                 ),
-                child: Text(isPhone ? phoneTitle : emailTitle,
-                    style: TextThemes.heavySize10Text(
-                        const Color(0xFF1ba376))),
-              ),
-              Expanded(
-                child: Text(
-                  value,
-                  style: TextThemes.normalSize14Text(
-                      Theme.of(context).accentColor),
+                smallVerticalSizedBox,
+                Expanded(
+                  child: Text(
+                    value,
+                    style: TextThemes.normalSize14Text(
+                        Theme.of(context).accentColor),
+                  ),
                 ),
-              ),
-              mediumVerticalSizedBox,
-              Text(
-                instructions[0],
-                style: TextThemes.normalSize13Text().copyWith(height: 1.6),
-              ),
-              mediumVerticalSizedBox,
-              Text(
-                instructions[1],
-                style: TextThemes.normalSize12Text().copyWith(height: 1.6),
-              ),
-              size15VerticalSizedBox,
-              Text(
-                instructions[2],
-                style: TextThemes.normalSize12Text().copyWith(height: 1.6),
-              ),
-              mediumVerticalSizedBox,
-              GestureDetector(
-                key: const Key('close_key'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  closeText,
-                  style: TextThemes.heavySize14Text(Colors.red),
+                mediumVerticalSizedBox,
+                Text(
+                  instructions[0],
+                  style: TextThemes.normalSize13Text().copyWith(height: 1.6),
                 ),
-              ),
-            ],
+                mediumVerticalSizedBox,
+                Text(
+                  instructions[1],
+                  style: TextThemes.normalSize12Text().copyWith(height: 1.6),
+                ),
+                size15VerticalSizedBox,
+                Text(
+                  instructions[2],
+                  style: TextThemes.normalSize12Text().copyWith(height: 1.6),
+                ),
+                mediumVerticalSizedBox,
+                GestureDetector(
+                  key: const Key('close_key'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    closeText,
+                    style: TextThemes.heavySize14Text(Colors.red),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       });
