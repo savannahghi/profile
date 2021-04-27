@@ -26,7 +26,7 @@ class ContactDetails extends StatelessWidget {
           title: primaryEmail,
           data: <ContactType<ValueObject<String>>>[
             if (provider.primaryEmail != EmailAddress.withValue(UNKNOWNEMAIL))
-              ContactType<ValueObject<String>>(provider.primaryEmail)
+              ContactType<ValueObject<String>>(provider.primaryEmail!)
           ],
           type: ContactInfoType.email,
           addMessage: primaryEmailMessage,
@@ -43,13 +43,15 @@ class ContactDetails extends StatelessWidget {
           title: secondaryPhones,
           addMessage: phonesMessage,
           type: ContactInfoType.phone,
-          data: <ContactType<ValueObject<String>>>[
-            for (PhoneNumber phoneNumber in provider.secondaryPhones)
-              ContactType<ValueObject<String>>(
-                phoneNumber,
-                isSecondary: true,
-              )
-          ],
+          data: provider.secondaryPhones != null
+              ? <ContactType<ValueObject<String>>>[
+                  for (PhoneNumber phoneNumber in provider.secondaryPhones!)
+                    ContactType<ValueObject<String>>(
+                      phoneNumber,
+                      isSecondary: true,
+                    )
+                ]
+              : null,
           onAddContactInfo: ([bool primary = false]) async {
             final dynamic result = await addContactInfoBottomSheet(
                 context: context,
@@ -61,13 +63,15 @@ class ContactDetails extends StatelessWidget {
         if (provider.primaryEmail != EmailAddress.withValue(UNKNOWNEMAIL))
           ContactItemsCard(
             title: secondaryEmails,
-            data: <ContactType<ValueObject<String>>>[
-              for (EmailAddress emailAddress in provider.secondaryEmails)
-                ContactType<ValueObject<String>>(
-                  emailAddress,
-                  isSecondary: true,
-                )
-            ],
+            data: provider.secondaryEmails != null
+                ? <ContactType<ValueObject<String>>>[
+                    for (EmailAddress emailAddress in provider.secondaryEmails!)
+                      ContactType<ValueObject<String>>(
+                        emailAddress,
+                        isSecondary: true,
+                      )
+                  ]
+                : null,
             type: ContactInfoType.email,
             addMessage: secondaryEmailsMessage,
             onAddContactInfo: ([bool primary = false]) async {
@@ -97,10 +101,10 @@ class ContactProvider extends InheritedWidget {
   }) : super(key: key, child: child);
 
   final ContactUtils contactUtils;
-  final EmailAddress primaryEmail;
+  final EmailAddress? primaryEmail;
   final PhoneNumber primaryPhone;
-  final List<EmailAddress> secondaryEmails;
-  final List<PhoneNumber> secondaryPhones;
+  final List<EmailAddress>? secondaryEmails;
+  final List<PhoneNumber>? secondaryPhones;
 
   final Wait wait;
   final Function checkWaitingFor;
@@ -113,7 +117,7 @@ class ContactProvider extends InheritedWidget {
   bool updateShouldNotify(ContactProvider old) =>
       primaryEmail != old.primaryEmail ||
       primaryPhone != old.primaryPhone ||
-      secondaryEmails.length != old.secondaryEmails.length ||
-      secondaryPhones.length != old.secondaryPhones.length ||
+      secondaryEmails?.length != old.secondaryEmails?.length ||
+      secondaryPhones?.length != old.secondaryPhones?.length ||
       wait.hashCode != old.wait.hashCode;
 }

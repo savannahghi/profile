@@ -23,7 +23,7 @@ class ContactItemsCard extends StatelessWidget {
 
   final String title;
   final String? addMessage;
-  final List<ContactType<ValueObject<String>>> data;
+  final List<ContactType<ValueObject<String>>>? data;
   final Function? onAddContactInfo;
   final ContactInfoType type;
 
@@ -103,33 +103,37 @@ class ContactItemsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// takes data which can be [string] or [list] and return contact item(s)
-    final dynamic contactItem = _buildContactItem(
-      data: data,
-    );
-    return Column(
-      children: <Widget>[
-        // title
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Theme.of(context).accentColor.withOpacity(0.06),
-          ),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: Text(
-                  title,
-                  style: TextThemes.heavySize16Text(),
+    if (data != null) {
+      /// takes data which can be [string] or [list] and return contact item(s)
+      final dynamic contactItem = _buildContactItem(
+        data: data!,
+      );
+      return Column(
+        children: <Widget>[
+          // title
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Theme.of(context).accentColor.withOpacity(0.06),
+            ),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextThemes.heavySize16Text(),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
 
-        if (contactItem != null) contactItem as Widget
-      ],
-    );
+          if (contactItem != null) contactItem as Widget
+        ],
+      );
+    }
+
+    return const SizedBox();
   }
 }
