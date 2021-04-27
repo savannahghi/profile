@@ -87,7 +87,7 @@ class ContactItem extends StatelessWidget {
               child: Icon(
                 MdiIcons.informationOutline,
                 color: Colors.black.withOpacity(0.4),
-                size: 18,
+                size: 28,
               ),
             ),
         ],
@@ -182,7 +182,7 @@ void primaryContactInfo(
             isPhone ? phoneChangeInstructions : emailChangeInstructions;
         return SingleChildScrollView(
           child: Container(
-            height: 360,
+            height: 320,
             padding: const EdgeInsets.all(20),
             color: Colors.white,
             child: Column(
