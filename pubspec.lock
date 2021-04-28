@@ -407,7 +407,7 @@ packages:
       name: mockito
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.5"
+    version: "5.0.6"
   package_config:
     dependency: transitive
     description:
@@ -590,8 +590,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.64-nullsafety"
-      resolved-ref: e6538ccb9484a113159dab2c30b735e8f4e11473
+      ref: "0.0.65-nullsafety"
+      resolved-ref: "791af312f72e49315728317a3f771c6a71811ce8"
       url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_ui_components.git"
     source: git
     version: "0.0.1"
@@ -746,7 +746,7 @@ packages:
       name: weak_map
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.2"
   webview_flutter:
     dependency: "direct main"
     description:
