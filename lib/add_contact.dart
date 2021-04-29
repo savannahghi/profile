@@ -5,6 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:rxdart/rxdart.dart';
 import 'package:sil_ui_components/sil_platform_loader.dart';
 import 'package:sil_user_profile/contact_utils.dart';
+import 'package:sil_user_profile/helpers.dart';
 import 'package:sil_user_profile/shared/widget_keys.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
 import 'package:sil_user_profile/constants.dart';
@@ -106,20 +107,6 @@ class _AddContactInfoState extends State<AddContactInfo> {
   void toggleInvalidCodeMsg({required bool val}) {
     addContactBehaviorSubject.invalidCode.add(val);
     setState(() {});
-  }
-
-  String formatPhoneNumber(
-      {required String countryCode, required String phoneNumber}) {
-    if (!countryCode.startsWith('+')) {
-      return '+$countryCode';
-    }
-    if (countryCode == '+1') {
-      return '$countryCode$phoneNumber';
-    }
-    if (phoneNumber.startsWith('0')) {
-      return phoneNumber.substring(1);
-    }
-    return '$countryCode$phoneNumber';
   }
 
   @override

@@ -143,4 +143,30 @@ void main() {
       expect(response, true);
     });
   });
+
+  test('should test other phone number', () {
+    expect(formatPhoneNumber(phoneNumber: '1234567', countryCode: '+255'),
+        '+2551234567');
+
+    expect(
+      formatPhoneNumber(countryCode: '254', phoneNumber: '790123456'),
+      '+254790123456',
+    );
+
+    expect(
+      formatPhoneNumber(countryCode: '254', phoneNumber: '0790123456'),
+      '+254790123456',
+    );
+
+    expect(
+      formatPhoneNumber(countryCode: '+1', phoneNumber: '100000'),
+      '+1100000',
+    );
+
+    expect(formatPhoneNumber(countryCode: '+254', phoneNumber: '07100000'),
+        '+2547100000');
+
+    expect(formatPhoneNumber(countryCode: '+254', phoneNumber: '0775973716'),
+        '+254775973716');
+  });
 }
