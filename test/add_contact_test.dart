@@ -1,6 +1,8 @@
-import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'package:async_redux/async_redux.dart';
+
 import 'package:sil_core_domain_objects/value_objects.dart';
 import 'package:sil_ui_components/sil_buttons.dart';
 import 'package:sil_ui_components/sil_inputs.dart';
@@ -354,6 +356,9 @@ void main() {
 
       expect(addContactBehaviorSubject.invalidCode.valueWrapper!.value, true);
       expect(find.text(incorrectCode), findsOneWidget);
+
+      await tester.enterText(find.byType(SILPinCodeTextField), testInvalidOTP);
+      await tester.pumpAndSettle();
     });
   });
 }

@@ -44,9 +44,6 @@ class ContactItemsCard extends StatelessWidget {
           mediumHorizontalSizedBox,
           GestureDetector(
             key: Key(title),
-            onTap: () {
-              onAddContactInfo!(primary);
-            },
             child: SILPrimaryButton(
               buttonColor: AppColors.consumerColors['primaryColor'],
               customRadius: 12,

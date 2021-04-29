@@ -157,6 +157,7 @@ Future<dynamic> deleteContactDialogue({
                   ),
                 ),
                 TextButton(
+                  key: cancelButtonKey,
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

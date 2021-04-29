@@ -1,8 +1,11 @@
 import 'dart:convert';
 
-import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'package:async_redux/async_redux.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:sil_core_domain_objects/value_objects.dart';
 import 'package:sil_user_profile/constants.dart';
 import 'package:sil_user_profile/contact_item.dart';
@@ -10,7 +13,6 @@ import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/set_to_primary.dart';
 import 'package:sil_user_profile/shared/widget_keys.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
-import 'package:http/http.dart' as http;
 
 import 'mocks.dart';
 import 'test_utils.dart';
@@ -24,7 +26,7 @@ void main() {
     final MockSILGraphQlClient mockSILGraphQlClient = MockSILGraphQlClient();
 
     testWidgets(
-        'renders correctly when the item is type phone and  not editable',
+        'renders correctly when the item is type phone and not editable',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
@@ -232,6 +234,9 @@ void main() {
 
         // expect to find widget in the bottom sheet
         expect(find.byType(AlertDialog), findsOneWidget);
+
+        await tester.tap(find.byKey(cancelButtonKey));
+        await tester.pump();
       });
     });
 

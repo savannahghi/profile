@@ -56,7 +56,92 @@ void main() {
     await tester.tap(find.byKey(testButtonKey));
   });
 
-  testWidgets('should retireSecondaryContact sucessfully',
+  testWidgets('should fail to sendPhoneOtp with error',
+      (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(
+          json.encode(<String, dynamic>{
+            'error': 'not found',
+          }),
+          402),
+    );
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockShortSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () {
+                    testContactProvider(
+                            mockShortSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .sendPhoneOtp(
+                            phone: testPhoneNumber,
+                            context: context,
+                            flag: 'flag');
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+  });
+
+  testWidgets('should fail to sendPhoneOtp', (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(json.encode(<String, dynamic>{}), 402),
+    );
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockShortSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () {
+                    testContactProvider(
+                            mockShortSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .sendPhoneOtp(
+                            phone: testPhoneNumber,
+                            context: context,
+                            flag: 'flag');
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+  });
+
+  testWidgets('should retireSecondaryContact phone sucessfully',
       (WidgetTester tester) async {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
@@ -91,6 +176,49 @@ void main() {
     await tester.tap(find.byKey(testButtonKey));
   });
 
+  testWidgets('should retireSecondaryContact email sucessfully',
+      (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(
+          json.encode(<String, dynamic>{'status': 'ok', 'value': true}), 201),
+    );
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockShortSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () {
+                    testContactProvider(
+                            mockShortSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .retireSecondaryContact(
+                            value: 'value',
+                            isPhone: false,
+                            context: context,
+                            flag: 'flag');
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+  });
+
   testWidgets('should verifyAddPrimaryEmailOtp sucessfully',
       (WidgetTester tester) async {
     final TextEditingController controller = TextEditingController();
@@ -109,6 +237,53 @@ void main() {
                   buttonKey: testButtonKey,
                   onPressed: () {
                     testContactProvider(mockSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .verifyAddPrimaryEmailOtp(
+                            context: context,
+                            flag: 'flag',
+                            controller: controller,
+                            email: '',
+                            otp: '1234',
+                            toggleInvalidCodeMsg: () {},
+                            userInput: '1234');
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    expect(find.byType(HapticFeedback), findsNothing);
+  });
+
+  testWidgets('should fail to verifyAddPrimaryEmailOtp',
+      (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(json.encode(<String, dynamic>{}), 402),
+    );
+    final TextEditingController controller = TextEditingController();
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockShortSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () {
+                    testContactProvider(
+                            mockShortSILGraphQlClient, testUpdateState)
                         .contactUtils
                         .verifyAddPrimaryEmailOtp(
                             context: context,
@@ -224,7 +399,45 @@ void main() {
     expect(controller.value.text, '');
   });
 
-  testWidgets('should addSecondaryPhone sucessfully',
+  testWidgets('should fail to addSecondaryPhone', (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(json.encode(<String, dynamic>{}), 402),
+    );
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockShortSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () async {
+                    result = await testContactProvider(
+                            mockShortSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .addSecondaryPhone(
+                            context: context, phoneNumber: testPhoneNumber);
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+  });
+
+  testWidgets('should addSecondaryPhone successfully',
       (WidgetTester tester) async {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
@@ -258,7 +471,7 @@ void main() {
     expect(result, resultOK);
   });
 
-  testWidgets('should addSecondaryEmail sucessfully',
+  testWidgets('should addSecondaryEmail successfully',
       (WidgetTester tester) async {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
@@ -291,7 +504,86 @@ void main() {
     expect(result, resultOK);
   });
 
-  testWidgets('should setPrimaryEmail sucessfully',
+  testWidgets('should fail to addSecondaryEmail', (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(json.encode(<String, dynamic>{}), 402),
+    );
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockShortSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () async {
+                    result = await testContactProvider(
+                            mockShortSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .addSecondaryEmail(context: context, email: testEmail);
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+  });
+
+  testWidgets('should fail to addSecondaryEmail with error',
+      (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(
+          json.encode(<String, dynamic>{
+            'error': 'not found',
+          }),
+          402),
+    );
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockShortSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () async {
+                    result = await testContactProvider(
+                            mockShortSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .addSecondaryEmail(context: context, email: testEmail);
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+  });
+
+  testWidgets('should setPrimaryEmail successfully',
       (WidgetTester tester) async {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
@@ -327,6 +619,225 @@ void main() {
     await tester.tap(find.byKey(testButtonKey));
     await tester.pumpAndSettle();
     expect(result, resultOK);
+  });
+
+  testWidgets('should fail to setPrimaryEmail', (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(json.encode(<String, dynamic>{}), 402),
+    );
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockShortSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () async {
+                    result = await testContactProvider(
+                            mockShortSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .setPrimaryEmail(
+                          context: context,
+                          email: testEmail,
+                          otp: testOTP,
+                        );
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('should fail to setPrimaryEmail with error',
+      (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(
+          json.encode(<String, dynamic>{
+            'error': 'not found',
+          }),
+          402),
+    );
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockShortSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () async {
+                    result = await testContactProvider(
+                            mockShortSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .setPrimaryEmail(
+                          context: context,
+                          email: testEmail,
+                          otp: testOTP,
+                        );
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('should fail to setPrimaryPhone with error',
+      (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(
+          json.encode(<String, dynamic>{
+            'error': 'not found',
+          }),
+          402),
+    );
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockShortSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () async {
+                    result = await testContactProvider(
+                            mockShortSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .setPrimaryPhone(
+                          context: context,
+                          phoneNumber: testPhoneNumber,
+                          otp: testOTP,
+                        );
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('should fail to setPrimaryPhone', (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(json.encode(<String, dynamic>{}), 402),
+    );
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockShortSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () async {
+                    result = await testContactProvider(
+                            mockShortSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .setPrimaryPhone(
+                          context: context,
+                          phoneNumber: testPhoneNumber,
+                          otp: testOTP,
+                        );
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('should fail to sendEmailOtp', (WidgetTester tester) async {
+    final MockShortSILGraphQlClient mockShortSILGraphQlClient =
+        MockShortSILGraphQlClient.withResponse(
+      'idToken',
+      'endpoint',
+      http.Response(json.encode(<String, dynamic>{}), 402),
+    );
+    await tester.pumpWidget(Builder(
+      builder: (BuildContext context) {
+        return MaterialApp(
+          home: SILAppWrapperBase(
+            appName: 'testAppName',
+            appContexts: const <AppContext>[AppContext.BewellCONSUMER],
+            graphQLClient: mockShortSILGraphQlClient,
+            deviceCapabilities: MockDeviceCapabilities(),
+            child: Scaffold(
+              body: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints box) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () async {
+                    result = await testContactProvider(
+                            mockShortSILGraphQlClient, testUpdateState)
+                        .contactUtils
+                        .sendEmailOtp(
+                          context: context,
+                          email: testEmail,
+                        );
+                  },
+                );
+              }),
+            ),
+          ),
+        );
+      },
+    ));
+
+    await tester.tap(find.byKey(testButtonKey));
+    await tester.pumpAndSettle();
   });
 
   testWidgets('should render genericAddContact when primary is true',
@@ -411,7 +922,7 @@ void main() {
                               BuildGenericAddContactTest(
                                 mockShortSILGraphQlClient:
                                     mockShortSILGraphQlClient,
-                                type: ContactInfoType.phone,
+                                type: ContactInfoType.email,
                                 primary: false,
                               )),
                     );
