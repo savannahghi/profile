@@ -1,5 +1,7 @@
-import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
+
+import 'package:async_redux/async_redux.dart';
+
 import 'package:sil_core_domain_objects/value_objects.dart';
 import 'package:sil_user_profile/add_contact.dart';
 import 'package:sil_user_profile/contact_items_card.dart';
@@ -32,12 +34,13 @@ class ContactDetails extends StatelessWidget {
             type: ContactInfoType.email,
             addMessage: primaryEmailMessage,
             onAddContactInfo: ([bool primary = false]) async {
-              final dynamic result = await addContactInfoBottomSheet(
-                  context: context,
-                  type: ContactInfoType.email,
-                  onSave: provider.contactUtils.addPrimaryEmail,
-                  primary: primary);
-              provider.contactUtils.showMessageFromModal(context, result);
+              provider.contactUtils.showMessageFromModal(
+                  context,
+                  await addContactInfoBottomSheet(
+                      context: context,
+                      type: ContactInfoType.email,
+                      onSave: provider.contactUtils.addPrimaryEmail,
+                      primary: primary));
             },
           ),
           ContactItemsCard(
@@ -54,11 +57,12 @@ class ContactDetails extends StatelessWidget {
                   ]
                 : null,
             onAddContactInfo: ([bool primary = false]) async {
-              final dynamic result = await addContactInfoBottomSheet(
-                  context: context,
-                  type: ContactInfoType.phone,
-                  onSave: provider.contactUtils.addSecondaryPhone);
-              provider.contactUtils.showMessageFromModal(context, result);
+              provider.contactUtils.showMessageFromModal(
+                  context,
+                  await addContactInfoBottomSheet(
+                      context: context,
+                      type: ContactInfoType.phone,
+                      onSave: provider.contactUtils.addSecondaryPhone));
             },
           ),
           if (provider.primaryEmail != EmailAddress.withValue(UNKNOWNEMAIL))
@@ -77,11 +81,12 @@ class ContactDetails extends StatelessWidget {
               type: ContactInfoType.email,
               addMessage: secondaryEmailsMessage,
               onAddContactInfo: ([bool primary = false]) async {
-                final dynamic result = await addContactInfoBottomSheet(
-                    context: context,
-                    type: ContactInfoType.email,
-                    onSave: provider.contactUtils.addSecondaryEmail);
-                provider.contactUtils.showMessageFromModal(context, result);
+                provider.contactUtils.showMessageFromModal(
+                    context,
+                    await addContactInfoBottomSheet(
+                        context: context,
+                        type: ContactInfoType.email,
+                        onSave: provider.contactUtils.addSecondaryEmail));
               },
             ),
         ],

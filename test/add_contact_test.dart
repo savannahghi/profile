@@ -6,6 +6,7 @@ import 'package:async_redux/async_redux.dart';
 import 'package:sil_core_domain_objects/value_objects.dart';
 import 'package:sil_ui_components/sil_buttons.dart';
 import 'package:sil_ui_components/sil_inputs.dart';
+import 'package:sil_ui_components/sil_platform_loader.dart';
 import 'package:sil_user_profile/add_contact.dart';
 import 'package:sil_user_profile/constants.dart';
 import 'package:sil_user_profile/contact_utils.dart';
@@ -26,6 +27,10 @@ void main() {
 
   bool checkWaitingFor({required String flag}) {
     return false;
+  }
+
+  bool setToTrue({required String flag}) {
+    return true;
   }
 
   group('addContactInfoBottomSheet', () {
@@ -301,6 +306,54 @@ void main() {
 
       expect(addContactBehaviorSubject.invalidCode.valueWrapper!.value, false);
     });
+
+    testWidgets('should show loader', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: ContactProvider(
+            primaryEmail: EmailAddress.withValue(testEmail),
+            primaryPhone: PhoneNumber.withValue(testPhoneNumber),
+            secondaryEmails: <EmailAddress>[EmailAddress.withValue(testEmail)],
+            secondaryPhones: <PhoneNumber>[
+              PhoneNumber.withValue(testPhoneNumber)
+            ],
+            contactUtils: ContactUtils(
+              toggleLoadingIndicator: (
+                  {BuildContext? context, String? flag, bool? show}) {},
+              client: mockSILGraphQlClient,
+              updateStateFunc: testUpdateState,
+            ),
+            wait: Wait(),
+            checkWaitingFor: setToTrue,
+            child: Builder(builder: (BuildContext context) {
+              return SILPrimaryButton(
+                buttonKey: testButtonKey,
+                onPressed: () {
+                  addContactInfoBottomSheet(
+                      context: context,
+                      type: ContactInfoType.email,
+                      onSave: () {},
+                      primary: true);
+                },
+              );
+            }),
+          ),
+        ),
+      );
+
+      await tester.pump();
+
+      await tester.tap(find.byKey(testButtonKey));
+      await tester.pump();
+      expect(find.byType(SingleChildScrollView), findsOneWidget);
+      expect(find.byType(TextFormField), findsOneWidget);
+      await tester.enterText(find.byType(TextFormField), testEmail);
+      await tester.pump();
+      await tester.pump(const Duration(seconds: 10));
+
+      expect(find.byType(SILPlatformLoader), findsOneWidget);
+    });
+
     testWidgets('should verify invalid otp after saving email',
         (WidgetTester tester) async {
       await tester.pumpWidget(

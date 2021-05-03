@@ -7,6 +7,7 @@ import 'package:sil_core_domain_objects/value_objects.dart';
 import 'package:sil_user_profile/constants.dart';
 import 'package:sil_user_profile/contact_items_card.dart';
 import 'package:sil_user_profile/contact_utils.dart';
+import 'package:sil_user_profile/shared/widget_keys.dart';
 import 'package:sil_user_profile/sil_contacts.dart';
 
 import 'mocks.dart';
@@ -107,7 +108,8 @@ void main() {
                     PhoneNumber.withValue(testPhoneNumber)
                   ],
                   contactUtils: ContactUtils(
-                    toggleLoadingIndicator: () {},
+                    toggleLoadingIndicator: (
+                        {BuildContext? context, String? flag, bool? show}) {},
                     client: mockSILGraphQlClient,
                     updateStateFunc: testUpdateState,
                   ),
@@ -118,13 +120,22 @@ void main() {
               ),
             ),
           );
-
           expect(find.byType(ContactItemsCard), findsNWidgets(3));
           expect(find.byType(ContactDetails), findsOneWidget);
 
           expect(find.byKey(const Key(primaryEmail)).first, findsOneWidget);
           await tester.tap(find.byKey(const Key(primaryEmail)));
           await tester.pumpAndSettle();
+
+          expect(find.byKey(addEmailAddressKey), findsOneWidget);
+
+          await tester.enterText(find.byKey(addEmailAddressKey), ' ');
+          await tester.pumpAndSettle();
+
+          expect(find.byKey(saveButtonKey), findsOneWidget);
+          await tester.tap(find.byKey(saveButtonKey));
+          await tester.pumpAndSettle();
+          expect(find.text(emailValidationMessage), findsOneWidget);
         },
       );
 
@@ -239,6 +250,64 @@ void main() {
           await tester.pumpAndSettle();
         },
       );
+
+      testWidgets('should test updateShouldNotify function',
+          (WidgetTester tester) async {
+        bool result = true;
+        await tester.pumpWidget(MaterialApp(
+          home: Builder(builder: (BuildContext context) {
+            return Scaffold(
+                body: Center(
+                    child: MaterialButton(
+                        onPressed: () {
+                          result = ContactProvider(
+                            primaryEmail: EmailAddress.withValue(testEmail),
+                            primaryPhone:
+                                PhoneNumber.withValue(testPhoneNumber),
+                            secondaryEmails: <EmailAddress>[
+                              EmailAddress.withValue(testEmail),
+                              EmailAddress.withValue(testEmail)
+                            ],
+                            secondaryPhones: <PhoneNumber>[
+                              PhoneNumber.withValue(testPhoneNumber)
+                            ],
+                            contactUtils: ContactUtils(
+                              toggleLoadingIndicator: () {},
+                              client: mockSILGraphQlClient,
+                              updateStateFunc: testUpdateState,
+                            ),
+                            wait: Wait(),
+                            checkWaitingFor: checkWaitingFor,
+                            child: ContactDetails(),
+                          ).updateShouldNotify(ContactProvider(
+                            primaryEmail: EmailAddress.withValue(testEmail),
+                            primaryPhone:
+                                PhoneNumber.withValue(testPhoneNumber),
+                            secondaryEmails: <EmailAddress>[
+                              EmailAddress.withValue(testEmail),
+                              EmailAddress.withValue('test@test.com')
+                            ],
+                            secondaryPhones: <PhoneNumber>[
+                              PhoneNumber.withValue(testPhoneNumber)
+                            ],
+                            contactUtils: ContactUtils(
+                              toggleLoadingIndicator: () {},
+                              client: mockSILGraphQlClient,
+                              updateStateFunc: testUpdateState,
+                            ),
+                            wait: Wait(),
+                            checkWaitingFor: checkWaitingFor,
+                            child: ContactDetails(),
+                          ));
+                        },
+                        child: const Text('Launch'))));
+          }),
+        ));
+        await tester.tap(find.byType(MaterialButton));
+        await tester.pump();
+
+        expect(result, false);
+      });
     },
   );
 }

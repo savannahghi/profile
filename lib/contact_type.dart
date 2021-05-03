@@ -9,8 +9,4 @@ class ContactType<T extends ValueObject<String>> {
   String value() {
     return contactItemValueObject.getValue();
   }
-
-  Type typeOf() {
-    return T;
-  }
 }
