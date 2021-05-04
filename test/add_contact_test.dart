@@ -29,10 +29,6 @@ void main() {
     return false;
   }
 
-  bool setToTrue({required String flag}) {
-    return true;
-  }
-
   group('addContactInfoBottomSheet', () {
     testWidgets('should render correctly for email',
         (WidgetTester tester) async {
@@ -104,7 +100,7 @@ void main() {
       await tester.pump();
 
       await tester.tap(find.byKey(testButtonKey));
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(find.byType(SingleChildScrollView), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
       await tester.enterText(find.byType(TextFormField), testInvalidEmail);
@@ -154,7 +150,7 @@ void main() {
       await tester.pump();
 
       await tester.tap(find.byKey(testButtonKey));
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(find.byType(SingleChildScrollView), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
       await tester.enterText(find.byType(TextFormField), testEmail);
@@ -205,7 +201,7 @@ void main() {
       await tester.pump();
 
       await tester.tap(find.byKey(testButtonKey));
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(find.byType(SingleChildScrollView), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
       await tester.enterText(find.byType(TextFormField), testEmail);
@@ -289,7 +285,7 @@ void main() {
       await tester.pump();
 
       await tester.tap(find.byKey(testButtonKey));
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(find.byType(SingleChildScrollView), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
       await tester.enterText(find.byType(TextFormField), testEmail);
@@ -308,50 +304,60 @@ void main() {
     });
 
     testWidgets('should show loader', (WidgetTester tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: ContactProvider(
-            primaryEmail: EmailAddress.withValue(testEmail),
-            primaryPhone: PhoneNumber.withValue(testPhoneNumber),
-            secondaryEmails: <EmailAddress>[EmailAddress.withValue(testEmail)],
-            secondaryPhones: <PhoneNumber>[
-              PhoneNumber.withValue(testPhoneNumber)
-            ],
-            contactUtils: ContactUtils(
-              toggleLoadingIndicator: (
-                  {BuildContext? context, String? flag, bool? show}) {},
-              client: mockSILGraphQlClient,
-              updateStateFunc: testUpdateState,
+      final Wait wait = Wait();
+      await tester.runAsync(() async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: ContactProvider(
+              primaryEmail: EmailAddress.withValue(testEmail),
+              primaryPhone: PhoneNumber.withValue(testPhoneNumber),
+              secondaryEmails: <EmailAddress>[
+                EmailAddress.withValue(testEmail)
+              ],
+              secondaryPhones: <PhoneNumber>[
+                PhoneNumber.withValue(testPhoneNumber)
+              ],
+              contactUtils: ContactUtils(
+                toggleLoadingIndicator: (
+                    {BuildContext? context, String? flag, bool? show}) {},
+                client: mockSILGraphQlClient,
+                updateStateFunc: testUpdateState,
+              ),
+              wait: wait,
+              checkWaitingFor: checkWaitingFor,
+              child: Builder(builder: (BuildContext context) {
+                return SILPrimaryButton(
+                  buttonKey: testButtonKey,
+                  onPressed: () {
+                    addContactInfoBottomSheet(
+                        context: context,
+                        type: ContactInfoType.email,
+                        onSave: () {},
+                        primary: true);
+                  },
+                );
+              }),
             ),
-            wait: Wait(),
-            checkWaitingFor: setToTrue,
-            child: Builder(builder: (BuildContext context) {
-              return SILPrimaryButton(
-                buttonKey: testButtonKey,
-                onPressed: () {
-                  addContactInfoBottomSheet(
-                      context: context,
-                      type: ContactInfoType.email,
-                      onSave: () {},
-                      primary: true);
-                },
-              );
-            }),
           ),
-        ),
-      );
+        );
 
-      await tester.pump();
+        await tester.pump();
 
-      await tester.tap(find.byKey(testButtonKey));
-      await tester.pump();
-      expect(find.byType(SingleChildScrollView), findsOneWidget);
-      expect(find.byType(TextFormField), findsOneWidget);
-      await tester.enterText(find.byType(TextFormField), testEmail);
-      await tester.pump();
-      await tester.pump(const Duration(seconds: 10));
+        await tester.tap(find.byKey(testButtonKey));
+        await tester.pumpAndSettle();
+        await tester.pumpAndSettle();
+        expect(find.byType(SingleChildScrollView), findsOneWidget);
+        expect(find.byType(TextFormField), findsOneWidget);
+        await tester.enterText(find.byType(TextFormField), testEmail);
+        await tester.pumpAndSettle();
 
-      expect(find.byType(SILPlatformLoader), findsOneWidget);
+        expect(find.byType(SILPrimaryButton), findsOneWidget);
+        await tester.tap(find.byType(SILPrimaryButton));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byKey(cancelAddContact));
+        expect(getLoader(show: true), isA<SILPlatformLoader>());
+        expect(getLoader(show: false), isA<Widget>());
+      });
     });
 
     testWidgets('should verify invalid otp after saving email',
@@ -392,7 +398,7 @@ void main() {
       await tester.pump();
 
       await tester.tap(find.byKey(testButtonKey));
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(find.byType(SingleChildScrollView), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
       await tester.enterText(find.byType(TextFormField), testEmail);

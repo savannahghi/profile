@@ -23,49 +23,87 @@ Future<dynamic> addContactInfoBottomSheet(
     bool primary = false}) async {
   final bool isPhone = type == ContactInfoType.phone;
   final ContactProvider? provider = ContactProvider.of(context);
-  return showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      builder: (BuildContext context) {
-        return Padding(
-          padding: MediaQuery.of(context).viewInsets,
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            constraints: const BoxConstraints(
-              maxWidth: 420,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  mediumVerticalSizedBox,
-                  Text(
-                    isPhone ? phone : email,
-                    style: TextThemes.heavySize20Text(Colors.black),
-                    textAlign: TextAlign.center,
+
+  return Navigator.push(
+    context,
+    MaterialPageRoute<dynamic>(
+      builder: (BuildContext context) => AddContactWrapper(
+        isPhone: isPhone,
+        provider: provider,
+        primary: primary,
+        type: type,
+        onSave: onSave,
+      ),
+    ),
+  );
+}
+
+class AddContactWrapper extends StatelessWidget {
+  const AddContactWrapper({
+    Key? key,
+    required this.isPhone,
+    required this.provider,
+    required this.onSave,
+    required this.type,
+    required this.primary,
+  }) : super(key: key);
+
+  final bool isPhone;
+  final ContactProvider? provider;
+  final bool primary;
+  final Function onSave;
+  final ContactInfoType type;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                mediumVerticalSizedBox,
+                Text(
+                  isPhone ? phone : email,
+                  style: TextThemes.heavySize20Text(Colors.black),
+                  textAlign: TextAlign.center,
+                ),
+                mediumVerticalSizedBox,
+                Text(
+                  isPhone ? phonesMessage : emailMessage,
+                  style: TextThemes.normalSize15Text(),
+                  textAlign: TextAlign.center,
+                ),
+                size40VerticalSizedBox,
+                AddContactInfo(
+                  type: type,
+                  onSave: onSave,
+                  primary: primary,
+                  provider: provider,
+                ),
+                mediumVerticalSizedBox,
+                GestureDetector(
+                  key: cancelAddContact,
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'Cancel',
+                    style: TextThemes.boldSize15Text(Colors.red[400]),
                   ),
-                  mediumVerticalSizedBox,
-                  Text(
-                    isPhone ? phonesMessage : emailMessage,
-                    style: TextThemes.normalSize15Text(),
-                    textAlign: TextAlign.center,
-                  ),
-                  size40VerticalSizedBox,
-                  AddContactInfo(
-                    type: type,
-                    onSave: onSave,
-                    primary: primary,
-                    provider: provider,
-                  ),
-                ],
-              ),
+                ),
+                mediumVerticalSizedBox
+              ],
             ),
           ),
-        );
-      });
+        ),
+      ),
+    );
+  }
 }
 
 /// adds a contact to an account
@@ -220,14 +258,18 @@ class _AddContactInfoState extends State<AddContactInfo> {
             size40VerticalSizedBox,
           ],
           if (widget.provider != null)
-            if (widget.provider?.checkWaitingFor(flag: flag) as bool)
-              const Center(
-                child: SILPlatformLoader(),
-              )
+            Center(
+              child: getLoader(
+                  show: widget.provider?.checkWaitingFor(flag: flag) as bool),
+            )
         ],
       ),
     );
   }
+}
+
+Widget getLoader({required bool show}) {
+  return show ? const SILPlatformLoader() : const SizedBox();
 }
 
 class AddContactBehaviorSubject {

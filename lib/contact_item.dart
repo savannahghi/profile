@@ -183,7 +183,7 @@ void primaryContactInfo(
             isPhone ? phoneChangeInstructions : emailChangeInstructions;
         return SingleChildScrollView(
           child: Container(
-            height: 320,
+            height: 340,
             padding: const EdgeInsets.all(20),
             color: Colors.white,
             child: Column(

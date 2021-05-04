@@ -10,3 +10,5 @@ const Key addEmailAddressKey = Key('add_email_field');
 // terms & conditions
 const Key appBarKey = Key('terms_appbar');
 const Key webViewKey = Key('web_view_key');
+
+const Key cancelAddContact = Key('cancel_add_contact');
