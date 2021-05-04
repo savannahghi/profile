@@ -1,12 +1,46 @@
 import 'package:flutter/material.dart';
+
+import 'package:webview_flutter/webview_flutter.dart';
+
 import 'package:sil_ui_components/sil_platform_loader.dart';
 import 'package:sil_user_profile/constants.dart';
 import 'package:sil_user_profile/shared/widget_keys.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 /// A page that displays BeWell terms and conditions.
 /// It has an embedded webview that links to the bewell site to load the terms & conditions.
-class TermsAndConditionsPage extends StatelessWidget {
+class TermsAndConditionsPage extends StatefulWidget {
+  @override
+  TermsAndConditionsPageState createState() => TermsAndConditionsPageState();
+}
+
+class TermsAndConditionsPageState extends State<TermsAndConditionsPage> {
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return termsAndConditionsState;
+  }
+
+  void onPageStarted(String? url) {
+    loadingState();
+  }
+
+  void onPageFinished(String? url) {
+    completeLoading(context);
+  }
+
+  /// shows progress indicator
+  Future<dynamic> loadingState() {
+    return showDialog(
+      context: context,
+      barrierColor: Colors.black12,
+      builder: (BuildContext context) => const SILPlatformLoader(),
+    );
+  }
+
+  ///  progress indicator
+  void completeLoading(BuildContext context) {
+    return Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,24 +59,10 @@ class TermsAndConditionsPage extends StatelessWidget {
       body: WebView(
         key: webViewKey,
         initialUrl: url,
-        onPageStarted: (String url) => loadingState(context),
-        onPageFinished: (String url) => completeLoading(context),
+        onPageStarted: onPageStarted,
+        onPageFinished: onPageFinished,
         javascriptMode: JavascriptMode.unrestricted,
       ),
     );
-  }
-
-  /// shows progress indicator
-  Future<dynamic> loadingState(BuildContext context) {
-    return showDialog(
-      context: context,
-      barrierColor: Colors.black12,
-      builder: (BuildContext context) => const SILPlatformLoader(),
-    );
-  }
-
-  ///  progress indicator
-  void completeLoading(BuildContext context) {
-    return Navigator.pop(context);
   }
 }
