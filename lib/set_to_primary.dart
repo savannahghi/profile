@@ -123,7 +123,6 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
         size40VerticalSizedBox,
         SILPinCodeTextField(
           controller: textEditingController,
-          autoFocus: true,
           maxLength: 6,
           pinBoxWidth: 34,
           pinBoxHeight: 38,

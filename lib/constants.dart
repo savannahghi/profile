@@ -57,12 +57,12 @@ const String phoneTitle = 'Primary phone number';
 const String emailTitle = 'Primary email address';
 final List<String> phoneChangeInstructions = <String>[
   'Your primary phone number is what you use to sign in with and your pin. To change primary phone number, follow the steps below:',
-  '1. Go to secondary phone numbers section and tap on green plus button, add a phone number if you haven\'t already',
+  '1. Go to secondary phone numbers section and tap the ADD button to add a phone number you haven\'t used',
   '2. After adding a secondary phone number, tap on the up arrow next to it to set it as primary',
 ];
 final List<String> emailChangeInstructions = <String>[
-  'Your primary email address is what we use to primarily communicate with you. To change primary email address, follow the steps below:',
-  '1. Go to secondary email addresses section and tap on green plus button, add an email address if you haven\'t already',
+  'Your primary email address is what we use to communicate with you. To change primary email address, follow the steps below:',
+  '1. Go to secondary email addresses section and tap the ADD button to add an email address you haven\'t used',
   '2. After adding a secondary email address, tap on the up arrow next to it to set it as primary',
 ];
 const String verifyTitle = 'Verification code';
@@ -89,9 +89,9 @@ const String alertTitle = 'Hey, wait a minute';
 
 String alertMessage(String? value, {bool isPhone = true}) {
   if (isPhone) {
-    return 'You are about to set $value as your primary phone number. Note that this is the number you will use to login with your PIN';
+    return 'You are about to set $value as your primary phone number. Note that this is the phone number you will use to login with your PIN';
   }
-  return 'You are about to set $value as your primary email address. Note that we will primarily communicate with you via this email';
+  return 'You are about to set $value as your primary email address. Note that we will communicate with you via this email address';
 }
 
 String sendOtpError(String? value) => 'Error sending otp to $value';

@@ -17,9 +17,9 @@ void main() {
 
     expect(sendOtpError(value), 'Error sending otp to $value');
     expect(alertMessage(value),
-        'You are about to set $value as your primary phone number. Note that this is the number you will use to login with your PIN');
+        'You are about to set $value as your primary phone number. Note that this is the phone number you will use to login with your PIN');
     expect(alertMessage(value, isPhone: false),
-        'You are about to set $value as your primary email address. Note that we will primarily communicate with you via this email');
+        'You are about to set $value as your primary email address. Note that we will communicate with you via this email address');
 
     expect(
         addContactFeedback(value), 'Successfully added $value to your account');

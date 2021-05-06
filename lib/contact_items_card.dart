@@ -104,7 +104,7 @@ class ContactItemsCard extends StatelessWidget {
   }
 
   ContactInfoType checkContactType(ContactType<ValueObject<String>> item) {
-    if (item.contactItemValueObject.runtimeType is PhoneNumber) {
+    if (item.contactItemValueObject is PhoneNumber) {
       return ContactInfoType.phone;
     } else {
       return ContactInfoType.email;
