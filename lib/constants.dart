@@ -51,8 +51,7 @@ const String phone = 'Phone number';
 const String email = 'Email address';
 const String emailHint = 'Enter your email address';
 const String emailValidationMessage = 'Valid email is required';
-const String emailMessage =
-    'Please check your email for otp \nverification code';
+const String emailMessage = 'Please check your email for a \nverification code';
 const String phoneTitle = 'Primary phone number';
 const String emailTitle = 'Primary email address';
 final List<String> phoneChangeInstructions = <String>[
@@ -90,8 +89,9 @@ const String alertTitle = 'Hey, wait a minute';
 String alertMessage(String? value, {bool isPhone = true}) {
   if (isPhone) {
     return 'You are about to set $value as your primary phone number. Note that this is the phone number you will use to login with your PIN';
+  } else {
+    return 'You are about to set $value as your primary email address. Note that we will communicate with you via this email address';
   }
-  return 'You are about to set $value as your primary email address. Note that we will communicate with you via this email address';
 }
 
 String sendOtpError(String? value) => 'Error sending otp to $value';

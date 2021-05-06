@@ -82,6 +82,7 @@ class ContactItem extends StatelessWidget {
                 primaryContactInfo(
                     context: context,
                     isPhone: type == ContactInfoType.phone,
+                    contactType: type,
                     value: value);
               },
               child: Icon(
@@ -173,6 +174,7 @@ Future<dynamic> deleteContactDialogue({
 void primaryContactInfo(
     {required BuildContext context,
     required bool isPhone,
+    required ContactInfoType contactType,
     required String value}) {
   showModalBottomSheet(
       context: context,
@@ -196,7 +198,7 @@ void primaryContactInfo(
                     color: const Color(0xFF1ba376).withOpacity(0.2),
                     borderRadius: BorderRadius.circular(25),
                   ),
-                  child: Text(isPhone ? phoneTitle : emailTitle,
+                  child: Text( (contactType == ContactInfoType.phone) ? phoneTitle : emailTitle,
                       style:
                           TextThemes.heavySize10Text(const Color(0xFF1ba376))),
                 ),
