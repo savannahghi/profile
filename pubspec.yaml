@@ -19,7 +19,7 @@ dependencies:
   sil_app_wrapper:
     git:
       url: https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_app_wrapper.git
-      ref: 0.0.9-nullsafety
+      ref: 0.0.10
 
   sil_core_domain_objects:
     git:
@@ -29,7 +29,7 @@ dependencies:
   sil_graphql_client:
     git:
       url: https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_graphql_client.git
-      ref: 0.0.8-nullsafety
+      ref: 0.0.9
 
   sil_themes:
     git:
@@ -39,7 +39,7 @@ dependencies:
   sil_ui_components:
     git:
       url: https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_ui_components.git
-      ref: 0.0.72
+      ref: 0.0.73
 
   webview_flutter: ^2.0.2 #embedded webView
 

@@ -198,7 +198,10 @@ void primaryContactInfo(
                     color: const Color(0xFF1ba376).withOpacity(0.2),
                     borderRadius: BorderRadius.circular(25),
                   ),
-                  child: Text( (contactType == ContactInfoType.phone) ? phoneTitle : emailTitle,
+                  child: Text(
+                      (contactType == ContactInfoType.phone)
+                          ? phoneTitle
+                          : emailTitle,
                       style:
                           TextThemes.heavySize10Text(const Color(0xFF1ba376))),
                 ),
