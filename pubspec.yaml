@@ -24,7 +24,7 @@ dependencies:
   sil_core_domain_objects:
     git:
       url: https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_core_domain_objects.git
-      ref: 0.0.16-nullsafety
+      ref: 0.0.17
 
   sil_graphql_client:
     git:

@@ -554,8 +554,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.16-nullsafety"
-      resolved-ref: "102533f0564810638e6cde8445422bb9bca6fdde"
+      ref: "0.0.17"
+      resolved-ref: "21295aa8bc898e719e7032fcc86e69fb2e029487"
       url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_core_domain_objects.git"
     source: git
     version: "0.0.1"
