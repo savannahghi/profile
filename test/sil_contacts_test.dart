@@ -28,7 +28,7 @@ void main() {
       }
 
       testWidgets(
-        'renders 4 ContactItemsCard widgets if primaryEmail is defined',
+        'renders 2 ContactItemsCard widgets if primaryEmail is defined',
         (WidgetTester tester) async {
           await tester.pumpWidget(
             MaterialApp(
@@ -55,7 +55,7 @@ void main() {
             ),
           );
 
-          expect(find.byType(ContactItemsCard), findsNWidgets(4));
+          expect(find.byType(ContactItemsCard), findsNWidgets(2));
           expect(find.byType(ContactDetails), findsOneWidget);
         },
       );
@@ -87,7 +87,7 @@ void main() {
             ),
           );
 
-          expect(find.byType(ContactItemsCard), findsNWidgets(3));
+          expect(find.byType(ContactItemsCard), findsNWidgets(2));
           expect(find.byType(ContactDetails), findsOneWidget);
         },
       );
@@ -120,7 +120,7 @@ void main() {
               ),
             ),
           );
-          expect(find.byType(ContactItemsCard), findsNWidgets(3));
+          expect(find.byType(ContactItemsCard), findsNWidgets(2));
           expect(find.byType(ContactDetails), findsOneWidget);
 
           expect(find.byKey(const Key(primaryEmail)).first, findsOneWidget);
@@ -169,85 +169,8 @@ void main() {
             ),
           );
 
-          expect(find.byType(ContactItemsCard), findsNWidgets(4));
+          expect(find.byType(ContactItemsCard), findsNWidgets(2));
           expect(find.byType(ContactDetails), findsOneWidget);
-        },
-      );
-
-      testWidgets(
-        'should onAddContactInfo if secondaryPhones is not UNKNOWN',
-        (WidgetTester tester) async {
-          await tester.pumpWidget(
-            MaterialApp(
-              home: Scaffold(
-                body: ContactProvider(
-                  primaryEmail: EmailAddress.withValue(testEmail),
-                  primaryPhone: PhoneNumber.withValue(testPhoneNumber),
-                  secondaryEmails: <EmailAddress>[
-                    EmailAddress.withValue('example@mail.com')
-                  ],
-                  secondaryPhones: <PhoneNumber>[
-                    PhoneNumber.withValue(testPhoneNumber),
-                    PhoneNumber.withValue(testPhoneNumber)
-                  ],
-                  contactUtils: ContactUtils(
-                    toggleLoadingIndicator: () {},
-                    client: mockSILGraphQlClient,
-                    updateStateFunc: testUpdateState,
-                  ),
-                  wait: Wait(),
-                  checkWaitingFor: checkWaitingFor,
-                  child: ContactDetails(),
-                ),
-              ),
-            ),
-          );
-
-          expect(find.byType(ContactItemsCard), findsNWidgets(4));
-          expect(find.byType(ContactDetails), findsOneWidget);
-
-          await tester.pumpAndSettle();
-          expect(find.byKey(const Key(secondaryPhones)).first, findsOneWidget);
-          await tester.tap(find.byKey(const Key(secondaryPhones)));
-          await tester.pumpAndSettle();
-        },
-      );
-
-      testWidgets(
-        'should onAddContactInfo if primaryEmail and secondaryEmails is not UNKNOWN',
-        (WidgetTester tester) async {
-          await tester.pumpWidget(
-            MaterialApp(
-              home: Scaffold(
-                body: ContactProvider(
-                  primaryEmail: EmailAddress.withValue(testEmail),
-                  primaryPhone: PhoneNumber.withValue(testPhoneNumber),
-                  secondaryEmails: <EmailAddress>[
-                    EmailAddress.withValue(testEmail),
-                    EmailAddress.withValue(testEmail)
-                  ],
-                  secondaryPhones: <PhoneNumber>[
-                    PhoneNumber.withValue(testPhoneNumber)
-                  ],
-                  contactUtils: ContactUtils(
-                    toggleLoadingIndicator: () {},
-                    client: mockSILGraphQlClient,
-                    updateStateFunc: testUpdateState,
-                  ),
-                  wait: Wait(),
-                  checkWaitingFor: checkWaitingFor,
-                  child: ContactDetails(),
-                ),
-              ),
-            ),
-          );
-          await tester.pumpAndSettle();
-
-          expect(find.byType(ContactDetails), findsOneWidget);
-          await tester.pumpAndSettle();
-          expect(find.byKey(const Key(secondaryEmails)).first, findsOneWidget);
-          await tester.tap(find.byKey(const Key(secondaryEmails)));
-          await tester.pumpAndSettle();
         },
       );
 
