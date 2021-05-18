@@ -10,9 +10,9 @@ import 'package:sil_user_profile/constants.dart';
 import 'package:sil_themes/spaces.dart';
 import 'package:sil_themes/text_themes.dart';
 
-/// shows a contact and possible actions [info], [upgrade] or [delete]
+/// Shows a contact and possible actions [info], [upgrade] or [delete]
 /// [editable] flag determines whether a contact can be [deleted] or [upgraded]
-///  which is not the case for a primary contact
+/// Which is not the case for a primary contact
 class ContactItem extends StatelessWidget {
   const ContactItem({
     Key? key,

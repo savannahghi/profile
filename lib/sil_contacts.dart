@@ -9,7 +9,7 @@ import 'package:sil_user_profile/contact_type.dart';
 import 'package:sil_user_profile/contact_utils.dart';
 import 'package:sil_user_profile/constants.dart';
 
-/// renders [ContactItemsCard] card and supplies the relevant [data] and [type]
+/// Renders [ContactItemsCard] card and supplies the relevant [data] and [type]
 class ContactDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

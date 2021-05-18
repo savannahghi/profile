@@ -127,11 +127,6 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
           pinBoxWidth: 34,
           pinBoxHeight: 38,
           wrapAlignment: WrapAlignment.spaceAround,
-          onTextChanged: (dynamic val) {
-            if (invalidCode) {
-              setToPrimaryBehaviorSubject.invalidCode.add(false);
-            }
-          },
           onDone: (dynamic val) async {
             if (val == otp) {
               await provider!.contactUtils.verifyContact(

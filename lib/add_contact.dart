@@ -220,7 +220,7 @@ class _AddContactInfoState extends State<AddContactInfo> {
                 ),
           ],
           if (otp != null) ...<Widget>[
-            // verify otp input here
+            /// Verify otp input here
             SILPinCodeTextField(
               controller: textEditingController,
               autoFocus: true,
@@ -228,11 +228,6 @@ class _AddContactInfoState extends State<AddContactInfo> {
               pinBoxWidth: 34,
               pinBoxHeight: 38,
               wrapAlignment: WrapAlignment.spaceAround,
-              onTextChanged: (dynamic val) {
-                if (invalidCode) {
-                  toggleInvalidCodeMsg(val: false);
-                }
-              },
               onDone: (String v) async {
                 await widget.provider!.contactUtils.verifyAddPrimaryEmailOtp(
                   context: context,

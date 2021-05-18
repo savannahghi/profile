@@ -455,7 +455,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(
-          setToPrimaryBehaviorSubject.invalidCode.valueWrapper!.value, false);
+          setToPrimaryBehaviorSubject.invalidCode.valueWrapper!.value, true);
     });
   });
 }
