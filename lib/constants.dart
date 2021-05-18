@@ -54,16 +54,10 @@ const String emailValidationMessage = 'Valid email is required';
 const String emailMessage = 'Please check your email for a \nverification code';
 const String phoneTitle = 'Primary phone number';
 const String emailTitle = 'Primary email address';
-final List<String> phoneChangeInstructions = <String>[
-  'Your primary phone number is what you use to sign in with and your pin. To change primary phone number, follow the steps below:',
-  '1. Go to secondary phone numbers section and tap the ADD button to add a phone number you haven\'t used',
-  '2. After adding a secondary phone number, tap on the up arrow next to it to set it as primary',
-];
-final List<String> emailChangeInstructions = <String>[
-  'Your primary email address is what we use to communicate with you. To change primary email address, follow the steps below:',
-  '1. Go to secondary email addresses section and tap the ADD button to add an email address you haven\'t used',
-  '2. After adding a secondary email address, tap on the up arrow next to it to set it as primary',
-];
+const String phoneChangeInstructions =
+    'Your primary phone number is what you use to sign in with and your pin, and we will use it for communications.';
+const String emailChangeInstructions =
+    'Your primary email address is what we use to communicate with you.';
 const String verifyTitle = 'Verification code';
 String verificationMsg(String? value) =>
     'Enter the 6 digit code sent to $value';

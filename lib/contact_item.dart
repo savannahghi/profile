@@ -181,11 +181,11 @@ void primaryContactInfo(
       barrierColor: Colors.black.withOpacity(0.2),
       elevation: 1,
       builder: (BuildContext context) {
-        final List<String> instructions =
+        final String instructions =
             isPhone ? phoneChangeInstructions : emailChangeInstructions;
         return SingleChildScrollView(
           child: Container(
-            height: 340,
+            height: 260,
             padding: const EdgeInsets.all(20),
             color: Colors.white,
             child: Column(
@@ -213,20 +213,10 @@ void primaryContactInfo(
                 ),
                 mediumVerticalSizedBox,
                 Text(
-                  instructions[0],
+                  instructions,
                   style: TextThemes.normalSize12Text().copyWith(height: 1.6),
                 ),
-                mediumVerticalSizedBox,
-                Text(
-                  instructions[1],
-                  style: TextThemes.normalSize12Text().copyWith(height: 1.6),
-                ),
-                size15VerticalSizedBox,
-                Text(
-                  instructions[2],
-                  style: TextThemes.normalSize12Text().copyWith(height: 1.6),
-                ),
-                mediumVerticalSizedBox,
+                largeVerticalSizedBox,
                 GestureDetector(
                   key: const Key('close_key'),
                   onTap: () {
