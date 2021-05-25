@@ -11,6 +11,10 @@ import 'package:sil_user_profile/constants.dart';
 
 /// Renders [ContactItemsCard] card and supplies the relevant [data] and [type]
 class ContactDetails extends StatelessWidget {
+  const ContactDetails({Key? key, this.onContactSaved}) : super(key: key);
+
+  final Function? onContactSaved;
+
   @override
   Widget build(BuildContext context) {
     final ContactProvider provider = ContactProvider.of(context)!;
@@ -35,12 +39,14 @@ class ContactDetails extends StatelessWidget {
             addMessage: primaryEmailMessage,
             onAddContactInfo: ([bool primary = false]) async {
               provider.contactUtils.showMessageFromModal(
-                  context,
-                  await addContactInfoBottomSheet(
-                      context: context,
-                      type: ContactInfoType.email,
-                      onSave: provider.contactUtils.addPrimaryEmail,
-                      primary: primary));
+                context,
+                await addContactInfoBottomSheet(
+                    context: context,
+                    type: ContactInfoType.email,
+                    onSave: provider.contactUtils.addPrimaryEmail,
+                    primary: primary),
+                afterCallback: this.onContactSaved,
+              );
             },
           ),
         ],

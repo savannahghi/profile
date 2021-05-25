@@ -4,6 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:async_redux/async_redux.dart';
 
 import 'package:sil_core_domain_objects/value_objects.dart';
+import 'package:sil_ui_components/sil_buttons.dart';
+import 'package:sil_ui_components/sil_inputs.dart';
 import 'package:sil_user_profile/constants.dart';
 import 'package:sil_user_profile/contact_items_card.dart';
 import 'package:sil_user_profile/contact_utils.dart';
@@ -49,7 +51,7 @@ void main() {
                   ),
                   wait: Wait(),
                   checkWaitingFor: () {},
-                  child: ContactDetails(),
+                  child: const ContactDetails(),
                 ),
               ),
             ),
@@ -81,7 +83,7 @@ void main() {
                   ),
                   wait: Wait(),
                   checkWaitingFor: checkWaitingFor,
-                  child: ContactDetails(),
+                  child: const ContactDetails(),
                 ),
               ),
             ),
@@ -115,7 +117,7 @@ void main() {
                   ),
                   wait: Wait(),
                   checkWaitingFor: checkWaitingFor,
-                  child: ContactDetails(),
+                  child: const ContactDetails(),
                 ),
               ),
             ),
@@ -163,7 +165,7 @@ void main() {
                   ),
                   wait: Wait(),
                   checkWaitingFor: checkWaitingFor,
-                  child: ContactDetails(),
+                  child: const ContactDetails(),
                 ),
               ),
             ),
@@ -201,7 +203,7 @@ void main() {
                             ),
                             wait: Wait(),
                             checkWaitingFor: checkWaitingFor,
-                            child: ContactDetails(),
+                            child: const ContactDetails(),
                           ).updateShouldNotify(ContactProvider(
                             primaryEmail: EmailAddress.withValue(testEmail),
                             primaryPhone:
@@ -220,7 +222,7 @@ void main() {
                             ),
                             wait: Wait(),
                             checkWaitingFor: checkWaitingFor,
-                            child: ContactDetails(),
+                            child: const ContactDetails(),
                           ));
                         },
                         child: const Text('Launch'))));
@@ -231,6 +233,117 @@ void main() {
 
         expect(result, false);
       });
+
+      testWidgets(
+        'refreshFunc is called',
+        (WidgetTester tester) async {
+          int counter = 0;
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: ContactProvider(
+                  primaryEmail: EmailAddress.withValue(UNKNOWNEMAIL),
+                  primaryPhone: PhoneNumber.withValue(testPhoneNumber),
+                  secondaryEmails: <EmailAddress>[
+                    EmailAddress.withValue('example@mail.com')
+                  ],
+                  secondaryPhones: <PhoneNumber>[
+                    PhoneNumber.withValue(testPhoneNumber)
+                  ],
+                  contactUtils: ContactUtils(
+                    toggleLoadingIndicator: (
+                        {BuildContext? context, String? flag, bool? show}) {},
+                    client: mockSILGraphQlClient,
+                    updateStateFunc: testUpdateState,
+                  ),
+                  wait: Wait(),
+                  checkWaitingFor: checkWaitingFor,
+                  child: ContactDetails(
+                    onContactSaved: () {
+                      counter = counter + 1;
+                    },
+                  ),
+                ),
+              ),
+            ),
+          );
+
+          /// verify renders
+          expect(find.byType(ContactItemsCard), findsNWidgets(2));
+          expect(find.byType(ContactDetails), findsOneWidget);
+          expect(counter, 0);
+
+          /// tap add primary email btn
+          expect(find.byKey(const Key(primaryEmail)).first, findsOneWidget);
+          await tester.tap(find.byKey(const Key(primaryEmail)));
+          await tester.pumpAndSettle();
+
+          /// confirm email text input is present
+          expect(find.byKey(addEmailAddressKey), findsOneWidget);
+
+          /// add test email value
+          await tester.enterText(find.byKey(addEmailAddressKey), testEmail);
+          await tester.pumpAndSettle();
+
+          /// confirm save btn is present & press
+          expect(find.byKey(saveButtonKey), findsOneWidget);
+          await tester.tap(find.byKey(saveButtonKey));
+          await tester.pumpAndSettle();
+
+          /// confirm otp pincode input is present
+          expect(find.byType(SILPinCodeTextField), findsOneWidget);
+
+          /// Pop navigation
+          // Use didPopRoute() to simulate the system back button. Check that
+          // didPopRoute() indicates that the notification was handled.
+          final dynamic widgetsAppState = tester.state(find.byType(WidgetsApp));
+          expect(await widgetsAppState.didPopRoute(), isTrue);
+          await tester.pumpAndSettle();
+
+          /// confirm otp input is out of view
+          expect(find.byType(SILPinCodeTextField), findsNothing);
+        },
+      );
+
+      testWidgets(
+        'refreshFunc works',
+        (WidgetTester tester) async {
+          final Map<String, String> result = <String, String>{
+            'message': 'refresh function called',
+          };
+          int counter = 0;
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Builder(builder: (BuildContext context) {
+                return Scaffold(
+                  body: SILPrimaryButton(
+                    buttonKey: const Key('presss'),
+                    onPressed: () {
+                      ContactUtils(
+                        toggleLoadingIndicator: (
+                            {BuildContext? context,
+                            String? flag,
+                            bool? show}) {},
+                        client: mockSILGraphQlClient,
+                        updateStateFunc: testUpdateState,
+                      ).showMessageFromModal(context, result,
+                          afterCallback: () {
+                        counter = counter + 1;
+                      });
+                    },
+                    text: 'Press',
+                  ),
+                );
+              }),
+            ),
+          );
+
+          expect(counter, 0);
+          await tester.tap(find.byKey(const Key('presss')));
+          await tester.pumpAndSettle();
+          expect(counter, 1);
+        },
+      );
     },
   );
 }

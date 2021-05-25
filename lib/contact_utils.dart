@@ -162,6 +162,7 @@ class ContactUtils {
         return;
       }
       setOtp(result['otp']);
+
       return;
     }
 
@@ -366,7 +367,10 @@ class ContactUtils {
     }
   }
 
-  void showMessageFromModal(BuildContext context, dynamic result) {
+  /// The parameter `afterCallback` is used as an optional parameter
+  /// A use-case is refreshing feed in `pro` after adding contact details
+  void showMessageFromModal(BuildContext context, dynamic result,
+      {Function? afterCallback}) {
     if (result == null) {
       final ContactProvider? provider = ContactProvider.of(context);
       // flags used to show loading indicator
@@ -385,12 +389,17 @@ class ContactUtils {
 
       return;
     }
-    // show message to user
+
+    /// Show message to user
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(result['message'].toString()),
       ),
     );
+
+    if (afterCallback != null) {
+      afterCallback();
+    }
   }
 
   Future<void> verifyAddPrimaryEmailOtp({
@@ -420,6 +429,7 @@ class ContactUtils {
         'status': 'ok',
         'message': addContactFeedback(email)
       });
+
       return;
     }
     toggleInvalidCodeMsg(val: true);
