@@ -411,7 +411,7 @@ class ContactUtils {
     required Function toggleInvalidCodeMsg,
     required TextEditingController controller,
   }) async {
-    /// check if otps match
+    /// check if OTP match
     if (userInput == otp) {
       toggleLoadingIndicator(context: context, flag: flag);
       final Map<String, dynamic> result =

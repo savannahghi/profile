@@ -25,7 +25,7 @@ void main() {
     'value': true,
   };
 
-  testWidgets('should sendPhoneOtp sucessfully', (WidgetTester tester) async {
+  testWidgets('should sendPhoneOtp successfully', (WidgetTester tester) async {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
@@ -143,7 +143,7 @@ void main() {
     await tester.tap(find.byKey(testButtonKey));
   });
 
-  testWidgets('should retireSecondaryContact phone sucessfully',
+  testWidgets('should retireSecondaryContact phone successfully',
       (WidgetTester tester) async {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
@@ -178,7 +178,7 @@ void main() {
     await tester.tap(find.byKey(testButtonKey));
   });
 
-  testWidgets('should retireSecondaryContact email sucessfully',
+  testWidgets('should retireSecondaryContact email successfully',
       (WidgetTester tester) async {
     final MockShortSILGraphQlClient mockShortSILGraphQlClient =
         MockShortSILGraphQlClient.withResponse(
@@ -221,7 +221,7 @@ void main() {
     await tester.tap(find.byKey(testButtonKey));
   });
 
-  testWidgets('should verifyAddPrimaryEmailOtp sucessfully',
+  testWidgets('should verifyAddPrimaryEmailOtp successfully',
       (WidgetTester tester) async {
     final TextEditingController controller = TextEditingController();
     await tester.pumpWidget(Builder(

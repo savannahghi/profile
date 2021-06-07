@@ -290,7 +290,7 @@ void main() {
           await tester.tap(find.byKey(saveButtonKey));
           await tester.pumpAndSettle();
 
-          /// confirm otp pincode input is present
+          /// confirm otp pin code input is present
           expect(find.byType(SILPinCodeTextField), findsOneWidget);
 
           /// Pop navigation
@@ -317,7 +317,7 @@ void main() {
               home: Builder(builder: (BuildContext context) {
                 return Scaffold(
                   body: SILPrimaryButton(
-                    buttonKey: const Key('presss'),
+                    buttonKey: pressText,
                     onPressed: () {
                       ContactUtils(
                         toggleLoadingIndicator: (
@@ -339,7 +339,7 @@ void main() {
           );
 
           expect(counter, 0);
-          await tester.tap(find.byKey(const Key('presss')));
+          await tester.tap(find.byKey(const Key('press')));
           await tester.pumpAndSettle();
           expect(counter, 1);
         },

@@ -56,7 +56,7 @@ void main() {
           ),
         ),
       );
-      // expect to find the guesture detector when the number is not editable
+      // expect to find the gesture detector when the number is not editable
       expect(find.byKey(const Key('not_editable_contact_key')), findsOneWidget);
 
       // expect that tapping the button calls the primaryContactInfo method
@@ -110,7 +110,7 @@ void main() {
           ),
         ),
       );
-      // expect to find the guesture detector when the number is not editable
+      // expect to find the gesture detector when the number is not editable
       expect(find.byKey(const Key('not_editable_contact_key')), findsOneWidget);
 
       // expect that tapping the button calls the primaryContactInfo method
@@ -170,7 +170,7 @@ void main() {
           ),
         );
 
-        // expect to find the guesture detectors when the number is  editable
+        // expect to find the gesture detectors when the number is  editable
         expect(find.byKey(const Key('editable_contact_key')), findsOneWidget);
         expect(find.byKey(const Key('delete_contact_key')), findsOneWidget);
 
@@ -226,7 +226,7 @@ void main() {
           ),
         );
 
-        // expect to find the guesture detectors when the number is  editable
+        // expect to find the gesture detectors when the number is  editable
         expect(find.byKey(const Key('editable_contact_key')), findsOneWidget);
         expect(find.byKey(const Key('delete_contact_key')), findsOneWidget);
 
@@ -280,7 +280,7 @@ void main() {
           ),
         );
 
-        // expect to find the guesture detectors when the number is  editable
+        // expect to find the gesture detectors when the number is  editable
         expect(find.byKey(const Key('editable_contact_key')), findsOneWidget);
         expect(find.byKey(const Key('delete_contact_key')), findsOneWidget);
 
@@ -332,7 +332,7 @@ void main() {
           ),
         );
 
-        // expect to find the guesture detectors when the number is  editable
+        // expect to find the gesture detectors when the number is  editable
         expect(find.byKey(const Key('editable_contact_key')), findsOneWidget);
         expect(find.byKey(const Key('delete_contact_key')), findsOneWidget);
 
@@ -382,7 +382,7 @@ void main() {
           ),
         );
 
-        // expect to find the guesture detectors when the number is  editable
+        // expect to find the gesture detectors when the number is  editable
         expect(find.byKey(const Key('editable_contact_key')), findsOneWidget);
         expect(find.byKey(const Key('delete_contact_key')), findsOneWidget);
 
@@ -447,7 +447,7 @@ void main() {
           ),
         );
 
-        // expect to find the guesture detectors when the number is  editable
+        // expect to find the gesture detectors when the number is  editable
         expect(find.byKey(const Key('editable_contact_key')), findsOneWidget);
         expect(find.byKey(const Key('delete_contact_key')), findsOneWidget);
 

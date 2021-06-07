@@ -235,7 +235,7 @@ void main() {
     });
 
     testWidgets(
-        'should buildVerifyWidget with valid code and Contact type is phone and navgate',
+        'should buildVerifyWidget with valid code and Contact type is phone and navigate',
         (WidgetTester tester) async {
       setToPrimaryBehaviorSubject.otp.add('123456');
 
@@ -277,7 +277,7 @@ void main() {
     });
 
     testWidgets(
-        'should buildVerifyWidget with valid code and navgate successfully',
+        'should buildVerifyWidget with valid code and navigate successfully',
         (WidgetTester tester) async {
       setToPrimaryBehaviorSubject.otp.add('123456');
 
@@ -319,7 +319,7 @@ void main() {
     });
 
     testWidgets(
-        'should buildVerifyWidget with valid code and navgate with error',
+        'should buildVerifyWidget with valid code and navigate with error',
         (WidgetTester tester) async {
       setToPrimaryBehaviorSubject.otp.add('123456');
 
@@ -454,8 +454,7 @@ void main() {
       await tester.enterText(find.byType(SILPinCodeTextField), '123456');
       await tester.pumpAndSettle();
 
-      expect(
-          setToPrimaryBehaviorSubject.invalidCode.valueWrapper!.value, true);
+      expect(setToPrimaryBehaviorSubject.invalidCode.valueWrapper!.value, true);
     });
   });
 }
