@@ -87,7 +87,7 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
 
   @override
   Widget build(BuildContext context) {
-    final String? otp = setToPrimaryBehaviorSubject.otp.valueWrapper?.value;
+    final String? otp = setToPrimaryBehaviorSubject.otp.valueOrNull;
     return Column(
       children: <Widget>[
         if (otp == null) ...<Widget>[
@@ -104,9 +104,9 @@ class _SetContactToPrimaryState extends State<SetContactToPrimary> {
   }
 
   Widget _buildVerifyWidget(BuildContext context, ContactProvider? provider) {
-    final String? otp = setToPrimaryBehaviorSubject.otp.valueWrapper?.value;
+    final String? otp = setToPrimaryBehaviorSubject.otp.valueOrNull;
     final bool invalidCode =
-        setToPrimaryBehaviorSubject.invalidCode.valueWrapper!.value;
+        setToPrimaryBehaviorSubject.invalidCode.valueOrNull!;
 
     return Column(
       children: <Widget>[

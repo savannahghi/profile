@@ -103,7 +103,7 @@ void main() {
       await tester.tap(find.byKey(emailAlertContinueButtonKey));
       await tester.pumpAndSettle();
 
-      expect(setToPrimaryBehaviorSubject.otp.valueWrapper!.value, testOTP);
+      expect(setToPrimaryBehaviorSubject.otp.valueOrNull, testOTP);
     });
   });
 }

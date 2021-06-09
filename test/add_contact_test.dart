@@ -300,7 +300,7 @@ void main() {
       await tester.enterText(find.byType(SILPinCodeTextField), testOTP);
       await tester.pumpAndSettle();
 
-      expect(addContactBehaviorSubject.invalidCode.valueWrapper!.value, false);
+      expect(addContactBehaviorSubject.invalidCode.valueOrNull, false);
     });
 
     testWidgets('should show loader', (WidgetTester tester) async {
@@ -413,7 +413,7 @@ void main() {
       await tester.enterText(find.byType(SILPinCodeTextField), testInvalidOTP);
       await tester.pumpAndSettle();
 
-      expect(addContactBehaviorSubject.invalidCode.valueWrapper!.value, true);
+      expect(addContactBehaviorSubject.invalidCode.valueOrNull, true);
       expect(find.text(incorrectCode), findsOneWidget);
 
       await tester.enterText(find.byType(SILPinCodeTextField), testInvalidOTP);

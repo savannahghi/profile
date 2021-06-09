@@ -231,7 +231,7 @@ void main() {
       expect(find.byType(SILPrimaryButton), findsOneWidget);
       await tester.tap(find.byType(SILPrimaryButton));
       await tester.pumpAndSettle();
-      expect(setToPrimaryBehaviorSubject.otp.valueWrapper!.value, '123456');
+      expect(setToPrimaryBehaviorSubject.otp.valueOrNull, '123456');
     });
 
     testWidgets(
@@ -409,7 +409,7 @@ void main() {
       await tester.enterText(find.byType(SILPinCodeTextField), '654321');
       await tester.pumpAndSettle();
 
-      expect(setToPrimaryBehaviorSubject.invalidCode.valueWrapper!.value, true);
+      expect(setToPrimaryBehaviorSubject.invalidCode.valueOrNull, true);
     });
 
     testWidgets(
@@ -454,7 +454,8 @@ void main() {
       await tester.enterText(find.byType(SILPinCodeTextField), '123456');
       await tester.pumpAndSettle();
 
-      expect(setToPrimaryBehaviorSubject.invalidCode.valueWrapper!.value, true);
+      expect(
+          setToPrimaryBehaviorSubject.invalidCode.valueOrNull, true);
     });
   });
 }

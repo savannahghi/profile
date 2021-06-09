@@ -150,7 +150,7 @@ class _AddContactInfoState extends State<AddContactInfo> {
   @override
   Widget build(BuildContext context) {
     final bool invalidCode =
-        addContactBehaviorSubject.invalidCode.valueWrapper!.value;
+        addContactBehaviorSubject.invalidCode.valueOrNull!;
     return Form(
       key: _formKey,
       child: Column(
