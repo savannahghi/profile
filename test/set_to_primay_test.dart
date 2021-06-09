@@ -454,8 +454,7 @@ void main() {
       await tester.enterText(find.byType(SILPinCodeTextField), '123456');
       await tester.pumpAndSettle();
 
-      expect(
-          setToPrimaryBehaviorSubject.invalidCode.valueOrNull, true);
+      expect(setToPrimaryBehaviorSubject.invalidCode.valueOrNull, true);
     });
   });
 }

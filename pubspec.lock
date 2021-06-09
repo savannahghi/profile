@@ -7,21 +7,21 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "22.0.0"
+    version: "21.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.1"
+    version: "1.5.0"
   args:
     dependency: transitive
     description:
       name: args
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.0"
   async:
     dependency: transitive
     description:
@@ -49,7 +49,7 @@ packages:
       name: build
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.1"
   build_config:
     dependency: transitive
     description:
@@ -70,7 +70,7 @@ packages:
       name: built_value
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.0.6"
+    version: "8.0.5"
   camera:
     dependency: transitive
     description:
@@ -210,14 +210,14 @@ packages:
       name: ffi
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.2"
+    version: "1.0.0"
   file:
     dependency: transitive
     description:
       name: file
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.1.1"
+    version: "6.1.0"
   file_picker:
     dependency: transitive
     description:
@@ -250,7 +250,7 @@ packages:
       name: flutter_plugin_android_lifecycle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.1"
   flutter_spinkit:
     dependency: transitive
     description:
@@ -449,14 +449,14 @@ packages:
       name: path_drawing
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.1"
+    version: "0.5.0"
   path_parsing:
     dependency: transitive
     description:
       name: path_parsing
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1"
+    version: "0.2.0"
   path_provider:
     dependency: transitive
     description:
@@ -566,8 +566,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.12"
-      resolved-ref: "8e413ad9e4df9663e0565f7e7f080a77a0a6c0d2"
+      ref: "0.0.13"
+      resolved-ref: b60f804f2272dd2c13665dc30895dd56e216266a
       url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_app_wrapper.git"
     source: git
     version: "0.0.1"
@@ -575,8 +575,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.1.0"
-      resolved-ref: "89123e433fe3c7fe8180e8a9745c5487526e2c05"
+      ref: "0.1.01"
+      resolved-ref: a7987e336f4a0bea3311759500963418ec590962
       url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_graphql_client.git"
     source: git
     version: "0.0.1"
@@ -584,8 +584,8 @@ packages:
     dependency: transitive
     description:
       path: "."
-      ref: "0.1.1"
-      resolved-ref: be409548f9977027f7cc5d0353c70471027dbb5b
+      ref: "0.1.13"
+      resolved-ref: "7db54608a8fca97fd525fa0d9bdf34f9b4c84a2c"
       url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_misc.git"
     source: git
     version: "0.0.1"
@@ -593,8 +593,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.9"
-      resolved-ref: bea8f952a745dbe6b8de3c1882501b986809e5e9
+      ref: "0.1.00"
+      resolved-ref: "280ab60afb899caf401469eb0711c4a136cad97b"
       url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_themes.git"
     source: git
     version: "0.0.1"
@@ -602,8 +602,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.1.2"
-      resolved-ref: "3889204977679fcd1e8e759fdc822e949d2624d9"
+      ref: "0.1.23"
+      resolved-ref: "2bb445f2f33da6c0e040de43563739195198dcbf"
       url: "https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_ui_components.git"
     source: git
     version: "0.0.1"
@@ -618,7 +618,7 @@ packages:
       name: source_gen
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.0"
   source_span:
     dependency: transitive
     description:
@@ -730,7 +730,7 @@ packages:
       name: url_launcher_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.0"
   url_launcher_windows:
     dependency: transitive
     description:
@@ -765,7 +765,7 @@ packages:
       name: webview_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.8"
+    version: "2.0.4"
   win32:
     dependency: transitive
     description:
@@ -786,7 +786,7 @@ packages:
       name: xml
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.1.2"
+    version: "5.1.0"
   yaml:
     dependency: transitive
     description:
