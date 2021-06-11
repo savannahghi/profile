@@ -10,7 +10,9 @@ environment:
 
 dependencies:
   async_redux: ^10.0.1
-  dotted_border: ^2.0.0
+  debug_logger: ^0.0.21
+  domain_objects: ^0.0.18-nullsafety
+  dotted_border: ^2.0.0-nullsafety.0
   flutter:
     sdk: flutter
   http: ^0.13.0
@@ -20,11 +22,6 @@ dependencies:
     git:
       url: https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_app_wrapper.git
       ref: 0.0.12
-
-  sil_core_domain_objects:
-    git:
-      url: https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_core_domain_objects.git
-      ref: 0.0.19
 
   sil_graphql_client:
     git:

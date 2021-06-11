@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:async_redux/async_redux.dart';
 
-import 'package:sil_core_domain_objects/value_objects.dart';
+import 'package:domain_objects/value_objects.dart';
 import 'package:sil_user_profile/add_contact.dart';
 import 'package:sil_user_profile/contact_items_card.dart';
 import 'package:sil_user_profile/contact_type.dart';

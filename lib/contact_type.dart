@@ -1,4 +1,4 @@
-import 'package:sil_core_domain_objects/value_objects.dart';
+import 'package:domain_objects/value_objects.dart';
 
 class ContactType<T extends ValueObject<String>> {
   ContactType(this.contactItemValueObject, {this.isSecondary = false});

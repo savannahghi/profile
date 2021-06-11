@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:async_redux/async_redux.dart';
 
-import 'package:sil_core_domain_objects/value_objects.dart';
+import 'package:domain_objects/value_objects.dart';
 import 'package:sil_ui_components/sil_buttons.dart';
 import 'package:sil_ui_components/sil_inputs.dart';
 import 'package:sil_user_profile/constants.dart';
