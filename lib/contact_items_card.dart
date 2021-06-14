@@ -5,9 +5,9 @@ import 'package:domain_objects/value_objects.dart';
 import 'package:sil_themes/app_theme.dart';
 import 'package:sil_themes/spaces.dart';
 import 'package:sil_ui_components/sil_buttons.dart';
-import 'package:sil_user_profile/contact_item.dart';
-import 'package:sil_user_profile/contact_type.dart';
-import 'package:sil_user_profile/contact_utils.dart';
+import 'package:user_profile/contact_item.dart';
+import 'package:user_profile/contact_type.dart';
+import 'package:user_profile/contact_utils.dart';
 import 'package:sil_themes/text_themes.dart';
 
 /// renders [ContactItem]s based on data supplied [primary] or [secondary] contacts

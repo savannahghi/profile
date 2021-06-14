@@ -6,11 +6,11 @@ import 'package:async_redux/async_redux.dart';
 import 'package:domain_objects/value_objects.dart';
 import 'package:sil_ui_components/sil_buttons.dart';
 import 'package:sil_ui_components/sil_inputs.dart';
-import 'package:sil_user_profile/constants.dart';
-import 'package:sil_user_profile/contact_items_card.dart';
-import 'package:sil_user_profile/contact_utils.dart';
-import 'package:sil_user_profile/shared/widget_keys.dart';
-import 'package:sil_user_profile/sil_contacts.dart';
+import 'package:user_profile/constants.dart';
+import 'package:user_profile/contact_items_card.dart';
+import 'package:user_profile/contact_utils.dart';
+import 'package:user_profile/shared/widget_keys.dart';
+import 'package:user_profile/sil_contacts.dart';
 
 import 'mocks.dart';
 import 'test_utils.dart';

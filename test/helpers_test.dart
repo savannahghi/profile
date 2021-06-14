@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sil_app_wrapper/sil_app_wrapper.dart';
 import 'package:sil_ui_components/sil_buttons.dart';
 import 'package:sil_ui_components/sil_comms_setting.dart';
-import 'package:sil_user_profile/helpers.dart';
+import 'package:user_profile/helpers.dart';
 
 import 'mocks.dart';
 
