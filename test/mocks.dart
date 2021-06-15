@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:sil_app_wrapper/sil_app_wrapper.dart';
 import 'package:sil_graphql_client/graph_client.dart';
-import 'package:sil_user_profile/constants.dart';
+import 'package:user_profile/constants.dart';
 
 class MockDeviceCapabilities extends IDeviceCapabilities {}
 

@@ -562,6 +562,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.1"
+  shared_themes:
+    dependency: "direct main"
+    description:
+      name: shared_themes
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.9"
   sil_app_wrapper:
     dependency: "direct main"
     description:
@@ -590,7 +597,7 @@ packages:
     source: git
     version: "0.0.1"
   sil_themes:
-    dependency: "direct main"
+    dependency: transitive
     description:
       path: "."
       ref: "0.1.00"

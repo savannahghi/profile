@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sil_user_profile/sil_contacts.dart';
-import 'package:sil_user_profile/constants.dart';
+import 'package:user_profile/sil_contacts.dart';
+import 'package:user_profile/constants.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:sil_themes/constants.dart';

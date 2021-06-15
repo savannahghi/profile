@@ -4,9 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import 'package:sil_ui_components/sil_platform_loader.dart';
-import 'package:sil_user_profile/shared/widget_keys.dart';
-import 'package:sil_user_profile/term_and_conditions.dart';
-import 'package:sil_user_profile/constants.dart';
+import 'package:user_profile/shared/widget_keys.dart';
+import 'package:user_profile/term_and_conditions.dart';
+import 'package:user_profile/constants.dart';
 
 void main() {
   testWidgets('WebViewPage renders TermsAndConditions.url correctly',

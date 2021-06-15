@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:sil_app_wrapper/sil_app_wrapper.dart';
 import 'package:sil_ui_components/sil_buttons.dart';
-import 'package:sil_user_profile/contact_utils.dart';
+import 'package:user_profile/contact_utils.dart';
 
 import 'mocks.dart';
 import 'test_utils.dart';
