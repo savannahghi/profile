@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'package:sil_ui_components/sil_platform_loader.dart';
+import 'package:shared_ui_components/platform_loader.dart';
 import 'package:user_profile/constants.dart';
 import 'package:user_profile/shared/widget_keys.dart';
 

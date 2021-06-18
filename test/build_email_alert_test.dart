@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:domain_objects/value_objects.dart';
-import 'package:sil_ui_components/sil_buttons.dart';
+import 'package:shared_ui_components/buttons.dart';
 import 'package:user_profile/contact_item.dart';
 import 'package:user_profile/contact_utils.dart';
 import 'package:user_profile/set_to_primary.dart';

@@ -2,13 +2,13 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:domain_objects/value_objects.dart';
-import 'package:sil_themes/app_theme.dart';
-import 'package:sil_themes/spaces.dart';
-import 'package:sil_ui_components/sil_buttons.dart';
+import 'package:shared_themes/app_theme.dart';
+import 'package:shared_themes/spaces.dart';
+import 'package:shared_ui_components/buttons.dart';
 import 'package:user_profile/contact_item.dart';
 import 'package:user_profile/contact_type.dart';
 import 'package:user_profile/contact_utils.dart';
-import 'package:sil_themes/text_themes.dart';
+import 'package:shared_themes/text_themes.dart';
 
 /// renders [ContactItem]s based on data supplied [primary] or [secondary] contacts
 /// the data supplied is either a [string] or an [list] of contacts

@@ -6,7 +6,7 @@ import 'package:user_profile/sil_contacts.dart';
 import 'package:user_profile/constants.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:sil_themes/constants.dart';
+import 'package:shared_themes/constants.dart';
 
 enum StateContactType {
   primaryEmail,
