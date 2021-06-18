@@ -7,9 +7,9 @@ import 'package:async_redux/async_redux.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:domain_objects/value_objects.dart';
-import 'package:sil_ui_components/sil_buttons.dart';
-import 'package:sil_ui_components/sil_inputs.dart';
-import 'package:sil_ui_components/sil_platform_loader.dart';
+import 'package:shared_ui_components/buttons.dart';
+import 'package:shared_ui_components/inputs.dart';
+import 'package:shared_ui_components/platform_loader.dart';
 import 'package:user_profile/contact_item.dart';
 import 'package:user_profile/contact_utils.dart';
 import 'package:user_profile/set_to_primary.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
-import 'package:sil_app_wrapper/sil_app_wrapper.dart';
-import 'package:sil_graphql_client/graph_client.dart';
-import 'package:sil_graphql_client/graph_event_bus.dart';
-import 'package:sil_ui_components/sil_comms_setting.dart';
+import 'package:app_wrapper/app_wrapper.dart';
+import 'package:flutter_graphql_client/graph_client.dart';
+import 'package:flutter_graphql_client/graph_event_bus.dart';
+import 'package:shared_ui_components/communications_settings.dart';
 
 import 'mutations.dart';
 

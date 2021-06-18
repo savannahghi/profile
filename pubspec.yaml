@@ -1,43 +1,30 @@
 name: user_profile
-description: A new Flutter package project.
-version: 0.1.1
+description: A shared library that is responsible for the user profile displayed on both apps.
+version: 0.1.1-nullsafety
 homepage: https://github.com/savannahghi/user_profile
 repository: https://github.com/savannahghi/user_profile
 issue_tracker: https://github.com/savannahghi/user_profile/issues
 documentation: https://github.com/savannahghi/user_profile/doc
-publish_to: none
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
   flutter: ">=2.0.0"
 
 dependencies:
+  app_wrapper: ^0.1.1 # internal (formerly sil_app_wrapper)
   async_redux: ^10.0.1
   debug_logger: ^0.0.21
-  domain_objects: ^0.0.18-nullsafety
+  domain_objects: ^0.0.18-nullsafety # internal (formerly sil_core_domain_objects)
   dotted_border: ^2.0.0-nullsafety.0
   flutter:
     sdk: flutter
+  flutter_graphql_client: ^0.1.1 # internal (formerly sil_graphql_client)
   http: ^0.13.3
+  material_design_icons_flutter: ^5.0.5955-rc.1
   rxdart: ^0.27.0
-  shared_themes: ^0.0.9
-
-  sil_app_wrapper:
-    git:
-      url: https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_app_wrapper.git
-      ref: 0.0.13
-
-  sil_graphql_client:
-    git:
-      url: https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_graphql_client.git
-      ref: 0.1.01
-
-  sil_ui_components:
-    git:
-      url: https://sil_dart_utils:xiFnpjLHssG76bpWxUb9@gitlab.slade360emr.com/optimalhealth/dart_utils/sil_ui_components.git
-      ref: 0.1.23
-
-  webview_flutter: ^2.0.2 #embedded webView
+  shared_themes: ^0.0.9 # internal (formerly sil_themes)
+  shared_ui_components: ^0.1.23-nullsafety # internal (formerly sil_ui_components)
+  webview_flutter: ^2.0.2 # embedded webView
 
 dev_dependencies:
   flutter_test:
@@ -48,8 +35,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - packages/sil_ui_components/assets/ke.png
-    - packages/sil_ui_components/assets/try_features.jpg
-    - packages/sil_ui_components/assets/tz.png
-    - packages/sil_ui_components/assets/ug.png
-    - packages/sil_ui_components/assets/us.png
+    - packages/shared_ui_components/assets/ke.png
+    - packages/shared_ui_components/assets/try_features.jpg
+    - packages/shared_ui_components/assets/tz.png
+    - packages/shared_ui_components/assets/ug.png
+    - packages/shared_ui_components/assets/us.png
