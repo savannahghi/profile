@@ -1,6 +1,6 @@
 name: user_profile
 description: A shared library that is responsible for the user profile displayed on both apps.
-version: 0.1.1-nullsafety
+version: 0.1.11-nullsafety
 homepage: https://github.com/savannahghi/user_profile
 repository: https://github.com/savannahghi/user_profile
 issue_tracker: https://github.com/savannahghi/user_profile/issues

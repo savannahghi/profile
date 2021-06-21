@@ -1,3 +1,7 @@
+### 0.1.11-nullsafety
+
+- chore: update libs (domain_objects)
+
 ### 0.1.1-nullsafety
 
 - Update dependencies (shared_ui_components)
