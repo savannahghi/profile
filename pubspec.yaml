@@ -14,7 +14,7 @@ dependencies:
   app_wrapper: ^0.1.1 # internal (formerly sil_app_wrapper)
   async_redux: ^10.0.1
   debug_logger: ^0.0.21
-  domain_objects: ^0.0.18-nullsafety # internal (formerly sil_core_domain_objects)
+  domain_objects: ^0.0.19-nullsafety # internal (formerly sil_core_domain_objects)
   dotted_border: ^2.0.0-nullsafety.0
   flutter:
     sdk: flutter
