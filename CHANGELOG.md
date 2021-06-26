@@ -1,3 +1,7 @@
+### 0.1.12-nullsafety
+
+- chore: remove secondary contacts
+
 ### 0.1.11-nullsafety
 
 - chore: update libs (domain_objects)
