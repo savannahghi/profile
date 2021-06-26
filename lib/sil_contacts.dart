@@ -51,52 +51,6 @@ class ContactDetails extends StatelessWidget {
           ),
 
           //Todo: return once API is working
-          // ContactItemsCard(
-          //   title: secondaryPhones,
-          //   addMessage: phonesMessage,
-          //   type: ContactInfoType.phone,
-          //   data: provider.secondaryPhones != null
-          //       ? <ContactType<ValueObject<String>>>[
-          //           for (PhoneNumber phoneNumber in provider.secondaryPhones!)
-          //             ContactType<ValueObject<String>>(
-          //               phoneNumber,
-          //               isSecondary: true,
-          //             )
-          //         ]
-          //       : null,
-          //   onAddContactInfo: ([bool primary = false]) async {
-          //     provider.contactUtils.showMessageFromModal(
-          //         context,
-          //         await addContactInfoBottomSheet(
-          //             context: context,
-          //             type: ContactInfoType.phone,
-          //             onSave: provider.contactUtils.addSecondaryPhone));
-          //   },
-          // ),
-          // if (provider.primaryEmail != EmailAddress.withValue(UNKNOWNEMAIL))
-          //   ContactItemsCard(
-          //     title: secondaryEmails,
-          //     data: provider.secondaryEmails != null
-          //         ? <ContactType<ValueObject<String>>>[
-          //             for (EmailAddress emailAddress
-          //                 in provider.secondaryEmails!)
-          //               ContactType<ValueObject<String>>(
-          //                 emailAddress,
-          //                 isSecondary: true,
-          //               )
-          //           ]
-          //         : null,
-          //     type: ContactInfoType.email,
-          //     addMessage: secondaryEmailsMessage,
-          //     onAddContactInfo: ([bool primary = false]) async {
-          //       provider.contactUtils.showMessageFromModal(
-          //           context,
-          //           await addContactInfoBottomSheet(
-          //               context: context,
-          //               type: ContactInfoType.email,
-          //               onSave: provider.contactUtils.addSecondaryEmail));
-          //     },
-          //   ),
         ],
       ),
     );
