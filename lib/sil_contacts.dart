@@ -13,7 +13,7 @@ import 'package:user_profile/constants.dart';
 class ContactDetails extends StatelessWidget {
   const ContactDetails({Key? key, this.onContactSaved}) : super(key: key);
 
-  final Function? onContactSaved;
+  final VoidCallback? onContactSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class ContactDetails extends StatelessWidget {
                     type: ContactInfoType.email,
                     onSave: provider.contactUtils.addPrimaryEmail,
                     primary: primary),
-                afterCallback: this.onContactSaved,
+                afterCallback: () => this.onContactSaved,
               );
             },
           ),
