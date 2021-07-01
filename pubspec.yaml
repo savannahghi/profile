@@ -21,7 +21,8 @@ dependencies:
   flutter_graphql_client: ^0.1.1 # internal (formerly sil_graphql_client)
   http: ^0.13.3
   material_design_icons_flutter: ^5.0.5955-rc.1
-  rxdart: ^0.27.0
+  misc_utilities: ^0.1.16-nullsafety # internal (formerly sil_misc)
+  rxdart: ^0.27.1
   shared_themes: ^0.0.9 # internal (formerly sil_themes)
   shared_ui_components: ^0.1.23-nullsafety # internal (formerly sil_ui_components)
   webview_flutter: ^2.0.2 # embedded webView

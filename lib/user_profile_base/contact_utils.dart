@@ -1,12 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:user_profile/sil_contacts.dart';
-import 'package:user_profile/constants.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:shared_themes/constants.dart';
+import 'package:user_profile/user_profile_base/constants.dart';
+import 'package:user_profile/user_profile_base/sil_contacts.dart';
 
 enum StateContactType {
   primaryEmail,

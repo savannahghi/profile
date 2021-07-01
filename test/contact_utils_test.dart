@@ -1,14 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:http/http.dart' as http;
-
 import 'package:app_wrapper/app_wrapper.dart';
 import 'package:shared_ui_components/buttons.dart';
-import 'package:user_profile/contact_utils.dart';
+import 'package:user_profile/user_profile_base/contact_utils.dart';
 
 import 'mocks.dart';
 import 'test_utils.dart';

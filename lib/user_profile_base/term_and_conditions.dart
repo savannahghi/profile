@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:user_profile/user_profile_base/constants.dart';
+import 'package:user_profile/user_profile_base/shared/widget_keys.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
 import 'package:shared_ui_components/platform_loader.dart';
-import 'package:user_profile/constants.dart';
-import 'package:user_profile/shared/widget_keys.dart';
 
 /// A page that displays BeWell terms and conditions.
 /// It has an embedded webview that links to the bewell site to load the terms & conditions.

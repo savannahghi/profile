@@ -5,10 +5,10 @@ import 'package:domain_objects/value_objects.dart';
 import 'package:shared_themes/app_theme.dart';
 import 'package:shared_themes/spaces.dart';
 import 'package:shared_ui_components/buttons.dart';
-import 'package:user_profile/contact_item.dart';
-import 'package:user_profile/contact_type.dart';
-import 'package:user_profile/contact_utils.dart';
 import 'package:shared_themes/text_themes.dart';
+import 'package:user_profile/user_profile_base/contact_item.dart';
+import 'package:user_profile/user_profile_base/contact_type.dart';
+import 'package:user_profile/user_profile_base/contact_utils.dart';
 
 /// renders [ContactItem]s based on data supplied [primary] or [secondary] contacts
 /// the data supplied is either a [string] or an [list] of contacts

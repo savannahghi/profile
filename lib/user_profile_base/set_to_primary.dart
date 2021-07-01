@@ -3,15 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_ui_components/platform_loader.dart';
-import 'package:user_profile/contact_utils.dart';
-import 'package:user_profile/shared/widget_keys.dart';
-import 'package:user_profile/sil_contacts.dart';
-import 'package:user_profile/constants.dart';
 import 'package:shared_ui_components/buttons.dart';
 import 'package:shared_ui_components/inputs.dart';
-
 import 'package:shared_themes/spaces.dart';
 import 'package:shared_themes/text_themes.dart';
+import 'package:user_profile/user_profile_base/constants.dart';
+import 'package:user_profile/user_profile_base/contact_utils.dart';
+import 'package:user_profile/user_profile_base/shared/widget_keys.dart';
+import 'package:user_profile/user_profile_base/sil_contacts.dart';
 
 /// shows bottom sheet to render [SetContactToPrimary]
 /// takes contact type and a value which can be [phone] or [email]

@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:app_wrapper/app_wrapper.dart';
 import 'package:shared_ui_components/buttons.dart';
 import 'package:shared_ui_components/communications_settings.dart';
-import 'package:user_profile/helpers.dart';
+import 'package:user_profile/user_profile_base/helpers.dart';
 
 import 'mocks.dart';
 

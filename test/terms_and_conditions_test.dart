@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:user_profile/user_profile_base/constants.dart';
+import 'package:user_profile/user_profile_base/shared/widget_keys.dart';
+import 'package:user_profile/user_profile_base/term_and_conditions.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
 import 'package:shared_ui_components/platform_loader.dart';
-import 'package:user_profile/shared/widget_keys.dart';
-import 'package:user_profile/term_and_conditions.dart';
-import 'package:user_profile/constants.dart';
 
 void main() {
   testWidgets('WebViewPage renders TermsAndConditions.url correctly',

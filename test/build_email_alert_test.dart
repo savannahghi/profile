@@ -1,16 +1,15 @@
 import 'dart:convert';
-
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:domain_objects/value_objects.dart';
 import 'package:shared_ui_components/buttons.dart';
-import 'package:user_profile/contact_item.dart';
-import 'package:user_profile/contact_utils.dart';
-import 'package:user_profile/set_to_primary.dart';
-import 'package:user_profile/shared/widget_keys.dart';
-import 'package:user_profile/sil_contacts.dart';
+import 'package:user_profile/user_profile_base/contact_item.dart';
+import 'package:user_profile/user_profile_base/contact_utils.dart';
+import 'package:user_profile/user_profile_base/set_to_primary.dart';
+import 'package:user_profile/user_profile_base/shared/widget_keys.dart';
+import 'package:user_profile/user_profile_base/sil_contacts.dart';
 
 import 'mocks.dart';
 import 'test_utils.dart';

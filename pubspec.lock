@@ -437,12 +437,12 @@ packages:
     source: hosted
     version: "1.3.0"
   misc_utilities:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: misc_utilities
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.13-nullsafety"
+    version: "0.1.16-nullsafety"
   mockito:
     dependency: "direct dev"
     description:
