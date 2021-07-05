@@ -377,6 +377,17 @@ void main() {
           await tester.tap(find.byKey(const Key('press')));
           await tester.pumpAndSettle();
           expect(counter, 1);
+
+          // assert snackbar renders correctly
+          expect(find.byType(SnackBar), findsOneWidget);
+          expect(find.text('Ok, thanks'), findsOneWidget);
+
+          // tap on dismiss action
+          await tester.tap(find.text('Ok, thanks'));
+          await tester.pumpAndSettle();
+
+          // assert sncakbar is dismissed
+          expect(find.byType(SnackBar), findsNothing);
         },
       );
     },
