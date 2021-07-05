@@ -25,7 +25,7 @@ This will add a line like this to your package's pubspec.yaml (and run an implic
 
 ```dart
 dependencies:
-  user_profile: ^0.1.12-nullsafety
+  user_profile: ^0.1.13-nullsafety
 ```
 
 Alternatively, your editor might support flutter pub get. Check the docs for your editor to learn more.

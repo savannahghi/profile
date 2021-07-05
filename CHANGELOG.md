@@ -1,3 +1,6 @@
+### 0.1.13-nullsafety
+
+- add snackbar actions and duration
 ### 0.1.12-nullsafety
 
 - chore: remove secondary contacts

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_themes/colors.dart';
 import 'package:user_profile/sil_contacts.dart';
 import 'package:user_profile/constants.dart';
 
@@ -394,6 +395,14 @@ class ContactUtils {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(result['message'].toString()),
+        duration: const Duration(seconds: kLongSnackBarDuration),
+        action: SnackBarAction(
+          label: 'Ok, thanks',
+          textColor: white,
+          onPressed: () {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          },
+        ),
       ),
     );
 
