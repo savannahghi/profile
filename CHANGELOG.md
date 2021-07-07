@@ -1,6 +1,11 @@
+### 0.1.14-nullsafety
+
+- chore: update packages (async_redux, domain_objects, flutter_graphql_client, rxdart, shared_ui_components)
+
 ### 0.1.13-nullsafety
 
 - add snackbar actions and duration
+
 ### 0.1.12-nullsafety
 
 - chore: remove secondary contacts

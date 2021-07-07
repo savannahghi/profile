@@ -42,7 +42,7 @@ packages:
       name: async_redux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "10.0.1"
+    version: "12.0.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -189,7 +189,7 @@ packages:
       name: domain_objects
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.19-nullsafety"
+    version: "0.0.21-nullsafety"
   dotted_border:
     dependency: "direct main"
     description:
@@ -250,7 +250,7 @@ packages:
       name: flutter_graphql_client
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.01"
+    version: "0.1.20"
   flutter_image_compress:
     dependency: transitive
     description:
@@ -442,7 +442,7 @@ packages:
       name: misc_utilities
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.13-nullsafety"
+    version: "0.1.17-nullsafety"
   mockito:
     dependency: "direct dev"
     description:
@@ -596,7 +596,7 @@ packages:
       name: shared_ui_components
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.23-nullsafety"
+    version: "0.1.27-nullsafety"
   sky_engine:
     dependency: transitive
     description: flutter
