@@ -1,3 +1,7 @@
+### 0.1.15-nullsafety
+
+- chore: update url
+
 ### 0.1.14-nullsafety
 
 - chore: update packages (async_redux, domain_objects, flutter_graphql_client, rxdart, shared_ui_components)
