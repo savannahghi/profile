@@ -160,7 +160,7 @@ query GenerateEmailVerificationOTP($email: String!){
 
 // terms and conditions
 const String termsTitle = 'Terms and Conditions';
-const String url = 'https://bewell.co.ke/privacy.html';
+const String url = 'https://bewellsite.web.app/privacy.html';
 
 // terms and conditions state
 const String termsAndConditionsState = 'termsAndConditionsPageState';
