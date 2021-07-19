@@ -28,7 +28,7 @@ void main() {
       await tester.pumpWidget(Builder(
         builder: (BuildContext context) {
           return MaterialApp(
-            home: SILAppWrapperBase(
+            home: AppWrapperBase(
               appName: 'testAppName',
               appContexts: const <AppContext>[AppContext.BewellCONSUMER],
               graphQLClient: mockSILGraphQlClient,
@@ -71,7 +71,7 @@ void main() {
       bool response = false;
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-          body: SILAppWrapperBase(
+          body: AppWrapperBase(
             appName: '',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockSILGraphQlClient,
@@ -91,7 +91,7 @@ void main() {
         ),
       ));
 
-      expect(find.byType(SILAppWrapperBase), findsOneWidget);
+      expect(find.byType(AppWrapperBase), findsOneWidget);
       expect(find.byType(SILPrimaryButton), findsOneWidget);
 
       expect(
@@ -110,7 +110,7 @@ void main() {
       bool response = false;
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-          body: SILAppWrapperBase(
+          body: AppWrapperBase(
             appName: '',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             deviceCapabilities: MockDeviceCapabilities(),
@@ -131,7 +131,7 @@ void main() {
         ),
       ));
 
-      expect(find.byType(SILAppWrapperBase), findsOneWidget);
+      expect(find.byType(AppWrapperBase), findsOneWidget);
       expect(find.byType(SILPrimaryButton), findsOneWidget);
 
       expect(

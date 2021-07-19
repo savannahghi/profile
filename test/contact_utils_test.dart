@@ -29,7 +29,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockSILGraphQlClient,
@@ -73,7 +73,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -113,7 +113,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -148,7 +148,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockSILGraphQlClient,
@@ -190,7 +190,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -227,7 +227,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockSILGraphQlClient,
@@ -273,7 +273,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -325,7 +325,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -366,7 +366,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockSILGraphQlClient,
@@ -411,7 +411,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -444,7 +444,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockSILGraphQlClient,
@@ -478,7 +478,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockSILGraphQlClient,
@@ -516,7 +516,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -558,7 +558,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -590,7 +590,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockSILGraphQlClient,
@@ -633,7 +633,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -680,7 +680,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -727,7 +727,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -769,7 +769,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -811,7 +811,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -852,7 +852,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockSILGraphQlClient,
@@ -906,7 +906,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockShortSILGraphQlClient,
@@ -963,7 +963,7 @@ void main() {
     await tester.pumpWidget(Builder(
       builder: (BuildContext context) {
         return MaterialApp(
-          home: SILAppWrapperBase(
+          home: AppWrapperBase(
             appName: 'testAppName',
             appContexts: const <AppContext>[AppContext.BewellCONSUMER],
             graphQLClient: mockSILGraphQlClient,
@@ -1123,7 +1123,7 @@ class BuildGenericAddContactTest extends StatelessWidget {
         {required BuildContext context,
         required StateContactType type,
         required String? value}) {}
-    return SILAppWrapperBase(
+    return AppWrapperBase(
       appName: 'testAppName',
       appContexts: const <AppContext>[AppContext.BewellCONSUMER],
       graphQLClient: mockShortSILGraphQlClient,
