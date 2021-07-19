@@ -7,7 +7,7 @@ import 'package:shared_ui_components/platform_loader.dart';
 import 'package:user_profile/contact_utils.dart';
 import 'package:user_profile/helpers.dart';
 import 'package:user_profile/shared/widget_keys.dart';
-import 'package:user_profile/sil_contacts.dart';
+import 'package:user_profile/contacts.dart';
 import 'package:user_profile/constants.dart';
 import 'package:shared_ui_components/buttons.dart';
 import 'package:shared_ui_components/inputs.dart';

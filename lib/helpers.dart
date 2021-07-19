@@ -20,8 +20,7 @@ Future<bool> changeCommunicationSetting(
     'allowTextSMS': settings['allowText']!,
     'allowPush': settings['allowPush']!,
   };
-  final ISILGraphQlClient _client =
-      SILAppWrapperBase.of(context)!.graphQLClient;
+  final ISILGraphQlClient _client = AppWrapperBase.of(context)!.graphQLClient;
 
   _variables[channel.toShortString()] = isAllowed;
 
@@ -50,8 +49,7 @@ Future<bool> changeCommunicationSetting(
 ///function for getting whether a user is set up as an experiment participant
 Future<bool?> setupAsExperimentParticipant(
     {required BuildContext context, bool participate = false}) async {
-  final ISILGraphQlClient _client =
-      SILAppWrapperBase.of(context)!.graphQLClient;
+  final ISILGraphQlClient _client = AppWrapperBase.of(context)!.graphQLClient;
 
   final Response result = await _client.query(setupUserAsExperimentParticipant,
       setupAsExperimentParticipantVariables());
@@ -59,7 +57,7 @@ Future<bool?> setupAsExperimentParticipant(
   final Map<String, dynamic> response = _client.toMap(result);
 
   SaveTraceLog(
-    client: SILAppWrapperBase.of(context)!.graphQLClient,
+    client: AppWrapperBase.of(context)!.graphQLClient,
     query: setupUserAsExperimentParticipant,
     data: setupAsExperimentParticipantVariables(),
     response: response,

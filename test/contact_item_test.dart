@@ -13,7 +13,7 @@ import 'package:user_profile/contact_item.dart';
 import 'package:user_profile/contact_utils.dart';
 import 'package:user_profile/set_to_primary.dart';
 import 'package:user_profile/shared/widget_keys.dart';
-import 'package:user_profile/sil_contacts.dart';
+import 'package:user_profile/contacts.dart';
 
 import 'mocks.dart';
 import 'test_utils.dart';

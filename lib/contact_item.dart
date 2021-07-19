@@ -5,7 +5,7 @@ import 'package:shared_ui_components/platform_loader.dart';
 import 'package:user_profile/contact_utils.dart';
 import 'package:user_profile/set_to_primary.dart';
 import 'package:user_profile/shared/widget_keys.dart';
-import 'package:user_profile/sil_contacts.dart';
+import 'package:user_profile/contacts.dart';
 import 'package:user_profile/constants.dart';
 import 'package:shared_themes/spaces.dart';
 import 'package:shared_themes/text_themes.dart';

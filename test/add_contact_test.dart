@@ -11,7 +11,7 @@ import 'package:user_profile/add_contact.dart';
 import 'package:user_profile/constants.dart';
 import 'package:user_profile/contact_utils.dart';
 import 'package:user_profile/shared/widget_keys.dart';
-import 'package:user_profile/sil_contacts.dart';
+import 'package:user_profile/contacts.dart';
 
 import 'mocks.dart';
 import 'test_utils.dart';
