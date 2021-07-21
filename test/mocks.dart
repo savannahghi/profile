@@ -10,7 +10,7 @@ import 'package:user_profile/constants.dart';
 
 class MockDeviceCapabilities extends IDeviceCapabilities {}
 
-class MockShortSILGraphQlClient extends ISILGraphQlClient {
+class MockShortSILGraphQlClient extends IGraphQlClient {
   MockShortSILGraphQlClient.withResponse(
       String idToken, String endpoint, this.response) {
     super.idToken = idToken;
@@ -27,7 +27,7 @@ class MockShortSILGraphQlClient extends ISILGraphQlClient {
   }
 }
 
-class MockSILGraphQlClient extends Mock implements ISILGraphQlClient {
+class MockSILGraphQlClient extends Mock implements IGraphQlClient {
   String setupUserAsExperimentorVariables =
       json.encode(<String, bool>{'participate': true});
   String removeUserAsExperimentorVariables =
