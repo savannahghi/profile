@@ -1,3 +1,7 @@
+### 0.1.17-nullsafety
+
+- chore: update package
+
 ### 0.1.16-nullsafety
 
 - chore: update dependency (app_wrapper, domain_objects)
