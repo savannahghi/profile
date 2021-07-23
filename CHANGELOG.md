@@ -1,6 +1,18 @@
+### 0.1.20-nullsafety
+
+- doc: documentation fixes
+
 ### 0.1.19-nullsafety
 
 - chore: update package
+
+### 0.1.18-nullsafety
+
+- doc: fix project documentation
+
+### 0.1.17-nullsafety
+
+- doc: fix project documentation
 
 ### 0.1.16-nullsafety
 
