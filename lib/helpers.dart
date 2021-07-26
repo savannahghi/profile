@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
 import 'package:app_wrapper/app_wrapper.dart';
 import 'package:flutter_graphql_client/graph_client.dart';
-import 'package:flutter_graphql_client/graph_event_bus.dart';
 import 'package:shared_ui_components/communications_settings.dart';
 
 import 'mutations.dart';
@@ -55,15 +54,6 @@ Future<bool?> setupAsExperimentParticipant(
       setupAsExperimentParticipantVariables());
 
   final Map<String, dynamic> response = _client.toMap(result);
-
-  SaveTraceLog(
-    client: AppWrapperBase.of(context)!.graphQLClient,
-    query: setupUserAsExperimentParticipant,
-    data: setupAsExperimentParticipantVariables(),
-    response: response,
-    title: 'Setup user as experiment participant',
-    description: 'Setup user as experiment participant',
-  ).saveLog();
 
   if (_client.parseError(response) != null) {
     return null;
