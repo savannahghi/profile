@@ -24,7 +24,7 @@ dependencies:
   rxdart: ^0.27.1
   shared_themes: ^0.1.0 # internal (formerly sil_themes)
   shared_ui_components: ^0.1.33-nullsafety # internal (formerly sil_ui_components)
-  webview_flutter: ^2.0.2 # embedded webView
+  webview_flutter: ^2.0.10 # embedded webView
 
 dev_dependencies:
   flutter_test:
