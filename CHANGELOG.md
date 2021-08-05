@@ -1,3 +1,7 @@
+### 0.1.21-nullsafety
+
+- chore: update dependency (shared_ui_components)
+
 ### 0.1.20-nullsafety
 
 - doc: documentation fixes
