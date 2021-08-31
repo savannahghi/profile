@@ -21,7 +21,7 @@ void main() {
                           context,
                           MaterialPageRoute<TermsAndConditionsPage>(
                               builder: (BuildContext context) =>
-                                  TermsAndConditionsPage()));
+                                  const TermsAndConditionsPage()));
                     },
                     child: const Text('Launch Webview'))));
       }),
@@ -63,7 +63,7 @@ void main() {
                           context,
                           MaterialPageRoute<TermsAndConditionsPage>(
                               builder: (BuildContext context) =>
-                                  TermsAndConditionsPage()));
+                                  const TermsAndConditionsPage()));
                     },
                     child: const Text('Launch Webview'))));
       }),
@@ -95,10 +95,12 @@ void main() {
     // call the method
     final TermsAndConditionsPageState termsAndConditionState =
         testState as TermsAndConditionsPageState;
-    termsAndConditionState.onPageStarted(url);
+    termsAndConditionState.onPageStarted(bewellTermsAndConditionsUrl);
 
     // assert that is was called
-    expect(() => termsAndConditionState.onPageStarted(url), returnsNormally);
+    expect(
+        () => termsAndConditionState.onPageStarted(bewellTermsAndConditionsUrl),
+        returnsNormally);
   });
 
   testWidgets(
@@ -114,7 +116,7 @@ void main() {
                           context,
                           MaterialPageRoute<TermsAndConditionsPage>(
                               builder: (BuildContext context) =>
-                                  TermsAndConditionsPage()));
+                                  const TermsAndConditionsPage()));
                     },
                     child: const Text('Launch Webview'))));
       }),
@@ -146,10 +148,13 @@ void main() {
     // call the method
     final TermsAndConditionsPageState termsAndConditionState =
         testState as TermsAndConditionsPageState;
-    termsAndConditionState.onPageFinished(url);
+    termsAndConditionState.onPageFinished(bewellTermsAndConditionsUrl);
 
     // assert that is was called
-    expect(() => termsAndConditionState.onPageFinished(url), returnsNormally);
+    expect(
+        () =>
+            termsAndConditionState.onPageFinished(bewellTermsAndConditionsUrl),
+        returnsNormally);
   });
 
   testWidgets('WebViewPage loadingState works', (WidgetTester tester) async {
@@ -163,7 +168,7 @@ void main() {
                           context,
                           MaterialPageRoute<TermsAndConditionsPage>(
                               builder: (BuildContext context) =>
-                                  TermsAndConditionsPage()));
+                                  const TermsAndConditionsPage()));
                     },
                     child: const Text('Launch Webview'))));
       }),
