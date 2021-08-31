@@ -1,4 +1,8 @@
-### 0.1.21-nullsafety
+### 0.1.22-nullsafety
+
+- feat: update terms url
+
+- ### 0.1.21-nullsafety
 
 - chore: update dependency (shared_ui_components)
 

@@ -9,6 +9,10 @@ import 'package:user_profile/shared/widget_keys.dart';
 /// A page that displays BeWell terms and conditions.
 /// It has an embedded webview that links to the bewell site to load the terms & conditions.
 class TermsAndConditionsPage extends StatefulWidget {
+  const TermsAndConditionsPage({Key? key, this.termsUrl}) : super(key: key);
+
+  final String? termsUrl;
+
   @override
   TermsAndConditionsPageState createState() => TermsAndConditionsPageState();
 }
@@ -58,7 +62,7 @@ class TermsAndConditionsPageState extends State<TermsAndConditionsPage> {
       ),
       body: WebView(
         key: webViewKey,
-        initialUrl: url,
+        initialUrl: widget.termsUrl ?? bewellTermsAndConditionsUrl,
         onPageStarted: onPageStarted,
         onPageFinished: onPageFinished,
         javascriptMode: JavascriptMode.unrestricted,
