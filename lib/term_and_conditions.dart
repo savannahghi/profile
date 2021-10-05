@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
-import 'package:webview_flutter/webview_flutter.dart';
-
 import 'package:shared_ui_components/platform_loader.dart';
+import 'package:shared_ui_components/small_appbar.dart';
 import 'package:user_profile/constants.dart';
 import 'package:user_profile/shared/widget_keys.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 /// A page that displays BeWell terms and conditions.
 /// It has an embedded webview that links to the bewell site to load the terms & conditions.
@@ -49,16 +48,13 @@ class TermsAndConditionsPageState extends State<TermsAndConditionsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: appBarKey,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-          ),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: const Text(
-          termsTitle,
-        ),
+      appBar: SILSmallAppBar(
+        title: termsTitle,
+        backButtonKey: appBarBackButtonKey,
+        backRoute: '',
+        backRouteNavigationFunction: () {
+          Navigator.of(context).pop();
+        },
       ),
       body: WebView(
         key: webViewKey,

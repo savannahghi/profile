@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
-
 import 'package:async_redux/async_redux.dart';
-
 import 'package:domain_objects/value_objects.dart';
+import 'package:flutter/material.dart';
 import 'package:user_profile/add_contact.dart';
+import 'package:user_profile/constants.dart';
 import 'package:user_profile/contact_items_card.dart';
 import 'package:user_profile/contact_type.dart';
 import 'package:user_profile/contact_utils.dart';
-import 'package:user_profile/constants.dart';
 
 /// Renders [ContactItemsCard] card and supplies the relevant [data] and [type]
 class ContactDetails extends StatelessWidget {

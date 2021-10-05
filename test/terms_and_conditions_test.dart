@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:webview_flutter/webview_flutter.dart';
-
 import 'package:shared_ui_components/platform_loader.dart';
+import 'package:shared_ui_components/small_appbar.dart';
+import 'package:user_profile/constants.dart';
 import 'package:user_profile/shared/widget_keys.dart';
 import 'package:user_profile/term_and_conditions.dart';
-import 'package:user_profile/constants.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
   testWidgets('WebViewPage renders TermsAndConditions.url correctly',
@@ -37,13 +36,12 @@ void main() {
     // verify webview is open
     expect(find.byKey(appBarKey), findsOneWidget);
     expect(find.byKey(webViewKey), findsOneWidget);
-    expect(find.text(termsTitle), findsOneWidget);
+    expect(find.byType(SILSmallAppBar), findsOneWidget);
     expect(find.byType(WebView), findsOneWidget);
-    expect(find.byIcon(Icons.arrow_back), findsOneWidget);
     expect(find.byType(MaterialButton), findsNothing);
 
     // close webview
-    await tester.tap(find.byIcon(Icons.arrow_back));
+    await tester.tap(find.byKey(appBarBackButtonKey));
     await tester.pumpAndSettle();
 
     // verify webview is closed
@@ -79,9 +77,7 @@ void main() {
     // verify webview is open
     expect(find.byKey(appBarKey), findsOneWidget);
     expect(find.byKey(webViewKey), findsOneWidget);
-    expect(find.text(termsTitle), findsOneWidget);
     expect(find.byType(WebView), findsOneWidget);
-    expect(find.byIcon(Icons.arrow_back), findsOneWidget);
     expect(find.byType(MaterialButton), findsNothing);
 
     // get the state
@@ -132,9 +128,7 @@ void main() {
     // verify webview is open
     expect(find.byKey(appBarKey), findsOneWidget);
     expect(find.byKey(webViewKey), findsOneWidget);
-    expect(find.text(termsTitle), findsOneWidget);
     expect(find.byType(WebView), findsOneWidget);
-    expect(find.byIcon(Icons.arrow_back), findsOneWidget);
     expect(find.byType(MaterialButton), findsNothing);
 
     // get the state
@@ -184,9 +178,7 @@ void main() {
     // verify webview is open
     expect(find.byKey(appBarKey), findsOneWidget);
     expect(find.byKey(webViewKey), findsOneWidget);
-    expect(find.text(termsTitle), findsOneWidget);
     expect(find.byType(WebView), findsOneWidget);
-    expect(find.byIcon(Icons.arrow_back), findsOneWidget);
     expect(find.byType(MaterialButton), findsNothing);
 
     // get the state

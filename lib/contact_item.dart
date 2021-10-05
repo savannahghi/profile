@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:shared_ui_components/platform_loader.dart';
-import 'package:user_profile/contact_utils.dart';
-import 'package:user_profile/set_to_primary.dart';
-import 'package:user_profile/shared/widget_keys.dart';
-import 'package:user_profile/contacts.dart';
-import 'package:user_profile/constants.dart';
 import 'package:shared_themes/spaces.dart';
 import 'package:shared_themes/text_themes.dart';
+import 'package:shared_ui_components/platform_loader.dart';
+import 'package:user_profile/constants.dart';
+import 'package:user_profile/contact_utils.dart';
+import 'package:user_profile/contacts.dart';
+import 'package:user_profile/set_to_primary.dart';
+import 'package:user_profile/shared/widget_keys.dart';
 
 /// Shows a contact and possible actions [info], [upgrade] or [delete]
 /// [editable] flag determines whether a contact can be [deleted] or [upgraded]
@@ -208,8 +208,7 @@ void primaryContactInfo(
                 smallVerticalSizedBox,
                 Text(
                   value,
-                  style: TextThemes.normalSize14Text(
-                      Theme.of(context).accentColor),
+                  style: TextThemes.normalSize14Text(),
                 ),
                 mediumVerticalSizedBox,
                 Text(
