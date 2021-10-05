@@ -1,16 +1,14 @@
+import 'package:async_redux/async_redux.dart';
+import 'package:domain_objects/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:async_redux/async_redux.dart';
-
-import 'package:domain_objects/value_objects.dart';
 import 'package:shared_ui_components/buttons.dart';
 import 'package:shared_ui_components/inputs.dart';
 import 'package:user_profile/constants.dart';
 import 'package:user_profile/contact_items_card.dart';
 import 'package:user_profile/contact_utils.dart';
-import 'package:user_profile/shared/widget_keys.dart';
 import 'package:user_profile/contacts.dart';
+import 'package:user_profile/shared/widget_keys.dart';
 
 import 'mocks.dart';
 import 'test_utils.dart';

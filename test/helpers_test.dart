@@ -1,7 +1,7 @@
+import 'package:app_wrapper/app_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:app_wrapper/app_wrapper.dart';
 import 'package:shared_ui_components/buttons.dart';
 import 'package:shared_ui_components/communications_settings.dart';
 import 'package:user_profile/helpers.dart';

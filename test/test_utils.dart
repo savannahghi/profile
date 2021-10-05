@@ -1,6 +1,6 @@
 import 'package:async_redux/async_redux.dart';
-import 'package:flutter/material.dart';
 import 'package:domain_objects/value_objects.dart';
+import 'package:flutter/material.dart';
 import 'package:user_profile/contact_item.dart';
 import 'package:user_profile/contact_utils.dart';
 import 'package:user_profile/contacts.dart';

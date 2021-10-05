@@ -1,11 +1,13 @@
 // ignore: subtype_of_sealed_class
+// ignore_for_file: null_argument_to_non_null_type
+
 import 'dart:convert';
 
+import 'package:app_wrapper/app_wrapper.dart';
+import 'package:flutter_graphql_client/graph_client.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
-import 'package:app_wrapper/app_wrapper.dart';
-import 'package:flutter_graphql_client/graph_client.dart';
 import 'package:user_profile/constants.dart';
 
 class MockDeviceCapabilities extends IDeviceCapabilities {}

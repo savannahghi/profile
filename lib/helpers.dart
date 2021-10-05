@@ -1,7 +1,7 @@
-import 'package:flutter/widgets.dart';
-import 'package:http/http.dart';
 import 'package:app_wrapper/app_wrapper.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_graphql_client/graph_client.dart';
+import 'package:http/http.dart';
 import 'package:shared_ui_components/communications_settings.dart';
 
 import 'mutations.dart';
