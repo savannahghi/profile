@@ -1,3 +1,7 @@
+### 0.1.24-nullsafety
+
+- chore: update assets
+
 ### 0.1.23-nullsafety
 
 - chore: use appBar widget
