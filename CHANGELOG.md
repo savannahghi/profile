@@ -1,3 +1,8 @@
+### 0.1.26-nullsafety
+
+- chore: upgrade to flutter 2.5.3
+- chore: update packages
+
 ### 0.1.25-nullsafety
 
 - chore: upgrade packages
@@ -14,7 +19,7 @@
 
 - feat: update terms url
 
-- ### 0.1.21-nullsafety
+### 0.1.21-nullsafety
 
 - chore: update dependency (shared_ui_components)
 
