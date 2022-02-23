@@ -1,3 +1,7 @@
+### 0.1.27-nullsafety
+
+- chore: update terms and conditions url
+
 ### 0.1.26-nullsafety
 
 - chore: upgrade to flutter 2.5.3
