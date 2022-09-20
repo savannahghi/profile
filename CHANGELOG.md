@@ -1,3 +1,7 @@
+### 0.2.2-nullsafety
+
+- chore: upgrade packages
+
 ### 0.2.1-nullsafety
 
 - feat: setup automated deployment to pub.dev
