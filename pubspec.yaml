@@ -1,6 +1,6 @@
 name: user_profile
 description: A shared library that is responsible for the user profile displayed on both apps.
-version: 0.2.2-nullsafety
+version: 0.2.3
 homepage: https://github.com/savannahghi/user_profile
 repository: https://github.com/savannahghi/user_profile
 issue_tracker: https://github.com/savannahghi/user_profile/issues
@@ -11,20 +11,20 @@ environment:
   flutter: ">=2.0.0"
 
 dependencies:
-  app_wrapper: ^0.1.31 # internal (formerly sil_app_wrapper)
+  app_wrapper: ^0.2.1
   async_redux: ^16.0.0
-  debug_logger: ^0.0.23 # internal (formerly sil_logger)
-  domain_objects: ^0.2.0-nullsafety # internal (formerly sil_core_domain_objects)
+  debug_logger: ^0.0.23
+  domain_objects: ^0.2.2
   dotted_border: ^2.0.0+2
   flutter:
     sdk: flutter
-  flutter_graphql_client: ^0.1.24 # internal (formerly sil_graphql_client)
+  flutter_graphql_client: ^0.2.0
   http: ^0.13.5
   material_design_icons_flutter: ^5.0.6996
   rxdart: ^0.27.5
-  shared_themes: ^0.1.0 # internal (formerly sil_themes)
-  shared_ui_components: ^0.2.2-nullsafety # internal (formerly sil_ui_components)
-  webview_flutter: ^3.0.4 # embedded webView
+  shared_themes: ^0.2.0
+  shared_ui_components: ^0.2.4
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:

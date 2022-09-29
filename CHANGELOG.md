@@ -1,3 +1,7 @@
+### 0.2.3
+
+- chore: upgrade dependencies
+
 ### 0.2.2-nullsafety
 
 - chore: upgrade packages
